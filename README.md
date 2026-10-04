@@ -8,7 +8,7 @@ The midwife keeps working on paper. She needs no app, no account and no signal w
 
 - **Real WhatsApp, both directions, for free,** through the Vonage sandbox.
 - **Page reading runs locally for free** (PaddleOCR + form templates). Claude is only an optional fallback for doubtful cells.
-- **The full conversation, record lifecycle and patient linking work,** with 32 automated tests passing.
+- **The full conversation, record lifecycle and patient linking work,** with 40 automated tests passing.
 - **Held-out test pages: 98.1% field accuracy at $0, with no AI** (0.49% wrong values saved without asking).
 - **Not done yet:** the demo video, Arabic, and the full photo flow over real WhatsApp. See [Status](#status).
 
@@ -37,7 +37,7 @@ The midwife keeps working on paper. She needs no app, no account and no signal w
 | Multi-page sessions, duplicate photos, re-photographed registries | ✅ tested |
 | Record lifecycle CAPTURED → … → SYNCED plus failure states, every transition logged | ✅ |
 | Patient linking by form number, candidate matches, midwife decides | ✅ tested |
-| Offline: encrypted device queue, connection drop mid-upload | ✅ in the phone simulator and tests. On real WhatsApp, WhatsApp's own queue does this. |
+| Offline: encrypted device queue, connection drop mid-upload | ✅ in tests ([web/src/device/](web/src/device/)). On real WhatsApp, WhatsApp's own queue does this: shown live with the phone in airplane mode. |
 | Original photos: encrypted, linked to record / capture date / midwife / state, supervisor-only | ✅ |
 | WhatsApp via **Vonage sandbox** | ✅ receive and send confirmed on a real phone. The full photo → review → save flow on real WhatsApp is **not tested yet**. |
 | WhatsApp via **Meta Cloud API** (production path) | ✅ receiving works. ❌ Sending is blocked until the business is verified by Meta (DayOne can do this; we can't). |
@@ -55,17 +55,27 @@ Requirements:
 - **Python 3.12** for the local OCR, installed here with [`uv`](https://docs.astral.sh/uv/).
 
 ```bash
-npm install
+npm ci                                     # exact, cross-platform dependency versions
 cp .env.example .env                       # no keys needed to start
 
 # Free local OCR (PaddleOCR, Apache-2.0). The models (~100 MB) download on first use.
 uv venv --python 3.12 ocr/.venv
-uv pip install --python ocr/.venv/bin/python paddlepaddle paddleocr
+uv pip install --python ocr/.venv/bin/python -r ocr/requirements.txt
 
 npm run build && npm start                 # http://localhost:8787
+# or, with hot reload: npm run dev         # http://localhost:5173 (API on :8787)
 ```
 
-Open http://localhost:8787. **Midwife's phone** is a WhatsApp-style simulator, used to test and to demonstrate the offline queue (PIN `1234`). **DayOne office** is the console: role "Supervisor" sees records and photos; "Analyst" sees aggregates only.
+**Windows (PowerShell):**
+
+```powershell
+py -3.12 -m venv ocr\.venv
+.\ocr\.venv\Scripts\python.exe -m pip install -r ocr\requirements.txt
+```
+
+On Windows CPU the OCR service turns off oneDNN, because PaddlePaddle 3.3.x crashes during oneDNN inference there; other platforms keep PaddleOCR's default. `OCR_PYTHON` points to a different Python that has these packages, `OCR_PORT` moves the OCR service, and `OCR_CACHE_DIR` keeps its cached results apart.
+
+Open http://localhost:8787: the **DayOne office** console. Role "Supervisor" sees records and photos and can download a registered registry as a PDF; "Analyst" sees aggregates only. The midwife side is real WhatsApp (see [Connecting a real phone](#connecting-a-real-phone)); there is no phone simulator in the web app.
 
 What reads the pages depends on what's installed:
 
@@ -152,7 +162,9 @@ The agent ([server/agent.ts](server/agent.ts)) is a deterministic, button-driven
 
 **Real phone.** The midwife sends photos in WhatsApp with no signal. WhatsApp keeps them queued on the phone (🕓) and delivers them when it reconnects. Each page records when it was **captured** and when it was **received**. If the DayOne server itself is offline, Vonage retries delivering webhooks for up to 24 hours, and our processing queue lives in SQLite, so a restart loses nothing.
 
-**Our own queue** ([web/src/device/](web/src/device/), shown in the phone simulator):
+**To show it:** put the phone in airplane mode (or turn off both Wi-Fi and mobile data), send photos in WhatsApp, then reconnect. The office console shows each page's capture and receive times.
+
+**Our own queue** ([web/src/device/](web/src/device/)), for a future app that can't rely on WhatsApp. It is no longer shown in the web app; the tests below exercise it:
 - Every photo, text and button tap is stored **AES-GCM encrypted** (key derived from the PIN, PBKDF2) before anything else.
 - Items move through **CAPTURED → PENDING_AI**, then upload **in order** with idempotent IDs.
 - A connection drop mid-upload gives **SYNC_FAILED**, then an automatic retry.
@@ -239,6 +251,7 @@ npm run compare -- --extractor mock                                    # model c
 | `EXTRACTOR` | `auto` (default), `template`, `claude`, `mock` |
 | `AI_FALLBACK` | `none` (default), `claude-code`, `claude` |
 | `OCR_MODEL_SIZE` | PaddleOCR PP-OCRv6 size: `medium` (default), `small`, `tiny` |
+| `OCR_PYTHON`, `OCR_PORT`, `OCR_CACHE_DIR` | OCR interpreter (default `ocr/.venv`), service port (8790), result cache |
 | `REVIEW_THRESHOLD` | confidence below which a value is asked about (default 0.8) |
 | `SESSION_IDLE_MINUTES` | silence that closes a multi-page registry (default 10) |
 | `CLAUDE_CODE_MODEL`, `CLAUDE_CODE_BIN` | model alias and binary for the Claude Code fallback |
@@ -246,7 +259,7 @@ npm run compare -- --extractor mock                                    # model c
 | `NGROK_AUTHTOKEN`, `NGROK_DOMAIN` | permanent public address via `npm run tunnel` |
 | `PUBLIC_URL` | overrides the public address (else `NGROK_DOMAIN`, else the cloudflared log) |
 | `VONAGE_*`, `WHATSAPP_*`, `TWILIO_*`, `TELEGRAM_BOT_TOKEN` | messaging channels (see above) |
-| `PORT`, `DATA_DIR`, `IMAGE_KEY`, `SUPERVISOR_TOKEN`, `ANALYST_TOKEN` | server, storage, demo roles |
+| `PORT`, `WEB_PORT`, `DATA_DIR`, `IMAGE_KEY`, `SUPERVISOR_TOKEN`, `ANALYST_TOKEN` | server, storage, demo roles |
 
 ## Repository layout
 
@@ -257,10 +270,10 @@ server/        agent (conversation), pipeline (queue + retries), channels (Vonag
                linking, records, encrypted photo store, HTTP API
 ocr/           local PaddleOCR service (Python)
 templates/     registered paper forms
-web/src/       office console + dashboard, phone simulator (device/: encrypted vault, offline outbox, photo check)
+web/src/       office console + dashboard, PDF report (device/: encrypted vault and offline outbox, tested, not in the UI)
 eval/          answer key (redacted), template geometry, evaluation and model comparison
 tools/         PDF answer-key extractor, template builder, WhatsApp setup check
-tests/         32 tests: parsing, lifecycle, offline queue, full conversations, Meta / Twilio / Vonage adapters
+tests/         40 tests: parsing, lifecycle, offline queue, full conversations, PDF report, Meta / Twilio / Vonage adapters
 DATA_NOTES.md  dataset inspection        PROPOSAL.md  design decisions
 ```
 

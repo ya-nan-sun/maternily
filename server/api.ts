@@ -2,13 +2,15 @@ import express, { type NextFunction, type Request, type Response } from "express
 import fs from "node:fs";
 import path from "node:path";
 import { z } from "zod";
+import { FIELD_BY_KEY, SECTION_LABELS } from "../shared/catalog.ts";
 import type { CaptureStatus, OutboundMessage, PollResponse } from "../shared/messages.ts";
 import type { Bp } from "../shared/normalize.ts";
+import { formatValue } from "../shared/normalize.ts";
 import { Agent, linkDocument, registerDocument } from "./agent.ts";
 import { config } from "./config.ts";
 import { now, setState, type Db } from "./db.ts";
 import { readImage } from "./images.ts";
-import { descriptor, patientValues } from "./records.ts";
+import { descriptor, documentValues, patientValues } from "./records.ts";
 import { receiveTwilio, twilioStatus } from "./twilio.ts";
 import { receiveVonage, vonageStatus } from "./vonage.ts";
 import { receiveWebhook, verifyWebhook } from "./whatsapp.ts";
@@ -60,7 +62,12 @@ export function createApi(db: Db, agent: Agent, kick: () => void) {
   app.post("/webhook/vonage/status", vonageStatus(db));
 
   app.get("/api/health", (_req, res) => {
-    res.json({ ok: true, extractor: config.extractor, model: config.extractor === "claude" ? config.model : "mock-ground-truth", effort: config.effort });
+    const model = config.extractor === "claude"
+      ? config.model
+      : config.extractor === "template"
+        ? `PaddleOCR PP-OCRv6_${process.env.OCR_MODEL_SIZE ?? "medium"} + form templates`
+        : "mock-ground-truth";
+    res.json({ ok: true, extractor: config.extractor, model, effort: config.effort, aiFallback: config.extractor === "template" ? config.aiFallback : "none" });
   });
 
   // ---------------------------------------------------------------- simulated phone
@@ -90,6 +97,58 @@ export function createApi(db: Db, agent: Agent, kick: () => void) {
       lastSeq: rows.length ? rows[rows.length - 1].seq : since,
     };
     res.json(body);
+  });
+
+  app.get("/api/office/documents/:id/report", requireRole("supervisor"), (req, res) => {
+    const docId = String(req.params.id);
+    const doc = db.prepare("SELECT midwife_id, state, opened_at FROM documents WHERE id = ?").get(docId) as
+      | { midwife_id: string; state: string; opened_at: string }
+      | undefined;
+    if (!doc) return res.status(404).json({ error: "unknown document" });
+    db.prepare("INSERT INTO access_log (role, action, subject, at) VALUES (?, 'download_report', ?, ?)").run(res.locals.role, docId, now());
+    if (doc.state !== "REGISTERED" && doc.state !== "SYNCED") {
+      return res.status(409).json({ error: "document is not registered yet" });
+    }
+
+    const lang = req.query.lang === "en" ? "en" : "fr";
+    const pages = db.prepare(
+      "SELECT capture_id, page_no, section, state, quality FROM pages WHERE doc_id = ? AND replaced_by IS NULL ORDER BY page_no",
+    ).all(docId) as { capture_id: string; page_no: number; section: string | null; state: string; quality: string | null }[];
+    const pagesByCapture = new Map(pages.map((page) => [page.capture_id, page]));
+    const fields = [...documentValues(db, docId, false).values()].flatMap((field) => {
+      const def = FIELD_BY_KEY.get(field.key);
+      if (!def) return [];
+      const page = field.sourceCaptureId ? pagesByCapture.get(field.sourceCaptureId) : undefined;
+      return [{
+        label: def[lang],
+        value: field.value === null ? "" : formatValue(field.key, field.value, lang),
+        status: field.status,
+        confidence: field.confidence,
+        reasons: field.reasons,
+        pageNo: page?.page_no ?? null,
+      }];
+    });
+
+    res.json({
+      documentId: docId,
+      createdAt: doc.opened_at,
+      pageCount: pages.length,
+      pages: pages.map((page) => {
+        const section = page.section as keyof typeof SECTION_LABELS | null;
+        const quality = page.quality ? JSON.parse(page.quality) as { issues?: string[] } : null;
+        return {
+          number: page.page_no,
+          section: section ? SECTION_LABELS[section][lang] : (lang === "fr" ? "Page non classée" : "Unclassified page"),
+          state: page.state,
+          issues: (quality?.issues ?? []).map((issue) => ({
+            blurry: lang === "fr" ? "Photo floue" : "Blurry photo",
+            too_dark: lang === "fr" ? "Photo trop sombre" : "Photo too dark",
+            too_bright: lang === "fr" ? "Photo surexposée" : "Photo overexposed",
+          }[issue] ?? issue)),
+        };
+      }),
+      fields,
+    });
   });
 
   /** The device confirms it received the "registered" message and dropped its local copy. */
@@ -125,7 +184,7 @@ export function createApi(db: Db, agent: Agent, kick: () => void) {
     const ai = db
       .prepare("SELECT COUNT(*) AS calls, SUM(cached) AS cached, SUM(1 - ok) AS failed, SUM(cost_usd) AS cost, SUM(input_tokens) AS input, SUM(output_tokens) AS output, SUM(cache_read_tokens) AS cacheRead FROM ai_calls")
       .get();
-    res.json({ docStates, pageStates, patients, ai, extractor: config.extractor });
+    res.json({ docStates, pageStates, patients, ai, extractor: config.extractor, aiFallback: config.aiFallback });
   });
 
   app.get("/api/office/patients", requireRole("supervisor"), (_req, res) => {
@@ -170,7 +229,7 @@ export function createApi(db: Db, agent: Agent, kick: () => void) {
     const doc = db.prepare("SELECT * FROM documents WHERE id = ?").get(String(req.params.id));
     if (!doc) return res.status(404).end();
     const pages = (
-      db.prepare("SELECT capture_id, page_no, state, section, section_confidence, quality, fields, confirmed, replaced_by, duplicate_of, entry, captured_at, received_at, error, attempts FROM pages WHERE doc_id = ? ORDER BY page_no, received_at").all(String(req.params.id)) as Record<string, unknown>[]
+      db.prepare("SELECT pages.capture_id, page_no, state, section, section_confidence, quality, fields, confirmed, replaced_by, duplicate_of, entry, captured_at, received_at, error, attempts, (SELECT model FROM ai_calls WHERE capture_id = pages.capture_id ORDER BY id DESC LIMIT 1) AS reader FROM pages WHERE doc_id = ? ORDER BY page_no, received_at").all(String(req.params.id)) as Record<string, unknown>[]
     ).map((p) => ({ ...p, fields: p.fields ? JSON.parse(String(p.fields)) : null, quality: p.quality ? JSON.parse(String(p.quality)) : null }) as Record<string, unknown>);
     const ids = [String(req.params.id), ...pages.map((p) => String(p.capture_id))];
     const transitions = db

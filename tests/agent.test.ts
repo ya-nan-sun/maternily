@@ -193,7 +193,7 @@ describe("multi-page registry, review and registration", () => {
   });
 
   it("offers manual entry when the AI cannot read a photo", async () => {
-    agent.handle(photo("1-1.jpg"));
+    agent.handle(inbound("image", { image: { data: Buffer.from("synthetic unknown image for manual-entry test").toString("base64"), mime: "image/jpeg" } }));
     press("done");
     const transcript = await converse((ids, msg) => {
       if (ids.includes("fail:manual")) return "fail:manual";

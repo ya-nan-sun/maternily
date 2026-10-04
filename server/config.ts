@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { ocrInstalled } from "./ocr-runtime.ts";
 
 function loadDotEnv(file: string) {
   if (!fs.existsSync(file)) return;
@@ -15,8 +16,6 @@ const hasClaudeCredentials = Boolean(process.env.ANTHROPIC_API_KEY || process.en
 
 export type ExtractorKind = "template" | "claude" | "mock";
 const requested = env("EXTRACTOR", "auto");
-const ocrInstalled = fs.existsSync("ocr/.venv/bin/python");
-
 export const config = {
   port: Number(env("PORT", "8787")),
   dataDir: path.resolve(env("DATA_DIR", "data")),
@@ -24,7 +23,7 @@ export const config = {
    * "template": free local OCR + form templates, Claude only for what it cannot read (default when OCR is installed).
    * "claude": Claude reads every page. "mock": replays the PDF ground truth (demos without OCR or a key).
    */
-  extractor: (requested === "auto" ? (ocrInstalled ? "template" : hasClaudeCredentials ? "claude" : "mock") : requested) as ExtractorKind,
+  extractor: (requested === "auto" ? (ocrInstalled() ? "template" : hasClaudeCredentials ? "claude" : "mock") : requested) as ExtractorKind,
   /**
    * In template mode, who reads what local OCR could not:
    *   "none"        the midwife is asked (default: free, no keys, works anywhere)

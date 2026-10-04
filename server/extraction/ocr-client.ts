@@ -2,17 +2,15 @@
 
 import { spawn, type ChildProcess } from "node:child_process";
 import fs from "node:fs";
-import path from "node:path";
+import { getOcrPythonPath } from "../ocr-runtime.ts";
 import { AiUnavailableError } from "./types.ts";
 
 const PORT = Number(process.env.OCR_PORT ?? 8790);
 const BASE = `http://127.0.0.1:${PORT}`;
-const PYTHON = path.resolve("ocr/.venv/bin/python");
+const PYTHON = getOcrPythonPath();
 
 export interface OcrLine { text: string; score: number; box: [number, number, number, number] }
 export interface OcrPage { width: number; height: number; lines: OcrLine[]; seconds: number }
-
-export const ocrInstalled = () => fs.existsSync(PYTHON);
 
 let child: ChildProcess | null = null;
 let starting: Promise<void> | null = null;
@@ -30,7 +28,7 @@ export function ensureOcrService(): Promise<void> {
   if (starting) return starting;
   starting = (async () => {
     if (await healthy()) return;
-    if (!ocrInstalled()) throw new AiUnavailableError("Local OCR is not installed (see README: ocr/.venv).");
+    if (!fs.existsSync(PYTHON)) throw new AiUnavailableError(`Local OCR is not installed at ${PYTHON} (see README: ocr/.venv).`);
     fs.mkdirSync("work", { recursive: true });
     const log = fs.openSync("work/ocr.log", "a");
     child = spawn(PYTHON, ["ocr/service.py"], { stdio: ["ignore", log, log], env: { ...process.env, OCR_PORT: String(PORT) } });

@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 import { t, type UiLang } from "./i18n.ts";
 import { Office } from "./Office.tsx";
-import { Phone } from "./Phone.tsx";
 
 export interface Health {
-  extractor: "claude" | "mock";
+  extractor: "template" | "claude" | "mock";
   model: string;
   effort: string;
+  aiFallback: "none" | "claude-code" | "claude";
 }
 
 export function App() {
   const [lang, setLang] = useState<UiLang>(() => (localStorageGet("ui-lang") as UiLang) || "fr");
-  const [view, setView] = useState<"phone" | "office">(() => (location.hash === "#office" ? "office" : "phone"));
   const [health, setHealth] = useState<Health | null>(null);
 
   useEffect(() => {
@@ -21,9 +20,6 @@ export function App() {
     localStorageSet("ui-lang", lang);
     document.documentElement.lang = lang;
   }, [lang]);
-  useEffect(() => {
-    location.hash = view === "office" ? "office" : "";
-  }, [view]);
 
   return (
     <>
@@ -48,16 +44,6 @@ export function App() {
           </div>
         </div>
 
-        <nav className="tabs">
-          <button className={`tab ${view === "phone" ? "active" : ""}`} onClick={() => setView("phone")}>
-            <span className="tab-icon">📱</span>
-            <span>{t(lang, "tabPhone")}</span>
-          </button>
-          <button className={`tab ${view === "office" ? "active" : ""}`} onClick={() => setView("office")}>
-            <span className="tab-icon">🏢</span>
-            <span>{t(lang, "tabOffice")}</span>
-          </button>
-        </nav>
 
         <span className="spacer" />
 
@@ -65,9 +51,11 @@ export function App() {
           <div className={`health-pill ${health.extractor}`}>
             <span className="pulse-dot" />
             <span className="health-label">
-              {health.extractor === "claude"
-                ? `${health.model} · ${health.effort}`
-                : (lang === "fr" ? "Vérité terrain (démo)" : "Ground truth (demo)")}
+              {health.extractor === "template"
+                ? `PaddleOCR · ${health.aiFallback === "none" ? (lang === "fr" ? "sans IA" : "no AI") : health.aiFallback === "claude-code" ? (lang === "fr" ? "secours Claude Code" : "Claude Code fallback") : (lang === "fr" ? "secours Claude" : "Claude fallback")}`
+                : health.extractor === "claude"
+                  ? `Claude · ${health.model} · ${health.effort}`
+                  : lang === "fr" ? "Vérité terrain (démo)" : "Ground truth (demo)"}
             </span>
           </div>
         )}
@@ -89,7 +77,7 @@ export function App() {
       )}
 
       <main className="app-main">
-        {view === "phone" ? <Phone lang={lang} /> : <Office lang={lang} />}
+        <Office lang={lang} />
       </main>
     </>
   );

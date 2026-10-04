@@ -27,7 +27,7 @@ Bonuses: a real WhatsApp sandbox, Arabic, an on-device photo check, an anonymize
 | Language | **TypeScript** end to end (Node 25, strict mode) | One language for the server, the web app and the shared logic. The field catalog, parsers and lifecycle state machine are written once and used everywhere. |
 | Server | **Express 5**, Node's built-in **SQLite** (`node:sqlite`) | No native modules to compile, and a single file database. |
 | Validation | **Zod** | Schemas for incoming messages and AI output |
-| Web app | **React 19 + Vite** | Office console, dashboard, and a WhatsApp-style phone simulator |
+| Web app | **React 19 + Vite** | Office console, dashboard, supervisor PDF report (the phone simulator was removed once real WhatsApp worked) |
 | Page reading (free) | **PaddleOCR 3.7 / PP-OCRv6** (Apache 2.0) in a local Python service; form **templates**; checkbox reading by **ink measurement** | $0 per page; photos never leave the machine |
 | AI fallback (optional) | **Headless Claude Code** (`claude -p`, the team's plan, demo only) or the **Claude API** (`@anthropic-ai/sdk`, default `claude-opus-5-5`, production path) | Only for cells the local reader is unsure of; one targeted call per page |
 | Messaging | **Vonage WhatsApp sandbox** (demo), **Meta WhatsApp Cloud API** (production path), **Twilio**, **Telegram** | Channel adapters behind one dispatcher; the agent doesn't know which channel it's on |
@@ -229,4 +229,4 @@ Context:
 1. **Full photo flow on real WhatsApp** (Vonage): photos → "terminé" → questions → saved.
 2. **Merge the teammates' branches** (Sahon reviewed, Ale pending), fixing the report button for WhatsApp.
 3. **Demo video:** airplane-mode capture, reconnection, an uncertain field reviewed, a match decision.
-4. **Optional:** a few Arabic test pages, a Vonage quota counter, moving the simulator out of the main screens, and a decision on the public repo containing the organizers' dataset.
+4. **Optional:** a few Arabic test pages, a Vonage quota counter, and a decision on the public repo containing the organizers' dataset.
