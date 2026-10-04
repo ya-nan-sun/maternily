@@ -15,7 +15,8 @@
     "eval": "tsx eval/run.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "compare": "tsx eval/compare.ts"
+    "compare": "tsx eval/compare.ts",
+    "whatsapp:setup": "tsx tools/whatsapp-setup.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.131.0",

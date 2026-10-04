@@ -148,7 +148,7 @@ export class Agent {
           `⚠️ This photo is identical to one already received (page ${this.page(dup.capture_id).page_no}). What should I do?`),
         [
           { id: `dup:ignore:${captureId}`, title: L(lang, "Ignorer", "Ignore it") },
-          { id: `dup:use:${captureId}`, title: L(lang, "L'utiliser quand même", "Use it anyway") },
+          { id: `dup:use:${captureId}`, title: L(lang, "L'utiliser", "Use it anyway") },
         ],
         { docId, captureId },
       );
@@ -570,7 +570,7 @@ export class Agent {
           `❓ ${label}\nI can't read this box${f.raw ? ` (maybe "${f.raw}")` : ""}. Type the value written on the paper.${reasons ? "\n" + reasons : ""}\n(${total} left)`),
         [
           { id: "q:blank", title: L(lang, "Vide sur le papier", "Blank on paper") },
-          { id: "q:illegible", title: L(lang, "Illisible aussi pour moi", "Illegible for me too") },
+          { id: "q:illegible", title: L(lang, "Illisible pour moi", "Illegible for me too") },
           { id: "q:unknown", title: L(lang, "Inconnu", "Unknown") },
         ],
         { docId: p.doc_id, captureId: p.capture_id },

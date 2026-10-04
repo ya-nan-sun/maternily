@@ -47,6 +47,15 @@ export const config = {
     "claude-sonnet-5-5": { input: 2, output: 10, cacheRead: 0.2, cacheWrite: 2.5 },
     "claude-haiku-4-5": { input: 1, output: 5, cacheRead: 0.1, cacheWrite: 1.25 },
   } as Record<string, { input: number; output: number; cacheRead: number; cacheWrite: number }>,
+  /** WhatsApp Cloud API (Meta). The adapter is active when the phone number ID and token are set. */
+  whatsapp: {
+    phoneNumberId: env("WHATSAPP_PHONE_NUMBER_ID", "").trim(),
+    accessToken: env("WHATSAPP_ACCESS_TOKEN", "").trim(),
+    verifyToken: env("WHATSAPP_VERIFY_TOKEN", "").trim(),
+    /** Optional: when set, webhook calls must carry a valid X-Hub-Signature-256. */
+    appSecret: env("WHATSAPP_APP_SECRET", "").trim(),
+    apiVersion: env("WHATSAPP_API_VERSION", "v25.0"),
+  },
   /** Demo role tokens for the office console. */
   roles: {
     supervisor: env("SUPERVISOR_TOKEN", "supervisor-demo"),

@@ -9,6 +9,9 @@ import { config } from "./config.ts";
 import { now, setState, type Db } from "./db.ts";
 import { readImage } from "./images.ts";
 import { descriptor, patientValues } from "./records.ts";
+import { receiveTwilio, twilioStatus } from "./twilio.ts";
+import { receiveVonage, vonageStatus } from "./vonage.ts";
+import { receiveWebhook, verifyWebhook } from "./whatsapp.ts";
 
 const SAMPLES_DIR = "dayone-participants/data/Paper Registry";
 const CSV = "dayone-participants/data/maternal_registry_synthetic.csv";
@@ -39,7 +42,22 @@ const requireRole = (...allowed: Role[]) => (req: Request, res: Response, next: 
 
 export function createApi(db: Db, agent: Agent, kick: () => void) {
   const app = express();
-  app.use(express.json({ limit: "25mb" }));
+  // Keep the raw body: WhatsApp webhook signatures are computed over the exact bytes.
+  app.use(express.json({ limit: "25mb", verify: (req, _res, buf) => void ((req as Request & { rawBody?: Buffer }).rawBody = buf) }));
+
+  // ---------------------------------------------------------------- WhatsApp Cloud API webhook
+  app.get("/webhook/whatsapp", verifyWebhook);
+  app.post("/webhook/whatsapp", receiveWebhook(db, agent, kick));
+
+  // ---------------------------------------------------------------- Twilio WhatsApp (sandbox) webhook
+  app.post("/webhook/twilio", express.urlencoded({ extended: false }), receiveTwilio(db, agent, kick));
+  app.post("/webhook/twilio/status", express.urlencoded({ extended: false }), twilioStatus(db));
+
+  // ---------------------------------------------------------------- Vonage WhatsApp (sandbox) webhooks
+  app.post("/webhook/vonage/:key/inbound", receiveVonage(db, agent, kick));
+  app.post("/webhook/vonage/:key/status", vonageStatus(db));
+  app.post("/webhook/vonage/inbound", receiveVonage(db, agent, kick)); // older ?k= form
+  app.post("/webhook/vonage/status", vonageStatus(db));
 
   app.get("/api/health", (_req, res) => {
     res.json({ ok: true, extractor: config.extractor, model: config.extractor === "claude" ? config.model : "mock-ground-truth", effort: config.effort });

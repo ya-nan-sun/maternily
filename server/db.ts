@@ -72,9 +72,34 @@ CREATE TABLE IF NOT EXISTS access_log (
 );
 `;
 
+// WhatsApp: one row per outbound message handed to the Cloud API.
+const WHATSAPP_SCHEMA = `
+CREATE TABLE IF NOT EXISTS wa_deliveries (
+  outbound_id TEXT PRIMARY KEY, wamid TEXT, status TEXT NOT NULL, attempts INTEGER NOT NULL DEFAULT 0,
+  next_attempt_at TEXT, error TEXT, updated_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS wa_deliveries_wamid ON wa_deliveries(wamid);
+-- Text-only channels (Twilio): the last choices offered, so a reply "2" maps back to a button.
+CREATE TABLE IF NOT EXISTS channel_prompts (midwife_id TEXT PRIMARY KEY, buttons TEXT NOT NULL, at TEXT NOT NULL);
+`;
+
+/** Columns added after the first release; ignored when they already exist. */
+const MIGRATIONS = [
+  "ALTER TABLE midwives ADD COLUMN channel TEXT NOT NULL DEFAULT 'simulator'",
+  "ALTER TABLE midwives ADD COLUMN phone TEXT",
+];
+
 export function openDb(file = path.join(config.dataDir, "maternily.db")): Db {
   const db = new DatabaseSync(file);
   db.exec(SCHEMA);
+  db.exec(WHATSAPP_SCHEMA);
+  for (const sql of MIGRATIONS) {
+    try {
+      db.exec(sql);
+    } catch {
+      /* already applied */
+    }
+  }
   return db;
 }
 
