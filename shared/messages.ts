@@ -44,3 +44,23 @@ export interface PollResponse {
   captures: CaptureStatus[];
   lastSeq: number;
 }
+
+export interface DocumentReport {
+  documentId: string;
+  createdAt: string;
+  pageCount: number;
+  pages: {
+    number: number;
+    section: string;
+    state: string;
+    issues: string[];
+  }[];
+  fields: {
+    label: string;
+    value: string;
+    status: string;
+    confidence: number;
+    reasons: string[];
+    pageNo: number | null;
+  }[];
+}

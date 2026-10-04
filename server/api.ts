@@ -2,13 +2,15 @@ import express, { type NextFunction, type Request, type Response } from "express
 import fs from "node:fs";
 import path from "node:path";
 import { z } from "zod";
+import { FIELD_BY_KEY, SECTION_LABELS } from "../shared/catalog.ts";
 import type { CaptureStatus, OutboundMessage, PollResponse } from "../shared/messages.ts";
 import type { Bp } from "../shared/normalize.ts";
+import { formatValue } from "../shared/normalize.ts";
 import { Agent, linkDocument, registerDocument } from "./agent.ts";
 import { config } from "./config.ts";
 import { now, setState, type Db } from "./db.ts";
 import { readImage } from "./images.ts";
-import { descriptor, patientValues } from "./records.ts";
+import { descriptor, documentValues, patientValues } from "./records.ts";
 
 const SAMPLES_DIR = "dayone-participants/data/Paper Registry";
 const CSV = "dayone-participants/data/maternal_registry_synthetic.csv";
@@ -72,6 +74,58 @@ export function createApi(db: Db, agent: Agent, kick: () => void) {
       lastSeq: rows.length ? rows[rows.length - 1].seq : since,
     };
     res.json(body);
+  });
+
+  app.get("/api/sim/:mid/documents/:id/report", (req, res) => {
+    const mid = String(req.params.mid);
+    const docId = String(req.params.id);
+    const doc = db.prepare("SELECT midwife_id, state, opened_at FROM documents WHERE id = ?").get(docId) as
+      | { midwife_id: string; state: string; opened_at: string }
+      | undefined;
+    if (!doc || doc.midwife_id !== mid) return res.status(404).json({ error: "unknown document" });
+    if (doc.state !== "REGISTERED" && doc.state !== "SYNCED") {
+      return res.status(409).json({ error: "document is not registered yet" });
+    }
+
+    const lang = req.query.lang === "en" ? "en" : "fr";
+    const pages = db.prepare(
+      "SELECT capture_id, page_no, section, state, quality FROM pages WHERE doc_id = ? AND replaced_by IS NULL ORDER BY page_no",
+    ).all(docId) as { capture_id: string; page_no: number; section: string | null; state: string; quality: string | null }[];
+    const pagesByCapture = new Map(pages.map((page) => [page.capture_id, page]));
+    const fields = [...documentValues(db, docId, false).values()].flatMap((field) => {
+      const def = FIELD_BY_KEY.get(field.key);
+      if (!def) return [];
+      const page = field.sourceCaptureId ? pagesByCapture.get(field.sourceCaptureId) : undefined;
+      return [{
+        label: def[lang],
+        value: field.value === null ? "" : formatValue(field.key, field.value, lang),
+        status: field.status,
+        confidence: field.confidence,
+        reasons: field.reasons,
+        pageNo: page?.page_no ?? null,
+      }];
+    });
+
+    res.json({
+      documentId: docId,
+      createdAt: doc.opened_at,
+      pageCount: pages.length,
+      pages: pages.map((page) => {
+        const section = page.section as keyof typeof SECTION_LABELS | null;
+        const quality = page.quality ? JSON.parse(page.quality) as { issues?: string[] } : null;
+        return {
+          number: page.page_no,
+          section: section ? SECTION_LABELS[section][lang] : (lang === "fr" ? "Page non classée" : "Unclassified page"),
+          state: page.state,
+          issues: (quality?.issues ?? []).map((issue) => ({
+            blurry: lang === "fr" ? "Photo floue" : "Blurry photo",
+            too_dark: lang === "fr" ? "Photo trop sombre" : "Photo too dark",
+            too_bright: lang === "fr" ? "Photo surexposée" : "Photo overexposed",
+          }[issue] ?? issue)),
+        };
+      }),
+      fields,
+    });
   });
 
   /** The device confirms it received the "registered" message and dropped its local copy. */

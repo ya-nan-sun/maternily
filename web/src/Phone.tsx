@@ -1,11 +1,12 @@
 // The simulated midwife phone: a WhatsApp-style chat on top of an encrypted
 // offline outbox. Toggle "offline" at any time, including mid-upload.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { STATE_LABELS } from "../../shared/lifecycle.ts";
-import type { Button, CaptureStatus, InboundMessage, PollResponse } from "../../shared/messages.ts";
+import type { Button, CaptureStatus, DocumentReport, InboundMessage, PollResponse } from "../../shared/messages.ts";
 import { Outbox, type LocalState, type OutboxItem } from "./device/outbox.ts";
 import { blobToBase64, checkQuality, prepareImage } from "./device/quality.ts";
+import { createReportPdf, downloadReport, reportMessage, whatsappReportMessage } from "./device/report.ts";
 import { Vault, deriveKey, indexedDbBackend } from "./device/vault.ts";
 import { t, type UiLang } from "./i18n.ts";
 
@@ -106,6 +107,11 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
   const [text, setText] = useState("");
   const [gallery, setGallery] = useState(false);
   const [uploading, setUploading] = useState<string | null>(null);
+  const [report, setReport] = useState<DocumentReport | null>(null);
+  const [reportFile, setReportFile] = useState<File | null>(null);
+  const [reportLoading, setReportLoading] = useState(false);
+  const [reportError, setReportError] = useState("");
+  const [shareNotice, setShareNotice] = useState("");
   const chatRef = useRef<HTMLDivElement>(null);
   const chatState = useRef(chat);
   const loaded = useRef(false);
@@ -191,6 +197,28 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
   }, [mid, outbox]);
 
   async function tapButton(entry: ChatEntry, b: Button) {
+    if (b.id.startsWith("report:")) {
+      setReport(null);
+      setReportFile(null);
+      setReportError("");
+      setShareNotice("");
+      setReportLoading(true);
+      try {
+        const docId = b.id.slice("report:".length);
+        const response = await fetch(`/api/sim/${encodeURIComponent(mid)}/documents/${encodeURIComponent(docId)}/report?lang=${lang}`);
+        if (!response.ok) throw new Error(`report request failed (${response.status})`);
+        const data = await response.json() as DocumentReport;
+        const file = await createReportPdf(data, lang);
+        setReport(data);
+        setReportFile(file);
+      } catch (error) {
+        console.error("Could not load registry report", error);
+        setReportError(t(lang, "reportError"));
+      } finally {
+        setReportLoading(false);
+      }
+      return;
+    }
     setChat((c) => ({ ...c, entries: c.entries.map((e) => (e.id === entry.id ? { ...e, used: true } : e)) }));
     const msg: InboundMessage = { id: crypto.randomUUID(), midwifeId: mid, kind: "button", buttonId: b.id, capturedAt: new Date().toISOString() };
     pushMine({ id: msg.id, text: b.title });
@@ -212,7 +240,34 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
     await outbox.add(msg, `📷 ${label}`);
   }
 
+  function saveReport() {
+    if (!reportFile) return;
+    downloadReport(reportFile);
+  }
+
+  function shareReport(event: MouseEvent<HTMLAnchorElement>) {
+    if (!report || !reportFile) return;
+    const file = reportFile;
+    const text = reportMessage(report, lang);
+    const nav = navigator as Navigator & { canShare?: (data: ShareData) => boolean };
+    if (nav.share && nav.canShare?.({ files: [file] })) {
+      event.preventDefault();
+      void nav.share({ files: [file], text, title: t(lang, "reportTitle") }).then(() => {
+        setShareNotice("");
+      }).catch((error: unknown) => {
+        if (error instanceof Error && error.name !== "AbortError") {
+          console.error("Could not share registry report", error);
+          setReportError(t(lang, "reportError"));
+        }
+      });
+      return;
+    }
+    downloadReport(file);
+    setShareNotice(t(lang, "reportAttach"));
+  }
+
   const byId = useMemo(() => new Map(items.map((i) => [i.id, i])), [items]);
+  const whatsappHref = report ? `https://wa.me/?text=${encodeURIComponent(whatsappReportMessage(report, lang))}` : undefined;
   // Only the latest prompt is answerable; duplicate-photo questions stay open until answered.
   const lastPrompt = chat.entries.reduce((last, e, i) => (e.from === "bot" && e.buttons?.length ? i : last), -1);
   const stale = (e: ChatEntry, i: number) => i < lastPrompt && !e.buttons?.some((b) => b.id.startsWith("dup:"));
@@ -230,6 +285,13 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
           <button className="icon-btn secondary" title="Lock" onClick={onLock}>🔒</button>
         </div>
         <div className="chat" ref={chatRef}>
+          {chat.entries.length === 0 && (
+            <div className="bubble bot welcome">
+              <strong>{t(lang, "welcomeTitle")}</strong>
+              <p>{t(lang, "welcomeText")}</p>
+              <span className="small muted">{t(lang, "firstSteps")}</span>
+            </div>
+          )}
           {chat.entries.map((e, idx) => (
             <div key={e.id} className={`bubble ${e.from}`}>
               {e.thumb && <img src={e.thumb} alt="" />}
@@ -264,23 +326,6 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
       </div>
 
       <div className="stack">
-        <div className="panel stack">
-          <h2>⚙️ {t(lang, "device")}</h2>
-          <label className="switch">
-            <input type="checkbox" checked={online} onChange={(e) => setOnline(e.target.checked)} />
-            <span className={`conn ${online ? "on" : "off"}`}>{online ? `📶 ${t(lang, "online")}` : `✈️ ${t(lang, "offline")}`}</span>
-          </label>
-          <label className="switch small">
-            <input type="checkbox" checked={slow} onChange={(e) => setSlow(e.target.checked)} />
-            {t(lang, "slowNetwork")}
-          </label>
-          <div className="row small">
-            {t(lang, "botLanguage")} :
-            <button className="btn" onClick={() => void tapButton({ id: "lang", from: "me", at: "" }, { id: "lang:fr", title: "Français" })}>FR</button>
-            <button className="btn" onClick={() => void tapButton({ id: "lang", from: "me", at: "" }, { id: "lang:en", title: "English" })}>EN</button>
-          </div>
-          <p className="small muted">🔒 {t(lang, "encrypted")}</p>
-        </div>
         <div className="panel">
           <h2>📤 {t(lang, "queue")}</h2>
           {items.length === 0 ? <p className="muted small">{t(lang, "queueEmpty")}</p> : (
@@ -300,6 +345,25 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
             </ul>
           )}
         </div>
+        <details className="panel device-settings">
+          <summary>⚙️ {t(lang, "device")}</summary>
+          <div className="stack device-settings-content">
+          <label className="switch">
+            <input type="checkbox" checked={online} onChange={(e) => setOnline(e.target.checked)} />
+            <span className={`conn ${online ? "on" : "off"}`}>{online ? `📶 ${t(lang, "online")}` : `✈️ ${t(lang, "offline")}`}</span>
+          </label>
+          <label className="switch small">
+            <input type="checkbox" checked={slow} onChange={(e) => setSlow(e.target.checked)} />
+            {t(lang, "slowNetwork")}
+          </label>
+          <div className="row small">
+            {t(lang, "botLanguage")} :
+            <button className="btn" onClick={() => void tapButton({ id: "lang", from: "me", at: "" }, { id: "lang:fr", title: "Français" })}>FR</button>
+            <button className="btn" onClick={() => void tapButton({ id: "lang", from: "me", at: "" }, { id: "lang:en", title: "English" })}>EN</button>
+          </div>
+          <p className="small muted">🔒 {t(lang, "encrypted")}</p>
+          </div>
+        </details>
       </div>
       {gallery && <Gallery lang={lang} onClose={() => setGallery(false)} onSend={async (files) => {
         setGallery(false);
@@ -308,6 +372,54 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
           await sendImage(blob, f.label, false);
         }
       }} />}
+      {(reportLoading || reportError || report) && (
+        <div className="modal-back" onClick={() => { setReport(null); setReportError(""); }}>
+          <section className="modal report-modal stack" role="dialog" aria-modal="true" aria-labelledby="report-title" onClick={(e) => e.stopPropagation()}>
+            <div className="row">
+              <h2 id="report-title">{t(lang, "reportTitle")}</h2>
+              <span className="spacer" />
+              <button className="btn" onClick={() => { setReport(null); setReportError(""); }}>{t(lang, "reportClose")}</button>
+            </div>
+            {reportLoading && <p role="status">{t(lang, "reportLoading")}</p>}
+            {reportError && <p role="alert" className="report-error">{reportError}</p>}
+            {report && (
+              <>
+                <p className="small muted">{t(lang, "reportMeta", { pages: report.pageCount, fields: report.fields.length })}</p>
+                <p className="small">{t(lang, "reportPrivacy")}</p>
+                <div className="report-pages">
+                  <h3>{t(lang, "reportPages")}</h3>
+                  {report.pages.map((page) => (
+                    <div className="report-page" key={`${page.number}-${page.section}`}>
+                      <strong>{page.number}. {page.section}</strong><span className="chip ok">{page.state}</span>
+                      {page.issues.map((issue) => <p className="report-issue" key={issue}>⚠ {issue}</p>)}
+                    </div>
+                  ))}
+                </div>
+                <div className="report-fields">
+                  {report.fields.map((field, index) => (
+                    <div className="report-field" key={`${field.label}-${index}`}>
+                      <strong>{field.label}</strong>
+                      <span>{field.value || (lang === "fr" ? "Non renseigné" : "Not provided")}</span>
+                      <span className="small muted">{field.status} · {t(lang, "reportConfidence")} {Math.round(field.confidence * 100)}%{field.pageNo === null ? "" : ` · p. ${field.pageNo}`}</span>
+                      {field.reasons.length > 0 && <span className="small report-issue">{t(lang, "reportReason")}: {field.reasons.join(", ")}</span>}
+                    </div>
+                  ))}
+                </div>
+                <div className="row report-actions">
+                  <button className="btn" disabled={!reportFile} onClick={saveReport}>📄 {t(lang, "reportDownload")}</button>
+                  {whatsappHref && (
+                    <a className={`btn primary ${!reportFile ? "disabled" : ""}`} href={reportFile ? whatsappHref : undefined} target="_blank" rel="noopener noreferrer" onClick={shareReport}>
+                      🟢 {t(lang, "reportWhatsApp")}
+                    </a>
+                  )}
+                </div>
+                {shareNotice && <p className="small report-notice" role="status">{shareNotice}</p>}
+                <p className="small muted">{lang === "fr" ? "Sur un téléphone compatible, le menu de partage permet de joindre directement le PDF. Sinon, le PDF est téléchargé et le message WhatsApp est prérempli." : "On a compatible phone, the share menu can attach the PDF directly. Otherwise, the PDF is downloaded and the WhatsApp message is prefilled."}</p>
+              </>
+            )}
+          </section>
+        </div>
+      )}
     </div>
   );
 }

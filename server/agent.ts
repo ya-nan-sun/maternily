@@ -927,7 +927,7 @@ export class Agent {
     this.send(
       mid,
       L(c.lang, `✅ Enregistré dans le dossier${code ? ` (fiche ${code})` : ""} : ${diffs.length} valeur(s) mises à jour. Merci !`, `✅ Saved to the record${code ? ` (form ${code})` : ""}: ${diffs.length} value(s) updated. Thank you!`),
-      undefined,
+      [{ id: `report:${a.docId}`, title: L(c.lang, "📄 Voir et partager le rapport", "📄 View and share report") }],
       { docId: a.docId },
     );
     return this.maybeStartReview(mid);

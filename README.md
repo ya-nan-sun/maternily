@@ -20,18 +20,23 @@ The midwife keeps working on paper. She photographs the pages, even with no netw
 Requirements: Node ≥ 22.13 (uses the built-in `node:sqlite`) and Python 3 (only to regenerate the ground truth).
 
 ```bash
-npm install
-npm run build && npm start          # http://localhost:8787  (server + built web app)
-# or, for development with hot reload:
-npm run dev                         # web on http://localhost:5173, API on :8787
+npm ci                              # install the exact cross-platform dependency versions
+npm run dev                         # http://localhost:5173 (hot reload; API on :8787)
+# or, for the production-style server:
+npm run build
+npm start                           # http://localhost:8787 (server + built web app)
 ```
+
+- On macOS, install Node ≥ 22.13 first (for example, `brew install node`), clone the repository, then run the commands above from the project directory.
+- Without Claude credentials, the server starts in demo mode; synthetic sample pages work, while arbitrary photos use manual entry. For AI extraction, set `ANTHROPIC_API_KEY` in your shell or in an uncommitted `.env` file.
+- After a registry is reviewed and registered, choose **View and share report** in the chat. Download the complete PDF or share it through the phone's native share sheet. The WhatsApp redirect pre-fills a text report; web links cannot attach a PDF, so attach the downloaded PDF manually when using the redirect.
 
 - **With Claude:** `export ANTHROPIC_API_KEY=...` (or put it in `.env`) before starting. The extractor is `claude-opus-5-5` by default.
 - **Without a key** the app runs in **demo mode**. Dataset pages are answered from the PDF-derived ground truth, with simulated doubts so that the review flow has something to ask. Any other photo goes to manual entry, which is also the required "AI unavailable" path. A banner shows which mode is active.
 
 | Script | What it does |
 |---|---|
-| `npm test` | 21 tests: parsing, lifecycle, offline outbox (drop mid-upload), full conversations end to end |
+| `npm test` | Parsing, lifecycle, offline outbox, report generation and full conversations end to end |
 | `npm run eval -- --split test` | Field-level accuracy, status and calibration report on the held-out patients |
 | `npm run gt` | Rebuild `eval/ground_truth/` from the registry PDF |
 | `npm run typecheck` | TypeScript, strict |
