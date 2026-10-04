@@ -13,10 +13,12 @@ import base64
 import io
 import json
 import os
+import sys
 import time
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
 os.environ.setdefault("PADDLE_PDX_DISABLE_MODEL_SOURCE_CHECK", "True")
+os.environ.setdefault("DISABLE_MODEL_SOURCE_CHECK", "True")
 
 import numpy as np  # noqa: E402
 from PIL import Image  # noqa: E402
@@ -32,6 +34,8 @@ OCR = PaddleOCR(
     use_doc_orientation_classify=False,
     use_doc_unwarping=False,
     use_textline_orientation=False,
+    # PaddlePaddle 3.3.x CPU inference crashes through oneDNN on Windows.
+    enable_mkldnn=sys.platform != "win32",
 )
 print(f"PaddleOCR PP-OCRv6 {SIZE} ready in {time.time() - started:.1f}s on port {PORT}", flush=True)
 

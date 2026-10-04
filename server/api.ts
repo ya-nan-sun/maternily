@@ -44,7 +44,12 @@ export function createApi(db: Db, agent: Agent, kick: () => void) {
   app.use(express.json({ limit: "25mb" }));
 
   app.get("/api/health", (_req, res) => {
-    res.json({ ok: true, extractor: config.extractor, model: config.extractor === "claude" ? config.model : "mock-ground-truth", effort: config.effort });
+    const model = config.extractor === "claude"
+      ? config.model
+      : config.extractor === "template"
+        ? `PaddleOCR PP-OCRv6_${process.env.OCR_MODEL_SIZE ?? "medium"} + form templates`
+        : "mock-ground-truth";
+    res.json({ ok: true, extractor: config.extractor, model, effort: config.effort, aiFallback: config.extractor === "template" ? config.aiFallback : "none" });
   });
 
   // ---------------------------------------------------------------- simulated phone
@@ -206,7 +211,7 @@ export function createApi(db: Db, agent: Agent, kick: () => void) {
     const doc = db.prepare("SELECT * FROM documents WHERE id = ?").get(String(req.params.id));
     if (!doc) return res.status(404).end();
     const pages = (
-      db.prepare("SELECT capture_id, page_no, state, section, section_confidence, quality, fields, confirmed, replaced_by, duplicate_of, entry, captured_at, received_at, error, attempts FROM pages WHERE doc_id = ? ORDER BY page_no, received_at").all(String(req.params.id)) as Record<string, unknown>[]
+      db.prepare("SELECT pages.capture_id, page_no, state, section, section_confidence, quality, fields, confirmed, replaced_by, duplicate_of, entry, captured_at, received_at, error, attempts, (SELECT model FROM ai_calls WHERE capture_id = pages.capture_id ORDER BY id DESC LIMIT 1) AS reader FROM pages WHERE doc_id = ? ORDER BY page_no, received_at").all(String(req.params.id)) as Record<string, unknown>[]
     ).map((p) => ({ ...p, fields: p.fields ? JSON.parse(String(p.fields)) : null, quality: p.quality ? JSON.parse(String(p.quality)) : null }) as Record<string, unknown>);
     const ids = [String(req.params.id), ...pages.map((p) => String(p.capture_id))];
     const transitions = db

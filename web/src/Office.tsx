@@ -109,8 +109,8 @@ function Overview({ role, lang }: { role: Role; lang: UiLang }) {
         <Tile label={L("Registres enregistrés", "Registries registered")} value={done} sub={`${total} ${L("reçus", "received")}`} />
         <Tile label={L("En cours de vérification", "Being reviewed")} value={waiting} />
         <Tile label={L("À rattacher par le bureau", "Waiting for office match")} value={docs.MANUAL_REVIEW_REQUIRED ?? 0} />
-        <Tile label={L("Appels IA", "AI calls")} value={data.ai.calls ?? 0} sub={`${data.ai.cached ?? 0} ${L("depuis le cache", "from cache")} · ${data.ai.failed ?? 0} ${L("échecs", "failed")}`} />
-        <Tile label={L("Coût IA estimé", "Estimated AI cost")} value={`$${(data.ai.cost ?? 0).toFixed(2)}`} sub={data.extractor === "mock" ? "mock" : `${Math.round((data.ai.cacheRead ?? 0) / 1000)}k ${L("jetons en cache", "cached tokens")}`} />
+        <Tile label={L("Exécutions d'extraction", "Extraction runs")} value={data.ai.calls ?? 0} sub={`${data.ai.cached ?? 0} ${L("depuis le cache", "from cache")} · ${data.ai.failed ?? 0} ${L("échecs", "failed")}`} />
+        <Tile label={L("Coût Claude estimé", "Estimated Claude cost")} value={`$${(data.ai.cost ?? 0).toFixed(2)}`} sub={data.extractor === "template" ? L("PaddleOCR local ; aucune donnée envoyée à Claude", "Local PaddleOCR; no data sent to Claude") : data.extractor === "mock" ? "mock" : `${Math.round((data.ai.cacheRead ?? 0) / 1000)}k ${L("jetons en cache", "cached tokens")}`} />
       </div>
       <div className="panel">
         <h2>{L("Cycle de vie des registres", "Registry lifecycle")}</h2>
@@ -234,7 +234,7 @@ function Documents({ role, lang, open }: { role: Role; lang: UiLang; open: (id: 
 
 interface DocDetail {
   doc: { id: string; state: string; midwife_id: string; code: string | null; note: string | null; patient_id: string | null };
-  pages: { capture_id: string; page_no: number; state: string; section: string | null; fields: Record<string, FieldValue> | null; quality: { usable: boolean; issues: string[] } | null; replaced_by: string | null; entry: string; captured_at: string; received_at: string; error: string | null }[];
+  pages: { capture_id: string; page_no: number; state: string; section: string | null; fields: Record<string, FieldValue> | null; quality: { usable: boolean; issues: string[] } | null; replaced_by: string | null; entry: string; reader: string | null; captured_at: string; received_at: string; error: string | null }[];
   transitions: { subject_type: string; subject_id: string; from_state: string | null; to_state: string; at: string; reason: string }[];
 }
 function DocumentView({ role, lang, id, onBack }: { role: Role; lang: UiLang; id: string; onBack: () => void }) {
@@ -272,7 +272,7 @@ function DocumentView({ role, lang, id, onBack }: { role: Role; lang: UiLang; id
               <PageImage role={role} cid={p.capture_id} lang={lang} />
               <div className="row"><strong>Page {p.page_no}</strong><StateBadge state={p.state} lang={lang} />{p.replaced_by && <span className="chip">{L("remplacée", "replaced")}</span>}</div>
               <div>{p.section ? SECTION_LABELS[p.section as keyof typeof SECTION_LABELS]?.[lang] ?? p.section : "—"}</div>
-              <div className="muted">{vals.filter((f) => f.status !== "NOT_PROVIDED").length} {L("valeurs", "values")} · {doubt} {L("à vérifier", "to check")} · {p.entry === "manual" ? L("saisie manuelle", "manual entry") : "IA"}</div>
+              <div className="muted">{vals.filter((f) => f.status !== "NOT_PROVIDED").length} {L("valeurs", "values")} · {doubt} {L("à vérifier", "to check")} · {p.entry === "manual" ? L("saisie manuelle", "manual entry") : p.reader?.startsWith("paddleocr-") ? "PaddleOCR" : p.reader === "mock-ground-truth" ? L("vérité terrain (démo)", "ground truth (demo)") : p.reader ?? L("lecture automatisée", "automated extraction")}</div>
               <div className="muted">{L("Capturée", "Captured")} {p.captured_at.slice(0, 16).replace("T", " ")} · {L("reçue", "received")} {p.received_at.slice(11, 16)}</div>
               {p.error && <div style={{ color: "var(--bad)" }}>{p.error}</div>}
             </div>
@@ -318,7 +318,7 @@ function AiUsage({ role, lang }: { role: Role; lang: UiLang }) {
   const L = (fr: string, en: string) => (lang === "fr" ? fr : en);
   return (
     <div className="panel table-wrap">
-      <p className="small muted">{L("Chaque photo est lue une seule fois : les doublons et reprises identiques sont servis depuis le cache.", "Each photo is read once: duplicates and identical retakes are served from the cache.")}</p>
+      <p className="small muted">{L("Chaque ligne est une exécution d'extraction ; le nom du modèle indique le moteur réellement utilisé. Un appel Claude apparaît dans les colonnes de jetons et de coût.", "Each row is an extraction run; the model name identifies the engine actually used. Claude usage appears in the token and cost columns.")}</p>
       <table>
         <thead><tr><th>{L("Heure", "Time")}</th><th>{L("Modèle", "Model")}</th><th>Cache</th><th>OK</th><th className="num">{L("Entrée", "Input")}</th><th className="num">{L("Sortie", "Output")}</th><th className="num">{L("Lu en cache", "Cache read")}</th><th className="num">$</th><th className="num">ms</th></tr></thead>
         <tbody>

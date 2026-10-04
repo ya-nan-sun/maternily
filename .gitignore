@@ -2,6 +2,8 @@ node_modules/
 web/dist/
 /data/
 /work/
+/data-paddleocr-preview*/
+/data-paddleocr-retry/
 .env
 .DS_Store
 eval/results/mock-*

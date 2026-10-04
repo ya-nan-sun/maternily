@@ -15,6 +15,14 @@ const STRINGS = {
   typeMessage: ["Message", "Message"],
   send: ["Envoyer", "Send"],
   camera: ["Photo", "Photo"],
+  photoCheckTitle: ["Vérifiez la photo avant l'envoi", "Check this photo before sending"],
+  photoCheckHelp: [
+    "La page risque d'être difficile à lire. Reprenez la photo pour un meilleur résultat, ou envoyez-la quand même.",
+    "This page may be difficult to read. Retake it for a clearer result, or send it anyway.",
+  ],
+  photoRetake: ["Reprendre la photo", "Retake photo"],
+  photoSendAnyway: ["Envoyer quand même", "Send anyway"],
+  photoIssues: ["À améliorer", "Could be improved"],
   welcomeTitle: ["Bonjour 👋", "Hello 👋"],
   welcomeText: [
     "Envoyez les pages de votre registre. Je les lis, puis je vous demande de vérifier uniquement les passages incertains.",

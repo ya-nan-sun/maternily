@@ -112,6 +112,8 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
   const [reportLoading, setReportLoading] = useState(false);
   const [reportError, setReportError] = useState("");
   const [shareNotice, setShareNotice] = useState("");
+  const [photoCheck, setPhotoCheck] = useState<{ blob: Blob; mime: string; label: string; thumb: string; issues: string[] } | null>(null);
+  const cameraInput = useRef<HTMLInputElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);
   const chatState = useRef(chat);
   const loaded = useRef(false);
@@ -229,14 +231,18 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
     const { blob, mime } = await prepareImage(file);
     const q = await checkQuality(blob);
     if (askOnIssues && q.issues.length) {
-      const issues = q.issues.map((i) => t(lang, i)).join(", ");
-      if (!confirm(t(lang, "qualityWarn", { issues }))) return;
+      setPhotoCheck({ blob, mime, label, thumb: await thumbnail(blob), issues: q.issues });
+      return;
     }
+    await queuePhoto(blob, mime, label);
+  }
+
+  async function queuePhoto(blob: Blob, mime: string, label: string, preview?: string) {
     const msg: InboundMessage = {
       id: crypto.randomUUID(), midwifeId: mid, kind: "image",
-      image: { data: await blobToBase64(blob), mime: mime as "image/png" }, capturedAt: new Date().toISOString(),
+      image: { data: await blobToBase64(blob), mime }, capturedAt: new Date().toISOString(),
     };
-    pushMine({ id: msg.id, thumb: await thumbnail(blob) });
+    pushMine({ id: msg.id, thumb: preview ?? await thumbnail(blob) });
     await outbox.add(msg, `📷 ${label}`);
   }
 
@@ -313,7 +319,7 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
         <form className="composer" onSubmit={(ev) => { ev.preventDefault(); void sendText(text); setText(""); }}>
           <label className="icon-btn secondary" title={t(lang, "camera")}>
             📷
-            <input type="file" accept="image/*" capture="environment" hidden onChange={(ev) => {
+            <input ref={cameraInput} type="file" accept="image/*" capture="environment" hidden onChange={(ev) => {
               const f = ev.target.files?.[0];
               if (f) void sendImage(f, f.name);
               ev.target.value = "";
@@ -372,6 +378,31 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
           await sendImage(blob, f.label, false);
         }
       }} />}
+      {photoCheck && (
+        <div className="modal-back" onClick={() => setPhotoCheck(null)}>
+          <section className="modal photo-check stack" role="alertdialog" aria-modal="true" aria-labelledby="photo-check-title" onClick={(e) => e.stopPropagation()}>
+            <div>
+              <h2 id="photo-check-title">{t(lang, "photoCheckTitle")}</h2>
+              <p>{t(lang, "photoCheckHelp")}</p>
+            </div>
+            <img className="photo-check-preview" src={photoCheck.thumb} alt={lang === "fr" ? "Aperçu de la page photographiée" : "Preview of the photographed page"} />
+            <div>
+              <strong className="small">{t(lang, "photoIssues")}</strong>
+              <ul className="photo-check-issues">
+                {photoCheck.issues.map((issue) => <li key={issue}>{t(lang, issue as "blurry" | "too_dark" | "too_bright")}</li>)}
+              </ul>
+            </div>
+            <div className="row photo-check-actions">
+              <button className="btn" onClick={() => { setPhotoCheck(null); cameraInput.current?.click(); }}>📷 {t(lang, "photoRetake")}</button>
+              <button className="btn primary" onClick={() => {
+                const pending = photoCheck;
+                setPhotoCheck(null);
+                void queuePhoto(pending.blob, pending.mime, pending.label, pending.thumb);
+              }}>{t(lang, "photoSendAnyway")}</button>
+            </div>
+          </section>
+        </div>
+      )}
       {(reportLoading || reportError || report) && (
         <div className="modal-back" onClick={() => { setReport(null); setReportError(""); }}>
           <section className="modal report-modal stack" role="dialog" aria-modal="true" aria-labelledby="report-title" onClick={(e) => e.stopPropagation()}>

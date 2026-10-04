@@ -4,9 +4,10 @@ import { Office } from "./Office.tsx";
 import { Phone } from "./Phone.tsx";
 
 export interface Health {
-  extractor: "claude" | "mock";
+  extractor: "template" | "claude" | "mock";
   model: string;
   effort: string;
+  aiFallback: "none" | "claude-code" | "claude";
 }
 
 export function App() {
@@ -36,7 +37,11 @@ export function App() {
         <span className="spacer" />
         {health && (
           <span className="small muted">
-            IA : {health.extractor === "claude" ? `${health.model} · effort ${health.effort}` : "mock"}
+            {health.extractor === "template"
+              ? `${lang === "fr" ? "Local" : "Local"} : ${health.model} · Claude ${lang === "fr" ? "secours" : "fallback"} : ${health.aiFallback}`
+              : health.extractor === "claude"
+                ? `Claude · ${health.model} · effort ${health.effort}`
+                : `${lang === "fr" ? "Mode démo" : "Demo mode"} · ${health.model}`}
           </span>
         )}
         <button className="btn" onClick={() => setLang(lang === "fr" ? "en" : "fr")}>{lang === "fr" ? "English" : "Français"}</button>

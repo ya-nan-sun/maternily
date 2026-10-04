@@ -7,6 +7,8 @@ export interface QualityReport {
   issues: ("blurry" | "too_dark" | "too_bright")[];
 }
 
+export type SupportedImageMime = "image/jpeg" | "image/png" | "image/webp";
+
 export async function checkQuality(blob: Blob): Promise<QualityReport> {
   const bitmap = await createImageBitmap(blob);
   const w = 480;
@@ -42,10 +44,11 @@ export async function checkQuality(blob: Blob): Promise<QualityReport> {
 }
 
 /** Phone photos can be several MB: shrink before storing and sending. Small images are kept byte-for-byte. */
-export async function prepareImage(file: Blob): Promise<{ blob: Blob; mime: string }> {
+export async function prepareImage(file: Blob): Promise<{ blob: Blob; mime: SupportedImageMime }> {
   const bitmap = await createImageBitmap(file);
   const longest = Math.max(bitmap.width, bitmap.height);
-  if (file.size < 1_500_000 && longest <= 2400) return { blob: file, mime: file.type || "image/jpeg" };
+  const supported = file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/webp";
+  if (supported && file.size < 1_500_000 && longest <= 2400) return { blob: file, mime: file.type };
   const scale = Math.min(1, 2000 / longest);
   const canvas = new OffscreenCanvas(Math.round(bitmap.width * scale), Math.round(bitmap.height * scale));
   canvas.getContext("2d")!.drawImage(bitmap, 0, 0, canvas.width, canvas.height);

@@ -163,7 +163,7 @@ export class TemplateExtractor implements Extractor {
 
   /** Raw OCR lines are cached on disk per image: re-reading the same photo is instant. */
   private async readLines(image: Buffer, contentHash: string) {
-    const file = path.join("work", "ocr-cache", `${this.ocrSize}-${contentHash}.json`);
+    const file = path.join(process.env.OCR_CACHE_DIR ?? "work/ocr-cache", `${this.ocrSize}-${contentHash}.json`);
     if (fs.existsSync(file)) return JSON.parse(fs.readFileSync(file, "utf8")) as Awaited<ReturnType<typeof ocrPage>>;
     const page = await ocrPage(image);
     fs.mkdirSync(path.dirname(file), { recursive: true });
@@ -263,4 +263,3 @@ export class TemplateExtractor implements Extractor {
     return (u.inputTokens * p.input + u.outputTokens * p.output + u.cacheReadTokens * p.cacheRead + u.cacheWriteTokens * p.cacheWrite) / 1e6;
   }
 }
-

@@ -140,6 +140,13 @@ input, select { font: inherit; color: inherit; }
 .report-actions > * { flex: 1; text-align: center; text-decoration: none; }
 .report-notice { color: var(--ok); }
 .report-error { color: var(--bad); }
+.photo-check { width: min(440px, 100%); }
+.photo-check h2 { margin: 0; font-size: 18px; }
+.photo-check p { margin: 6px 0 0; color: var(--text-2); }
+.photo-check-preview { display: block; max-height: 36vh; width: 100%; object-fit: contain; border-radius: 8px; background: var(--surface-2); }
+.photo-check-issues { margin: 5px 0 0; padding-left: 20px; color: var(--warn); }
+.photo-check-actions > * { flex: 1; min-height: 42px; }
+@media (max-width: 760px) { .photo-check-actions { flex-direction: column-reverse; } }
 
 /* ---------------- office */
 .office { padding: 16px; max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }

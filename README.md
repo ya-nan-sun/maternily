@@ -17,7 +17,7 @@ The midwife keeps working on paper. She photographs the pages, even with no netw
 
 ## Quick start
 
-Requirements: Node ≥ 22.13 (uses the built-in `node:sqlite`) and Python 3 (only to regenerate the ground truth).
+Requirements: Node ≥ 22.13 (uses the built-in `node:sqlite`). Python 3.12 is optional for PaddleOCR or regenerating the ground truth.
 
 ```bash
 npm ci                              # install the exact cross-platform dependency versions
@@ -31,6 +31,21 @@ npm start                           # http://localhost:8787 (server + built web 
 - Without Claude credentials, the server starts in demo mode; synthetic sample pages work, while arbitrary photos use manual entry. For AI extraction, set `ANTHROPIC_API_KEY` in your shell or in an uncommitted `.env` file.
 - After a registry is reviewed and registered, choose **View and share report** in the chat. Download the complete PDF or share it through the phone's native share sheet. The WhatsApp redirect pre-fills a text report; web links cannot attach a PDF, so attach the downloaded PDF manually when using the redirect.
 
+### Local PaddleOCR (no Claude/cloud fallback)
+
+Install 64-bit Python 3.12, then create the local environment and install the CPU OCR packages:
+
+```bash
+python3.12 -m venv ocr/.venv        # Windows PowerShell: py -3.12 -m venv ocr/.venv
+ocr/.venv/bin/python -m pip install -r ocr/requirements.txt
+```
+
+On Windows PowerShell, run `py -3.12 -m venv ocr\.venv` followed by `.\ocr\.venv\Scripts\python.exe -m pip install -r ocr\requirements.txt`. Set `EXTRACTOR=template` and `AI_FALLBACK=none` in `.env` to use local PaddleOCR + form templates and send unreadable values to midwife review, never Claude. Optionally set `OCR_PYTHON` to the absolute path of a different Python interpreter with these packages installed, `OCR_PORT` to change the local OCR service port, or `OCR_CACHE_DIR` to isolate local OCR results. PaddleOCR downloads its recognition models the first time it starts.
+
+On Windows CPU, the service disables oneDNN because PaddlePaddle 3.3.x currently crashes during oneDNN inference; other platforms retain PaddleOCR's default.
+
+For faster CPU-only previews, set `OCR_MODEL_SIZE=tiny`; the default is `medium`.
+
 - **With Claude:** `export ANTHROPIC_API_KEY=...` (or put it in `.env`) before starting. The extractor is `claude-opus-5-5` by default.
 - **Without a key** the app runs in **demo mode**. Dataset pages are answered from the PDF-derived ground truth, with simulated doubts so that the review flow has something to ask. Any other photo goes to manual entry, which is also the required "AI unavailable" path. A banner shows which mode is active.
 
@@ -41,7 +56,7 @@ npm start                           # http://localhost:8787 (server + built web 
 | `npm run gt` | Rebuild `eval/ground_truth/` from the registry PDF |
 | `npm run typecheck` | TypeScript, strict |
 
-Configuration (env or `.env`): `CLAUDE_MODEL`, `EXTRACTION_EFFORT` (`low` / `medium` / `high`, default `medium`), `REVIEW_THRESHOLD` (default 0.8), `SESSION_IDLE_MINUTES` (default 10), `EXTRACTOR` (`auto` / `claude` / `mock`), `PORT`, `DATA_DIR`.
+Configuration (env or `.env`): `CLAUDE_MODEL`, `EXTRACTION_EFFORT` (`low` / `medium` / `high`, default `medium`), `REVIEW_THRESHOLD` (default 0.8), `SESSION_IDLE_MINUTES` (default 10), `EXTRACTOR` (`auto` / `template` / `claude` / `mock`), `AI_FALLBACK`, `OCR_PYTHON`, `OCR_PORT`, `OCR_MODEL_SIZE`, `OCR_CACHE_DIR`, `PORT`, `WEB_PORT`, `DATA_DIR`.
 
 ## Demo script (the four required moments)
 
