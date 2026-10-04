@@ -28,6 +28,11 @@ export interface OutboundMessage {
   buttons?: Button[];
   createdAt: string;
   refs?: { docId?: string; captureId?: string };
+  /**
+   * Set when the midwife may type a value instead of choosing. On numbered channels a number
+   * typed for a numeric field is the value, so that message's choices are lettered (A, B, …).
+   */
+  answer?: "number" | "text";
 }
 
 /** Server-side lifecycle of each photo, mirrored on the device queue. */

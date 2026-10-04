@@ -15,6 +15,7 @@ import { config } from "./config.ts";
 import { logInitialState, now, setState, tx, type Db } from "./db.ts";
 import { deleteImage, storeImage } from "./images.ts";
 import { findCandidates, normalizeCode } from "./linking.ts";
+import { valueKind } from "./numbered-choices.ts";
 import { L, descriptor, diffAgainstPatient, documentValues, patientSummary, patientValues, writeField, type Diff, type Lang } from "./records.ts";
 
 type Step =
@@ -47,6 +48,9 @@ interface PageRow {
 
 const MAX_TEXT = 3500;
 
+/** No value and no raw text: the reader saw nothing in the box. */
+const nothingRead = (f: FieldValue | undefined) => !f || ((f.value === null || f.value === undefined) && !f.raw?.trim());
+
 export class Agent {
   /** Set while re-asking after a message the agent didn't understand: the next choices get "Start over". */
   private offerReset = false;
@@ -68,7 +72,9 @@ export class Agent {
       buttons = [...buttons, { id: "reset:ask", title: L(this.conv(mid).lang, "🧹 Tout recommencer", "🧹 Start over") }];
       this.offerReset = false;
     }
-    const msg: OutboundMessage = { id: randomUUID(), midwifeId: mid, text: text.slice(0, MAX_TEXT), buttons, createdAt: now(), refs };
+    const active = buttons?.length ? this.conv(mid).active : null;
+    const answer = active ? valueKind(active.step, active.key) ?? undefined : undefined;
+    const msg: OutboundMessage = { id: randomUUID(), midwifeId: mid, text: text.slice(0, MAX_TEXT), buttons, createdAt: now(), refs, ...(answer && { answer }) };
     this.db.prepare("INSERT INTO outbound (id, midwife_id, payload, created_at) VALUES (?, ?, ?, ?)").run(msg.id, mid, JSON.stringify(msg), msg.createdAt);
   }
   private page(cid: string): PageRow {
@@ -725,9 +731,10 @@ export class Agent {
       // The midwife says the rest of the page is blank: boxes where nothing was read become blank.
       // Boxes where something was read are still asked about, so no written value is dropped.
       const fields = this.pageFields(this.page(a.captureId));
-      const empty = new Set([a.key, ...(a.queue ?? [])].filter((k) => fields[k]?.value === null || fields[k]?.value === undefined));
+      const empty = new Set([a.key, ...(a.queue ?? [])].filter((k) => nothingRead(fields[k])));
       for (const k of empty) this.updateField(a.captureId, k, { status: "NOT_PROVIDED", value: null, raw: null, reasons: [] });
-      c.active = { ...a, queue: (a.queue ?? []).filter((k) => !empty.has(k)) };
+      // The current box goes back in the queue if something was read in it.
+      c.active = { ...a, queue: [...(empty.has(a.key) ? [] : [a.key]), ...(a.queue ?? []).filter((k) => !empty.has(k))] };
       this.save(mid, c);
       this.send(mid, L(c.lang, `⏭️ ${empty.size} case(s) notée(s) vides.`, `⏭️ ${empty.size} box(es) recorded as blank.`));
     }
@@ -737,7 +744,7 @@ export class Agent {
   /** Questions still queued on this page for boxes where nothing was read. */
   private emptyLeft(p: PageRow, queue: string[]): number {
     const fields = this.pageFields(p);
-    return queue.filter((k) => fields[k]?.value === null || fields[k]?.value === undefined).length;
+    return queue.filter((k) => nothingRead(fields[k])).length;
   }
 
   private afterAnswer(mid: string, c: Conv): void {
@@ -787,6 +794,12 @@ export class Agent {
       return this.afterAnswer(mid, c);
     }
     if (["illisible", "illegible"].includes(f)) return this.answerQuestion(mid, c, "illegible");
+    if (["inconnu", "unknown"].includes(f)) return this.answerQuestion(mid, c, "unknown");
+    if (a.step === "question" && /^(skip|passer|reste|rest)\b/.test(f)) {
+      // "skip le reste", "reste vide": the rest of the page is blank. A bare "skip" is not a value: re-ask.
+      if (/\b(reste|rest)\b/.test(f) && this.emptyLeft(this.page(a.captureId), a.queue ?? []) > 0) return this.answerQuestion(mid, c, "restblank");
+      return this.reprompt(mid, c, L(c.lang, "Je n'ai pas compris. ", "I didn't understand. "));
+    }
     const parsed = parseField(a.key, text);
     if (parsed.status && parsed.status !== "KNOWN") {
       this.updateField(a.captureId, a.key, { status: parsed.status, value: null, raw: text, reasons: [] });

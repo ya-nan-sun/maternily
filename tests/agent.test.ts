@@ -11,7 +11,7 @@ import { valuesEqual } from "../shared/normalize.ts";
 import { Agent } from "../server/agent.ts";
 import { openDb, type Db } from "../server/db.ts";
 import { MockExtractor } from "../server/extraction/mock.ts";
-import { resolveChoice } from "../server/numbered-choices.ts";
+import { numberedText, rememberChoices, resolveChoice } from "../server/numbered-choices.ts";
 import { Pipeline } from "../server/pipeline.ts";
 import { exportCsv } from "../server/export.ts";
 import { patientValues } from "../server/records.ts";
@@ -227,6 +227,40 @@ describe("multi-page registry, review and registration", () => {
     const msgs = newMessages();
     expect(msgs.some((m) => /passe après|comes after/.test(m.text))).toBe(true);
     expect(msgs.at(-1)?.buttons?.length).toBeGreaterThan(0);
+  });
+
+  it("on numbered channels, digits pick choices for text answers and letters pick them for numeric answers", async () => {
+    agent.handle(photo(pagesOf(2)[1].file));
+    type("terminé");
+    await pipeline.drain();
+    const cid = conv().active.captureId as string;
+    const ask = (key: string) => {
+      const fields = JSON.parse((db.prepare("SELECT fields FROM pages WHERE capture_id = ?").get(cid) as { fields: string }).fields);
+      fields[key] = { ...fields[key], key, value: null, raw: null, status: "ILLEGIBLE", confirmedBy: "AI", reasons: [] };
+      db.prepare("UPDATE pages SET fields = ? WHERE capture_id = ?").run(JSON.stringify(fields), cid);
+      db.prepare("UPDATE conversations SET state = json_set(state, '$.active.step', 'review_page', '$.active.queue', json_array(?)) WHERE midwife_id = ?").run(key, MID);
+      press("rv:start");
+      const q = newMessages().at(-1)!;
+      rememberChoices(db, MID, q);
+      return q;
+    };
+    const fieldOf = (key: string) => JSON.parse((db.prepare("SELECT fields FROM pages WHERE capture_id = ?").get(cid) as { fields: string }).fields)[key];
+
+    // Text field: "2" is the second choice ("Illisible pour moi"), never the value "2"; "skip" is never stored.
+    const text = ask("fam.hta.husband");
+    expect(numberedText(text, "fr")).toContain("2️⃣");
+    expect(resolveChoice(db, MID, "2")).toBe("q:illegible");
+    type("skip");
+    expect(fieldOf("fam.hta.husband").value).toBeNull();
+
+    // Numeric field: "2" is the value; "b" picks the second choice.
+    const num = ask("obs.abortion.count");
+    expect(num.answer).toBe("number");
+    expect(numberedText(num, "fr")).toContain("B · ");
+    expect(resolveChoice(db, MID, "2")).toBeNull();
+    expect(resolveChoice(db, MID, "b")).toBe("q:illegible");
+    type("2");
+    expect(fieldOf("obs.abortion.count")).toMatchObject({ value: 2, status: "KNOWN" });
   });
 
   it("'reset' discards unfinished registries but keeps saved records", async () => {
