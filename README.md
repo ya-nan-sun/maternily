@@ -8,7 +8,7 @@ The midwife keeps working on paper. She needs no app, no account and no signal w
 
 - **Real WhatsApp, both directions, for free,** through the Vonage sandbox.
 - **Page reading runs locally for free** (PaddleOCR + form templates). Claude is only an optional fallback for doubtful cells.
-- **The full conversation, record lifecycle and patient linking work,** with 40 automated tests passing.
+- **The full conversation, record lifecycle and patient linking work,** with 46 automated tests passing.
 - **Held-out test pages: 98.1% field accuracy at $0, with no AI** (0.49% wrong values saved without asking).
 - **Not done yet:** the demo video, Arabic, and the full photo flow over real WhatsApp. See [Status](#status).
 
@@ -75,7 +75,7 @@ py -3.12 -m venv ocr\.venv
 
 On Windows CPU the OCR service turns off oneDNN, because PaddlePaddle 3.3.x crashes during oneDNN inference there; other platforms keep PaddleOCR's default. `OCR_PYTHON` points to a different Python that has these packages, `OCR_PORT` moves the OCR service, and `OCR_CACHE_DIR` keeps its cached results apart.
 
-Open http://localhost:8787: the **DayOne office** console. Role "Supervisor" sees records and photos and can download a registered registry as a PDF; "Analyst" sees aggregates only. The midwife side is real WhatsApp (see [Connecting a real phone](#connecting-a-real-phone)); there is no phone simulator in the web app.
+Open http://localhost:8787: the **DayOne office** console. Role "Supervisor" sees records and photos, downloads a registered registry as a PDF, and exports every registered patient as a CSV (see [Export](#export)); "Analyst" sees aggregates only. The midwife side is real WhatsApp (see [Connecting a real phone](#connecting-a-real-phone)); there is no phone simulator in the web app.
 
 What reads the pages depends on what's installed:
 
@@ -156,7 +156,7 @@ The agent ([server/agent.ts](server/agent.ts)) is a deterministic, button-driven
 - **Other actions:** retake a photo, fix any field by name, and full **manual entry** when reading fails.
 - **Linking:** by the form number (*N° de fiche*). Otherwise the agent proposes candidates from non-identifying fields (age ±1, gravidity/parity, LMP/EDD ±7 days, delivery date, birth weight): **[Patient 1] [Patient 2] [None, create new] [I'm not sure]**. "I'm not sure" goes to the office. The system never merges on its own.
 - **Re-photographed registry:** new values are added; values that differ are listed as *on file → photo* for the midwife to accept, keep or pick.
-- **Commands:** `dossier <N° de fiche>` returns the patient's file (facts only); `statut`, `aide`, `langue` (French ↔ English).
+- **Commands:** `dossier <N° de fiche>` returns the patient's file (facts only); `statut`, `aide`, `langue` (French ↔ English); `reset` deletes this phone's unfinished registries (after a yes/no check) when a conversation gets stuck. Saved records are kept.
 
 ## Offline
 
@@ -171,6 +171,16 @@ The agent ([server/agent.ts](server/agent.ts)) is a deterministic, button-driven
 - After the server confirms registration, the photo is deleted from the device (**SYNCED**).
 
 [tests/outbox.test.ts](tests/outbox.test.ts) cuts the connection mid-upload, then checks that nothing is lost, order is kept, the queue survives a restart, and a wrong PIN can't read it.
+
+## Export
+
+**Patients → Export CSV** (supervisor only, logged) writes one row per registered patient with the **same 31 columns and coding as the organizers' `maternal_registry_synthetic.csv`**, so the data drops into the analysis DayOne already does. Code: [server/export.ts](server/export.ts).
+
+- `id` is the form number (no names). A cell is empty when the registry doesn't hold that value or the midwife hasn't confirmed it.
+- Direct from the form: age, consanguinity, desired pregnancy, gravidity, parity, abortions, living children, haemoglobin (first visit with a value), HIV and syphilis (positive if any visit was positive), gestational age at birth, delivery type, newborn sex, birth weight, head circumference.
+- Derived: education (free text → 0/1/2); mean systolic/diastolic BP over all visits; first fasting glucose (g/L × 100); gestational age at enrollment (first visit); preterm (birth before 37 weeks); proteinuria (albuminuria); previous caesarean (earlier deliveries' mode); breastfeeding (newborn feeding not "artificial"); referral (newborn transfer).
+- Approximate: pre-pregnancy BMI uses the first first-trimester weight. Hypertension and diabetes history use the cover page's risk boxes.
+- Always empty: hepatitis C and gestational diabetes, which have no box on this paper form.
 
 ## Record lifecycle
 
@@ -259,6 +269,7 @@ npm run compare -- --extractor mock                                    # model c
 | `NGROK_AUTHTOKEN`, `NGROK_DOMAIN` | permanent public address via `npm run tunnel` |
 | `PUBLIC_URL` | overrides the public address (else `NGROK_DOMAIN`, else the cloudflared log) |
 | `VONAGE_*`, `WHATSAPP_*`, `TWILIO_*`, `TELEGRAM_BOT_TOKEN` | messaging channels (see above) |
+| `ALLOW_RESET` | `true` shows **Erase demo data** to the supervisor (Overview): deletes all records, photos and messages, keeps midwives. Off by default |
 | `PORT`, `WEB_PORT`, `DATA_DIR`, `IMAGE_KEY`, `SUPERVISOR_TOKEN`, `ANALYST_TOKEN` | server, storage, demo roles |
 
 ## Repository layout
@@ -273,7 +284,7 @@ templates/     registered paper forms
 web/src/       office console + dashboard, PDF report (device/: encrypted vault and offline outbox, tested, not in the UI)
 eval/          answer key (redacted), template geometry, evaluation and model comparison
 tools/         PDF answer-key extractor, template builder, WhatsApp setup check
-tests/         40 tests: parsing, lifecycle, offline queue, full conversations, PDF report, Meta / Twilio / Vonage adapters
+tests/         46 tests: parsing, lifecycle, offline queue, full conversations, resets, PDF report, CSV export, Meta / Twilio / Vonage adapters
 DATA_NOTES.md  dataset inspection        PROPOSAL.md  design decisions
 ```
 

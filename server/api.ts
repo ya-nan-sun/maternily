@@ -8,8 +8,9 @@ import type { Bp } from "../shared/normalize.ts";
 import { formatValue } from "../shared/normalize.ts";
 import { Agent, linkDocument, registerDocument } from "./agent.ts";
 import { config } from "./config.ts";
-import { now, setState, type Db } from "./db.ts";
-import { readImage } from "./images.ts";
+import { now, setState, tx, type Db } from "./db.ts";
+import { exportCsv } from "./export.ts";
+import { deleteAllImages, readImage } from "./images.ts";
 import { descriptor, documentValues, patientValues } from "./records.ts";
 import { receiveTwilio, twilioStatus } from "./twilio.ts";
 import { receiveVonage, vonageStatus } from "./vonage.ts";
@@ -184,7 +185,27 @@ export function createApi(db: Db, agent: Agent, kick: () => void) {
     const ai = db
       .prepare("SELECT COUNT(*) AS calls, SUM(cached) AS cached, SUM(1 - ok) AS failed, SUM(cost_usd) AS cost, SUM(input_tokens) AS input, SUM(output_tokens) AS output, SUM(cache_read_tokens) AS cacheRead FROM ai_calls")
       .get();
-    res.json({ docStates, pageStates, patients, ai, extractor: config.extractor, aiFallback: config.aiFallback });
+    res.json({ docStates, pageStates, patients, ai, extractor: config.extractor, aiFallback: config.aiFallback, allowReset: config.allowReset });
+  });
+
+  // Demo reset: erase every record, photo and message. Midwives (phone ↔ language) are kept.
+  app.post("/api/office/reset", requireRole("supervisor"), (_req, res) => {
+    if (!config.allowReset) return res.status(403).json({ error: "reset is disabled (set ALLOW_RESET=true)" });
+    tx(db, () => {
+      for (const t of ["field_history", "field_values", "transitions", "pages", "documents", "patients", "conversations", "channel_prompts",
+        "wa_deliveries", "outbound", "inbound", "ai_cache", "ai_calls", "access_log"]) db.prepare(`DELETE FROM ${t}`).run();
+      db.prepare("INSERT INTO access_log (role, action, subject, at) VALUES (?, 'reset_all', NULL, ?)").run(res.locals.role, now());
+    });
+    deleteAllImages();
+    res.json({ ok: true });
+  });
+
+  // One de-identified row per registered patient, in the organizers' CSV format.
+  app.get("/api/office/export.csv", requireRole("supervisor"), (_req, res) => {
+    db.prepare("INSERT INTO access_log (role, action, subject, at) VALUES (?, 'export_csv', NULL, ?)").run(res.locals.role, now());
+    res.setHeader("Content-Type", "text/csv; charset=utf-8");
+    res.setHeader("Content-Disposition", `attachment; filename="maternily-export-${now().slice(0, 10)}.csv"`);
+    res.send(exportCsv(db));
   });
 
   app.get("/api/office/patients", requireRole("supervisor"), (_req, res) => {

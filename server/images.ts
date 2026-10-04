@@ -26,6 +26,15 @@ export function storeImage(captureId: string, bytes: Buffer): string {
   return path.relative(config.dataDir, file);
 }
 
+export function deleteImage(relPath: string) {
+  fs.rmSync(path.join(config.dataDir, relPath), { force: true });
+}
+
+/** Every stored photo (full demo reset). */
+export function deleteAllImages() {
+  for (const f of fs.readdirSync(dir)) fs.rmSync(path.join(dir, f), { force: true });
+}
+
 export function readImage(relPath: string): Buffer {
   const blob = fs.readFileSync(path.join(config.dataDir, relPath));
   const decipher = createDecipheriv("aes-256-gcm", KEY, blob.subarray(0, 12));

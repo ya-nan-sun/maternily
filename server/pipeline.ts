@@ -59,9 +59,12 @@ export class Pipeline {
     const page = this.db.prepare("SELECT * FROM pages WHERE capture_id = ?").get(captureId) as {
       capture_id: string; midwife_id: string; image_path: string; mime: string; content_hash: string; attempts: number;
     };
+    if (!page) return; // deleted by a reset
     try {
       const image = readImage(page.image_path);
       const result = await extractImage(this.db, this.extractor, image, page.mime, page.content_hash, captureId);
+      // The midwife may have reset her conversation while the page was being read.
+      if (!this.db.prepare("SELECT 1 FROM pages WHERE capture_id = ?").get(captureId)) return;
       this.db
         .prepare("UPDATE pages SET section = ?, section_confidence = ?, quality = ?, fields = ?, error = NULL WHERE capture_id = ?")
         .run(result.section, result.sectionConfidence, JSON.stringify(result.quality), JSON.stringify(result.fields), captureId);

@@ -117,6 +117,7 @@ interface OverviewData {
   ai: { calls: number; cached: number; failed: number; cost: number; input: number; output: number; cacheRead: number };
   extractor: string;
   aiFallback?: string;
+  allowReset?: boolean;
 }
 
 /** What actually read the pages, said plainly: local OCR, and whether anything goes to Claude. */
@@ -130,7 +131,8 @@ function readerNote(data: OverviewData, L: (fr: string, en: string) => string) {
   return `${Math.round((data.ai.cacheRead ?? 0) / 1000)}k ${L("jetons en cache", "cached tokens")}`;
 }
 function Overview({ role, lang }: { role: Role; lang: UiLang }) {
-  const { data, error } = useLoad<OverviewData>(role, "/api/office/overview");
+  const { data, error, reload } = useLoad<OverviewData>(role, "/api/office/overview");
+  const api = useApi(role);
   if (error === "forbidden") return <Forbidden lang={lang} />;
   if (!data) return null;
   const docs = Object.fromEntries(data.docStates.map((d) => [d.state, d.n]));
@@ -162,6 +164,21 @@ function Overview({ role, lang }: { role: Role; lang: UiLang }) {
           {data.pageStates.map((d) => <span key={d.state} className="row small state-counter"><StateBadge state={d.state} lang={lang} /> <span className="counter-val">{d.n}</span></span>)}
         </div>
       </div>
+      {data.allowReset && role === "supervisor" && (
+        <div className="row">
+          <span className="spacer" />
+          <button
+            className="btn"
+            onClick={async () => {
+              if (!window.confirm(L("Effacer TOUS les registres, patientes, photos et messages de cette démo ? Action irréversible.", "Erase ALL registries, patients, photos and messages in this demo? This cannot be undone."))) return;
+              await api("/api/office/reset", { method: "POST" });
+              reload();
+            }}
+          >
+            🧹 {L("Effacer les données de démo", "Erase demo data")}
+          </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -186,7 +203,22 @@ function Patients({ role, lang, open }: { role: Role; lang: UiLang; open: (id: s
   if (error === "forbidden") return <Forbidden lang={lang} />;
   if (!data) return null;
   const L = (fr: string, en: string) => (lang === "fr" ? fr : en);
+  const exportCsv = async () => {
+    const r = await fetch("/api/office/export.csv", { headers: { "x-role-token": TOKENS[role] } });
+    if (!r.ok) return;
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(await r.blob());
+    a.download = /filename="([^"]+)"/.exec(r.headers.get("Content-Disposition") ?? "")?.[1] ?? "maternily-export.csv";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
   return (
+    <div className="stack">
+    <div className="row">
+      <span className="muted">{L("Une ligne par patiente enregistrée, au format du CSV DayOne (31 colonnes, sans identifiant).", "One row per registered patient, in DayOne's CSV format (31 columns, no identifiers).")}</span>
+      <span className="spacer" />
+      <button className="btn primary" onClick={() => void exportCsv()}>⬇️ {L("Exporter en CSV", "Export CSV")}</button>
+    </div>
     <div className="panel table-wrap">
       <table>
         <thead><tr><th>{L("N° de fiche", "Form number")}</th><th>{L("Résumé (sans identifiant)", "Summary (no identifiers)")}</th><th className="num">{L("Valeurs", "Values")}</th><th className="num">{L("À vérifier", "To check")}</th><th className="num">{L("Registres", "Registries")}</th><th>{L("Créée", "Created")}</th></tr></thead>
@@ -199,6 +231,7 @@ function Patients({ role, lang, open }: { role: Role; lang: UiLang; open: (id: s
           {!data.length && <tr><td colSpan={6} className="muted">{L("Aucune patiente pour l'instant.", "No patients yet.")}</td></tr>}
         </tbody>
       </table>
+    </div>
     </div>
   );
 }

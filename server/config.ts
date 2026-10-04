@@ -40,6 +40,8 @@ export const config = {
   /** Pages sent by one midwife form one document until "done" or this much silence. */
   sessionIdleMinutes: Number(env("SESSION_IDLE_MINUTES", "10")),
   maxAttempts: Number(env("AI_MAX_ATTEMPTS", "3")),
+  /** Demo only: lets the supervisor erase all records from the office console. */
+  allowReset: env("ALLOW_RESET", "false") === "true",
   /** USD per million tokens (input, output, cache read, cache write), used for the cost log only. */
   pricing: {
     "claude-opus-5-5": { input: 4, output: 20, cacheRead: 0.2, cacheWrite: 5 },

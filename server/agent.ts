@@ -13,7 +13,7 @@ import { needsAttention, type FieldValue } from "../shared/status.ts";
 import { consistencyIssues } from "../shared/validate.ts";
 import { config } from "./config.ts";
 import { logInitialState, now, setState, tx, type Db } from "./db.ts";
-import { storeImage } from "./images.ts";
+import { deleteImage, storeImage } from "./images.ts";
 import { findCandidates, normalizeCode } from "./linking.ts";
 import { L, descriptor, diffAgainstPatient, documentValues, patientSummary, patientValues, writeField, type Diff, type Lang } from "./records.ts";
 
@@ -233,6 +233,7 @@ export class Agent {
     if (["fin", "termine", "done", "finish", "fini"].includes(f)) return this.onButton(mid, "done");
     if (["langue", "language", "english", "francais", "anglais"].includes(f)) return this.onButton(mid, f === "english" || f === "anglais" ? "lang:en" : f === "francais" ? "lang:fr" : lang === "fr" ? "lang:en" : "lang:fr");
     if (["statut", "status", "etat"].includes(f)) return this.status(mid, lang);
+    if (["reset", "recommencer", "reinitialiser", "tout effacer", "start over"].includes(f)) return this.askReset(mid, lang);
     if (fileReq) return this.fileRequest(mid, lang, fileReq[1]);
     if (["manuel", "manual", "saisie manuelle"].includes(f) && c.active?.captureId) return this.onButton(mid, "fail:manual");
 
@@ -245,6 +246,9 @@ export class Agent {
       return this.startLinking(mid, c);
     }
     if (a?.step === "redigitize_choose") return this.applyChosenDiffs(mid, c, text);
+    if (a?.step === "review_page" && /^(oui|yes|ok|okay|d ?accord|je confirme|confirme|confirmer|confirm|c ?est bon|correct)\b/.test(f.replace(/['’]/g, " "))) {
+      return this.onButton(mid, "rv:confirm");
+    }
     if (a) return this.reprompt(mid, c, L(lang, "Je n'ai pas compris. ", "I didn't understand. "));
     this.send(
       mid,
@@ -253,13 +257,51 @@ export class Agent {
     );
   }
 
+  // ------------------------------------------------------------------ reset
+  /** Registries this midwife started but that were never saved to a patient record. */
+  private draftDocs(mid: string) {
+    return this.db.prepare("SELECT id FROM documents WHERE midwife_id = ? AND state NOT IN ('REGISTERED', 'SYNCED')").all(mid) as { id: string }[];
+  }
+
+  private askReset(mid: string, lang: Lang): void {
+    const n = this.draftDocs(mid).length;
+    this.send(
+      mid,
+      L(lang, `🧹 Effacer ${n} registre(s) non terminé(s) et recommencer à zéro ? Les dossiers déjà enregistrés sont conservés.`,
+        `🧹 Delete ${n} unfinished registr${n === 1 ? "y" : "ies"} and start over? Records already saved are kept.`),
+      [
+        { id: "reset:yes", title: L(lang, "Oui, effacer", "Yes, delete") },
+        { id: "reset:no", title: L(lang, "Non", "No") },
+      ],
+    );
+  }
+
+  /** The way out when a conversation is stuck: drop unfinished registries, keep saved records. */
+  private discardDrafts(mid: string, c: Conv): void {
+    const docs = this.draftDocs(mid);
+    for (const d of docs) {
+      const pages = this.db.prepare("SELECT capture_id, image_path FROM pages WHERE doc_id = ?").all(d.id) as { capture_id: string; image_path: string }[];
+      for (const p of pages) {
+        deleteImage(p.image_path);
+        this.db.prepare("DELETE FROM transitions WHERE subject_type = 'page' AND subject_id = ?").run(p.capture_id);
+      }
+      this.db.prepare("DELETE FROM pages WHERE doc_id = ?").run(d.id);
+      this.db.prepare("DELETE FROM transitions WHERE subject_type = 'document' AND subject_id = ?").run(d.id);
+      this.db.prepare("DELETE FROM documents WHERE id = ?").run(d.id);
+    }
+    this.db.prepare("DELETE FROM channel_prompts WHERE midwife_id = ?").run(mid);
+    this.save(mid, { lang: c.lang, collectingDocId: null, active: null });
+    this.send(mid, L(c.lang, `🧹 ${docs.length} registre(s) non terminé(s) effacé(s). Vous pouvez envoyer de nouvelles photos.`,
+      `🧹 ${docs.length} unfinished registr${docs.length === 1 ? "y" : "ies"} deleted. You can send new photos.`));
+  }
+
   private help(mid: string, lang: Lang): void {
     this.send(
       mid,
       L(
         lang,
-        "ℹ️ Comment ça marche :\n1. Photographiez chaque page du registre et envoyez-les ici (même sans réseau : elles partiront plus tard).\n2. Appuyez sur « Terminé ».\n3. Je lis les pages et je vous pose des questions sur ce dont je ne suis pas sûr.\n\nCommandes :\n• dossier <N° de fiche> — recevoir le dossier d'une patiente\n• statut — registres en cours\n• manuel — saisir la page à la main\n• langue — English",
-        "ℹ️ How it works:\n1. Photograph each registry page and send them here (even offline: they will be sent later).\n2. Tap \"Done\".\n3. I read the pages and ask you about anything I'm not sure of.\n\nCommands:\n• file <form number> — get a patient's record\n• status — registries in progress\n• manual — enter the page by hand\n• language — Français",
+        "ℹ️ Comment ça marche :\n1. Photographiez chaque page du registre et envoyez-les ici (même sans réseau : elles partiront plus tard).\n2. Appuyez sur « Terminé ».\n3. Je lis les pages et je vous pose des questions sur ce dont je ne suis pas sûr.\n\nCommandes :\n• dossier <N° de fiche> — recevoir le dossier d'une patiente\n• statut — registres en cours\n• manuel — saisir la page à la main\n• reset — effacer les registres non terminés\n• langue — English",
+        "ℹ️ How it works:\n1. Photograph each registry page and send them here (even offline: they will be sent later).\n2. Tap \"Done\".\n3. I read the pages and ask you about anything I'm not sure of.\n\nCommands:\n• file <form number> — get a patient's record\n• status — registries in progress\n• manual — enter the page by hand\n• reset — delete unfinished registries\n• language — Français",
       ),
     );
   }
@@ -297,12 +339,20 @@ export class Agent {
         this.save(mid, c);
         return this.send(mid, L(c.lang, "Langue : français 🇫🇷", "Language: English 🇬🇧"));
       }
+      case "reset": {
+        if (arg === "yes") return this.discardDrafts(mid, c);
+        this.send(mid, L(lang, "👍 Rien n'a été effacé.", "👍 Nothing was deleted."));
+        return a ? this.reprompt(mid, c) : undefined;
+      }
       case "done": {
         if (!c.collectingDocId) {
           if (a) return this.reprompt(mid, c);
           return this.send(mid, L(lang, "Aucune page en cours. Envoyez d'abord les photos du registre.", "No pages in progress. Send the registry photos first."));
         }
         this.closeDoc(mid, c, "midwife tapped done");
+        // A review is already open: say the new registry waits its turn, and re-ask the open question
+        // (on numbered channels the "Terminé" choice just replaced it).
+        if (a) return this.reprompt(mid, c, L(lang, "📌 Ce registre passe après celui en cours. ", "📌 This registry comes after the one in progress. "));
         return this.maybeStartReview(mid);
       }
       case "dup": {

@@ -10,7 +10,9 @@ import { valuesEqual } from "../shared/normalize.ts";
 import { Agent } from "../server/agent.ts";
 import { openDb, type Db } from "../server/db.ts";
 import { MockExtractor } from "../server/extraction/mock.ts";
+import { resolveChoice } from "../server/numbered-choices.ts";
 import { Pipeline } from "../server/pipeline.ts";
+import { exportCsv } from "../server/export.ts";
 import { patientValues } from "../server/records.ts";
 
 const IMAGES = "dayone-participants/data/Paper Registry";
@@ -137,6 +139,14 @@ describe("multi-page registry, review and registration", () => {
     }
     expect(checked).toBeGreaterThan(250);
 
+    // The registered record exports as one row in the organizers' CSV format.
+    const [header, row, ...rest] = exportCsv(db).trim().split("\r\n");
+    expect(rest).toHaveLength(0);
+    const cells = Object.fromEntries(header.match(/("[^"]*"|[^,]+)/g)!.map((h, i) => [h.replace(/"/g, "").split(" ")[0] + i, row.split(",")[i]]));
+    expect(cells.id0).toBe("2026-823-001");
+    expect(cells.age1).toBe(String(values.get("id.age")?.value));
+    expect(cells.gravidity7).toBe(String(values.get("id.gravidity")?.value));
+
     // No direct identifier reaches the database.
     const dump = JSON.stringify(db.prepare("SELECT * FROM field_values").all()) + JSON.stringify(db.prepare("SELECT fields FROM pages").all());
     for (const banned of ["Tazi", "CB609814", "06 00 76 13 48", "Rue Al Qods", "Meryem"]) expect(dump).not.toContain(banned);
@@ -155,6 +165,48 @@ describe("multi-page registry, review and registration", () => {
     agent.handle(shot(pagesOf(4)[0].file, new Date(Date.UTC(2026, 9, 4, 11)).toISOString()));
     const docs = db.prepare("SELECT d.id, COUNT(p.capture_id) AS pages FROM documents d JOIN pages p ON p.doc_id = d.id GROUP BY d.id ORDER BY d.opened_at").all() as { pages: number }[];
     expect(docs.map((d) => d.pages)).toEqual([3, 1]);
+  });
+
+  it("re-asks the open question when a new registry is closed mid-review, and accepts a typed 'oui'", async () => {
+    const at = (min: number) => new Date(Date.UTC(2026, 9, 4, 9, min)).toISOString();
+    agent.handle({ ...photo(pagesOf(2)[0].file), capturedAt: at(0) });
+    agent.handle(inbound("text", { text: "terminé" }, at(1)));
+    await pipeline.drain();
+    const first = conv().active.captureId as string;
+    expect(conv().active.step).toBe("review_page");
+    newMessages();
+    agent.handle({ ...photo(pagesOf(3)[0].file), capturedAt: at(30) });
+    agent.handle(inbound("text", { text: "terminé" }, at(31)));
+    const msgs = newMessages();
+    expect(msgs.some((m) => /passe après|comes after/.test(m.text))).toBe(true);
+    expect(msgs.at(-1)?.buttons?.length).toBeGreaterThan(0); // the open question, not "Terminé"
+    // Answer the open page's questions with "1" (the first choice) until its summary asks for confirmation.
+    for (let i = 0; i < 20 && conv().active?.captureId === first && !newMessages().some((m) => /Confirmez-vous/.test(m.text)); i++) press(conv().active.step === "review_page" ? "rv:start" : "q:ok");
+    type("Oui je confirme");
+    expect((db.prepare("SELECT confirmed FROM pages WHERE capture_id = ?").get(first) as { confirmed: number }).confirmed).toBe(1);
+  });
+
+  it("'reset' discards unfinished registries but keeps saved records", async () => {
+    await sendRegistry(1);
+    await converse();
+    const saved = (db.prepare("SELECT id FROM documents").get() as { id: string }).id;
+    agent.handle(photo(pagesOf(2)[0].file));
+    type("terminé");
+    await pipeline.drain();
+    expect(conv().active).not.toBeNull(); // mid-review
+    newMessages();
+    type("reset");
+    expect(newMessages().at(-1)?.buttons?.map((b) => b.id)).toEqual(["reset:yes", "reset:no"]);
+    // On numbered channels "1" picks "Oui, effacer" even while a typed value is expected.
+    db.prepare("INSERT INTO channel_prompts (midwife_id, buttons, at) VALUES (?, ?, ?) ON CONFLICT(midwife_id) DO UPDATE SET buttons = excluded.buttons")
+      .run(MID, JSON.stringify([{ id: "reset:yes", title: "Oui, effacer" }, { id: "reset:no", title: "Non" }]), new Date().toISOString());
+    db.prepare("UPDATE conversations SET state = json_set(state, '$.active.step', 'question') WHERE midwife_id = ?").run(MID);
+    expect(resolveChoice(db, MID, "1")).toBe("reset:yes");
+    press("reset:yes");
+    expect(conv()).toMatchObject({ collectingDocId: null, active: null });
+    expect((db.prepare("SELECT id FROM documents").all() as { id: string }[]).map((d) => d.id)).toEqual([saved]);
+    expect(docState(saved)).toBe("REGISTERED");
+    expect((db.prepare("SELECT COUNT(*) AS n FROM pages WHERE doc_id != ?").get(saved) as { n: number }).n).toBe(0);
   });
 
   it("is idempotent when the device retries the same message", () => {

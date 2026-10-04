@@ -37,6 +37,8 @@ export function resolveChoice(db: Db, midwifeId: string, text: string): string |
   const conv = db.prepare("SELECT state FROM conversations WHERE midwife_id = ?").get(midwifeId) as { state: string } | undefined;
   const step = conv ? (JSON.parse(conv.state) as { active?: { step?: string } }).active?.step : undefined;
   const n = /^\d{1,2}$/.test(t) ? Number(t) : NaN;
-  if (Number.isInteger(n) && n >= 1 && n <= buttons.length && !(step && VALUE_STEPS.has(step))) return buttons[n - 1].id;
+  // The reset confirmation interrupts any step, so its numbers are always choices.
+  const typingValue = step && VALUE_STEPS.has(step) && !buttons.some((b) => b.id.startsWith("reset:"));
+  if (Number.isInteger(n) && n >= 1 && n <= buttons.length && !typingValue) return buttons[n - 1].id;
   return null;
 }
