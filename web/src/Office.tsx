@@ -30,18 +30,35 @@ export function Office({ lang }: { lang: UiLang }) {
   const [docId, setDocId] = useState<string | null>(null);
   useEffect(() => localStorageSet("office-role", role), [role]);
 
-  const tabs: [Tab, string][] = [["overview", t(lang, "overview")], ["patients", t(lang, "patients")], ["registries", t(lang, "registries")], ["dashboard", t(lang, "dashboard")], ["ai", t(lang, "aiUsage")]];
+  const tabIcons: Record<Tab, string> = {
+    overview: "📊",
+    patients: "👥",
+    registries: "📑",
+    dashboard: "📈",
+    ai: "⚡",
+  };
+  const tabs: [Tab, string][] = [
+    ["overview", t(lang, "overview")],
+    ["patients", t(lang, "patients")],
+    ["registries", t(lang, "registries")],
+    ["dashboard", t(lang, "dashboard")],
+    ["ai", t(lang, "aiUsage")],
+  ];
   return (
     <div className="office">
-      <div className="row">
-        <nav className="tabs">
+      <div className="office-header-row row">
+        <nav className="tabs office-tabs">
           {tabs.map(([k, label]) => (
-            <button key={k} className={`tab ${tab === k ? "active" : ""}`} onClick={() => { setTab(k); setPatientId(null); setDocId(null); }}>{label}</button>
+            <button key={k} className={`tab ${tab === k ? "active" : ""}`} onClick={() => { setTab(k); setPatientId(null); setDocId(null); }}>
+              <span className="tab-icon">{tabIcons[k]}</span>
+              <span>{label}</span>
+            </button>
           ))}
         </nav>
         <span className="spacer" />
-        <label className="row small">
-          {t(lang, "role")}
+        <label className="role-selector row small">
+          <span className="role-icon">👤</span>
+          <span className="role-label">{t(lang, "role")} :</span>
           <select value={role} onChange={(e) => setRole(e.target.value as Role)}>
             <option value="supervisor">{t(lang, "supervisor")}</option>
             <option value="analyst">{t(lang, "analyst")}</option>
@@ -82,7 +99,12 @@ function Forbidden({ lang }: { lang: UiLang }) {
 function StateBadge({ state, lang }: { state: string; lang: UiLang }) {
   const bad = ["PROCESSING_FAILED", "SYNC_FAILED"].includes(state);
   const warn = ["NEEDS_REVIEW", "DUPLICATE_SUSPECTED", "MANUAL_REVIEW_REQUIRED", "PENDING_AI"].includes(state);
-  return <span className={`chip ${bad ? "bad" : warn ? "warn" : "ok"}`}>{STATE_LABELS[state as keyof typeof STATE_LABELS]?.[lang] ?? state}</span>;
+  return (
+    <span className={`chip ${bad ? "bad" : warn ? "warn" : "ok"}`}>
+      <span className="chip-dot" />
+      <span>{STATE_LABELS[state as keyof typeof STATE_LABELS]?.[lang] ?? state}</span>
+    </span>
+  );
 }
 
 // ------------------------------------------------------------------ overview
@@ -105,32 +127,38 @@ function Overview({ role, lang }: { role: Role; lang: UiLang }) {
   return (
     <div className="stack">
       <div className="tiles">
-        <Tile label={L("Patientes", "Patients")} value={data.patients} />
-        <Tile label={L("Registres enregistrés", "Registries registered")} value={done} sub={`${total} ${L("reçus", "received")}`} />
-        <Tile label={L("En cours de vérification", "Being reviewed")} value={waiting} />
-        <Tile label={L("À rattacher par le bureau", "Waiting for office match")} value={docs.MANUAL_REVIEW_REQUIRED ?? 0} />
-        <Tile label={L("Appels IA", "AI calls")} value={data.ai.calls ?? 0} sub={`${data.ai.cached ?? 0} ${L("depuis le cache", "from cache")} · ${data.ai.failed ?? 0} ${L("échecs", "failed")}`} />
-        <Tile label={L("Coût IA estimé", "Estimated AI cost")} value={`$${(data.ai.cost ?? 0).toFixed(2)}`} sub={data.extractor === "mock" ? "mock" : `${Math.round((data.ai.cacheRead ?? 0) / 1000)}k ${L("jetons en cache", "cached tokens")}`} />
+        <Tile label={L("Patientes", "Patients")} value={data.patients} icon="👥" variant="teal" />
+        <Tile label={L("Registres enregistrés", "Registries registered")} value={done} sub={`${total} ${L("reçus", "received")}`} icon="📋" variant="emerald" />
+        <Tile label={L("En cours de vérification", "Being reviewed")} value={waiting} icon="⏳" variant="amber" />
+        <Tile label={L("À rattacher par le bureau", "Waiting for office match")} value={docs.MANUAL_REVIEW_REQUIRED ?? 0} icon="🔗" variant="indigo" />
+        <Tile label={L("Appels IA", "AI calls")} value={data.ai.calls ?? 0} sub={`${data.ai.cached ?? 0} ${L("depuis le cache", "from cache")} · ${data.ai.failed ?? 0} ${L("échecs", "failed")}`} icon="⚡" variant="purple" />
+        <Tile label={L("Coût IA estimé", "Estimated AI cost")} value={`$${(data.ai.cost ?? 0).toFixed(2)}`} sub={data.extractor === "mock" ? "mock" : `${Math.round((data.ai.cacheRead ?? 0) / 1000)}k ${L("jetons en cache", "cached tokens")}`} icon="💎" variant="rose" />
       </div>
-      <div className="panel">
-        <h2>{L("Cycle de vie des registres", "Registry lifecycle")}</h2>
-        <div className="row">
-          {data.docStates.map((d) => <span key={d.state} className="row small"><StateBadge state={d.state} lang={lang} /> {d.n}</span>)}
+      <div className="panel lifecycle-panel">
+        <div className="panel-header-row">
+          <h2>{L("Cycle de vie des registres", "Registry lifecycle")}</h2>
+          <span className="panel-sub-tag">{L("États temps réel", "Real-time states")}</span>
+        </div>
+        <div className="row lifecycle-row">
+          {data.docStates.map((d) => <span key={d.state} className="row small state-counter"><StateBadge state={d.state} lang={lang} /> <span className="counter-val">{d.n}</span></span>)}
           {!data.docStates.length && <span className="muted small">{L("Aucun registre reçu.", "No registry received yet.")}</span>}
         </div>
-        <h3>{L("Pages", "Pages")}</h3>
-        <div className="row">
-          {data.pageStates.map((d) => <span key={d.state} className="row small"><StateBadge state={d.state} lang={lang} /> {d.n}</span>)}
+        <h3 className="section-subhead">{L("Pages", "Pages")}</h3>
+        <div className="row lifecycle-row">
+          {data.pageStates.map((d) => <span key={d.state} className="row small state-counter"><StateBadge state={d.state} lang={lang} /> <span className="counter-val">{d.n}</span></span>)}
         </div>
       </div>
     </div>
   );
 }
 
-function Tile({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
+function Tile({ label, value, sub, icon, variant }: { label: string; value: string | number; sub?: string; icon?: string; variant?: string }) {
   return (
-    <div className="tile">
-      <div className="label">{label}</div>
+    <div className={`tile ${variant ? `tile-${variant}` : ""}`}>
+      <div className="tile-header">
+        <div className="label">{label}</div>
+        {icon && <span className="tile-icon-badge">{icon}</span>}
+      </div>
       <div className="value">{value}</div>
       {sub && <div className="sub">{sub}</div>}
     </div>

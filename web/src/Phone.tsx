@@ -75,22 +75,31 @@ function Unlock({ lang, onUnlock }: { lang: UiLang; onUnlock: (s: Session) => vo
   }
 
   return (
-    <div className="phone-layout">
-      <div className="panel stack">
-        <h2>🔐 {t(lang, "unlock")}</h2>
-        <label className="stack small">
-          {t(lang, "midwife")}
-          <select value={mid} onChange={(e) => setMid(e.target.value)}>
-            {MIDWIVES.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}
-          </select>
-        </label>
-        <label className="stack small">
-          {t(lang, "pin")}
-          <input type="password" inputMode="numeric" value={pin} onChange={(e) => setPin(e.target.value)} onKeyDown={(e) => e.key === "Enter" && void unlock()} />
-        </label>
-        <p className="small muted">{t(lang, "pinHint")}</p>
-        {error && <p className="small" style={{ color: "var(--bad)" }}>{error}</p>}
-        <button className="btn primary" onClick={() => void unlock()}>{t(lang, "unlock")}</button>
+    <div className="phone-layout unlock-layout">
+      <div className="unlock-container">
+        <div className="unlock-card panel stack">
+          <div className="unlock-badge-wrap">
+            <span className="unlock-badge-icon">🔐</span>
+          </div>
+          <h2>{t(lang, "unlock")}</h2>
+          <p className="unlock-subtitle">{lang === "fr" ? "Portail sécurisé de saisie sage-femme" : "Secure midwife entry portal"}</p>
+          <label className="stack small">
+            <span className="label-text">{t(lang, "midwife")}</span>
+            <select value={mid} onChange={(e) => setMid(e.target.value)}>
+              {MIDWIVES.map((m) => <option key={m.id} value={m.id}>{m.name}</option>)}
+            </select>
+          </label>
+          <label className="stack small">
+            <span className="label-text">{t(lang, "pin")}</span>
+            <input type="password" inputMode="numeric" value={pin} onChange={(e) => setPin(e.target.value)} onKeyDown={(e) => e.key === "Enter" && void unlock()} />
+          </label>
+          <div className="pin-hint-box">
+            <span className="hint-bulb">💡</span>
+            <p className="small muted">{t(lang, "pinHint")}</p>
+          </div>
+          {error && <p className="small error-text" style={{ color: "var(--bad)" }}>{error}</p>}
+          <button className="btn primary unlock-btn" onClick={() => void unlock()}>{t(lang, "unlock")}</button>
+        </div>
       </div>
     </div>
   );
@@ -220,77 +229,134 @@ function PhoneApp({ lang, session, onLock }: { lang: UiLang; session: Session; o
 
   return (
     <div className="phone-layout">
-      <div className="phone">
-        <div className="phone-header">
-          <div className="avatar">D1</div>
-          <div style={{ flex: 1 }}>
-            <strong>DayOne Registre</strong>
-            <small>{online ? t(lang, "online") : `${t(lang, "offline")} · ${pendingCount} ⏳`}</small>
-          </div>
-          <button className="icon-btn secondary" title="Lock" onClick={onLock}>🔒</button>
-        </div>
-        <div className="chat" ref={chatRef}>
-          {chat.entries.map((e, idx) => (
-            <div key={e.id} className={`bubble ${e.from}`}>
-              {e.thumb && <img src={e.thumb} alt="" />}
-              {e.text}
-              {e.buttons && (
-                <div className="buttons">
-                  {e.buttons.map((b) => (
-                    <button key={b.id} disabled={e.used || stale(e, idx)} onClick={() => void tapButton(e, b)}>{b.title}</button>
-                  ))}
-                </div>
-              )}
-              <div className="meta">
-                {new Date(e.at).toLocaleTimeString(lang, { hour: "2-digit", minute: "2-digit" })}
-                {e.from === "me" && <> {tick(byId.get(e.id)?.state, uploading === e.id)}</>}
-              </div>
+      <div className="phone-wrapper">
+        <div className="phone">
+          <div className="phone-statusbar">
+            <span className="phone-time">09:41</span>
+            <div className="phone-island">
+              <span className="island-lens" />
+              <span className="island-sensor" />
             </div>
-          ))}
+            <div className="phone-status-icons">
+              <span className="status-signal">5G</span>
+              <span className="status-wifi">📶</span>
+              <span className="status-battery">100% 🔋</span>
+            </div>
+          </div>
+
+          <div className="phone-header">
+            <div className="avatar">D1</div>
+            <div className="phone-header-info" style={{ flex: 1 }}>
+              <div className="phone-header-title">
+                <strong>DayOne Registre</strong>
+                <span className="verified-badge" title="Service certifié">✓</span>
+              </div>
+              <small>{online ? t(lang, "online") : `${t(lang, "offline")} · ${pendingCount} ⏳`}</small>
+            </div>
+            <button className="icon-btn secondary lock-btn" title="Lock" onClick={onLock}>🔒</button>
+          </div>
+
+          <div className="chat" ref={chatRef}>
+            {chat.entries.map((e, idx) => (
+              <div key={e.id} className={`bubble ${e.from}`}>
+                {e.thumb && <img src={e.thumb} alt="" />}
+                {e.text}
+                {e.buttons && (
+                  <div className="buttons">
+                    {e.buttons.map((b) => (
+                      <button key={b.id} disabled={e.used || stale(e, idx)} onClick={() => void tapButton(e, b)}>{b.title}</button>
+                    ))}
+                  </div>
+                )}
+                <div className="meta">
+                  {new Date(e.at).toLocaleTimeString(lang, { hour: "2-digit", minute: "2-digit" })}
+                  {e.from === "me" && <> {tick(byId.get(e.id)?.state, uploading === e.id)}</>}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <form className="composer" onSubmit={(ev) => { ev.preventDefault(); void sendText(text); setText(""); }}>
+            <label className="icon-btn secondary composer-action" title={t(lang, "camera")}>
+              📷
+              <input type="file" accept="image/*" capture="environment" hidden onChange={(ev) => {
+                const f = ev.target.files?.[0];
+                if (f) void sendImage(f, f.name);
+                ev.target.value = "";
+              }} />
+            </label>
+            <button type="button" className="icon-btn secondary composer-action" title={t(lang, "gallery")} onClick={() => setGallery(true)}>🗂️</button>
+            <input type="text" value={text} placeholder={t(lang, "typeMessage")} onChange={(e) => setText(e.target.value)} />
+            <button className="icon-btn send-btn" type="submit" title={t(lang, "send")}>➤</button>
+          </form>
+
+          <div className="phone-home-indicator" />
         </div>
-        <form className="composer" onSubmit={(ev) => { ev.preventDefault(); void sendText(text); setText(""); }}>
-          <label className="icon-btn secondary" title={t(lang, "camera")}>
-            📷
-            <input type="file" accept="image/*" capture="environment" hidden onChange={(ev) => {
-              const f = ev.target.files?.[0];
-              if (f) void sendImage(f, f.name);
-              ev.target.value = "";
-            }} />
-          </label>
-          <button type="button" className="icon-btn secondary" title={t(lang, "gallery")} onClick={() => setGallery(true)}>🗂️</button>
-          <input type="text" value={text} placeholder={t(lang, "typeMessage")} onChange={(e) => setText(e.target.value)} />
-          <button className="icon-btn" type="submit" title={t(lang, "send")}>➤</button>
-        </form>
       </div>
 
-      <div className="stack">
-        <div className="panel stack">
-          <h2>⚙️ {t(lang, "device")}</h2>
-          <label className="switch">
-            <input type="checkbox" checked={online} onChange={(e) => setOnline(e.target.checked)} />
-            <span className={`conn ${online ? "on" : "off"}`}>{online ? `📶 ${t(lang, "online")}` : `✈️ ${t(lang, "offline")}`}</span>
-          </label>
-          <label className="switch small">
-            <input type="checkbox" checked={slow} onChange={(e) => setSlow(e.target.checked)} />
-            {t(lang, "slowNetwork")}
-          </label>
-          <div className="row small">
-            {t(lang, "botLanguage")} :
-            <button className="btn" onClick={() => void tapButton({ id: "lang", from: "me", at: "" }, { id: "lang:fr", title: "Français" })}>FR</button>
-            <button className="btn" onClick={() => void tapButton({ id: "lang", from: "me", at: "" }, { id: "lang:en", title: "English" })}>EN</button>
+      <div className="stack device-sidebar">
+        <div className="panel stack device-panel">
+          <div className="panel-header-row">
+            <h2>⚙️ {t(lang, "device")}</h2>
+            <span className="sim-badge">Simulation</span>
           </div>
-          <p className="small muted">🔒 {t(lang, "encrypted")}</p>
+
+          <label className="switch-card">
+            <div className="switch-text">
+              <span className="switch-label">{online ? t(lang, "online") : t(lang, "offline")}</span>
+              <span className="switch-sub">{online ? (lang === "fr" ? "Connexion active au serveur" : "Active server connection") : (lang === "fr" ? "Mode déconnecté autonome" : "Offline standalone mode")}</span>
+            </div>
+            <input type="checkbox" checked={online} onChange={(e) => setOnline(e.target.checked)} />
+            <span className={`switch-pill ${online ? "on" : "off"}`}>
+              <span className="switch-knob" />
+            </span>
+          </label>
+
+          <label className="switch-card secondary">
+            <div className="switch-text">
+              <span className="switch-label">{t(lang, "slowNetwork")}</span>
+            </div>
+            <input type="checkbox" checked={slow} onChange={(e) => setSlow(e.target.checked)} />
+            <span className={`switch-pill ${slow ? "on" : "off"}`}>
+              <span className="switch-knob" />
+            </span>
+          </label>
+
+          <div className="row small bot-lang-row">
+            <span className="bot-lang-title">{t(lang, "botLanguage")} :</span>
+            <div className="btn-group">
+              <button className="btn small" onClick={() => void tapButton({ id: "lang", from: "me", at: "" }, { id: "lang:fr", title: "Français" })}>FR</button>
+              <button className="btn small" onClick={() => void tapButton({ id: "lang", from: "me", at: "" }, { id: "lang:en", title: "English" })}>EN</button>
+            </div>
+          </div>
+
+          <div className="vault-security-pill">
+            <span className="vault-shield">🔒</span>
+            <span className="vault-text">{t(lang, "encrypted")}</span>
+          </div>
         </div>
-        <div className="panel">
-          <h2>📤 {t(lang, "queue")}</h2>
-          {items.length === 0 ? <p className="muted small">{t(lang, "queueEmpty")}</p> : (
+
+        <div className="panel queue-panel">
+          <div className="panel-header-row">
+            <h2>📤 {t(lang, "queue")}</h2>
+            <span className="queue-count-badge">{items.length}</span>
+          </div>
+          {items.length === 0 ? (
+            <div className="queue-empty-box">
+              <span className="empty-check">✨</span>
+              <p className="muted small">{t(lang, "queueEmpty")}</p>
+            </div>
+          ) : (
             <ul className="queue">
               {[...items].reverse().map((i) => {
                 const server = captures.get(i.id);
                 return (
-                  <li key={i.id}>
-                    <span>{i.label}{server && !/p\.\d/.test(i.label) ? <span className="muted"> · page {server.pageNo}</span> : null}</span>
-                    <span className="row">
+                  <li key={i.id} className="queue-item">
+                    <span className="queue-item-name">
+                      <span className="queue-icon">📄</span>
+                      <span>{i.label}{server && !/p\.\d/.test(i.label) ? <span className="muted"> · page {server.pageNo}</span> : null}</span>
+                    </span>
+                    <span className="row queue-status-row">
                       <StateChip state={uploading === i.id ? "UPLOADING" : i.state} lang={lang} />
                       {server && i.state === "DELIVERED" && <StateChip state={server.docState === "REGISTERED" || server.docState === "SYNCED" ? server.docState : server.pageState} lang={lang} />}
                     </span>
@@ -326,7 +392,12 @@ function StateChip({ state, lang }: { state: string; lang: UiLang }) {
   const label = state === "UPLOADING" ? (lang === "fr" ? "ENVOI…" : "UPLOADING…")
     : state === "DELIVERED" ? (lang === "fr" ? "REÇU" : "DELIVERED")
     : STATE_LABELS[state as keyof typeof STATE_LABELS]?.[lang] ?? state;
-  return <span className={`chip ${cls}`}>{label}</span>;
+  return (
+    <span className={`chip ${cls}`}>
+      <span className="chip-dot" />
+      <span>{label}</span>
+    </span>
+  );
 }
 
 async function thumbnail(blob: Blob): Promise<string> {
