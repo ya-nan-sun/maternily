@@ -1,5 +1,5 @@
 // The one place that defines how a record moves through its lifecycle.
-// Both the device (simulated phone) and the server import this module, and
+// Both the device queue (web/src/device) and the server import this module, and
 // every transition is checked here and logged by the caller.
 
 export const RECORD_STATES = [

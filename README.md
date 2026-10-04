@@ -8,7 +8,7 @@ The midwife keeps working on paper. She needs no app, no account and no signal w
 
 - **Real WhatsApp, both directions, for free,** through the Vonage sandbox.
 - **Page reading runs locally for free** (PaddleOCR + form templates). Claude is only an optional fallback for doubtful cells.
-- **The full conversation, record lifecycle and patient linking work,** with 46 automated tests passing.
+- **The full conversation, record lifecycle and patient linking work,** with 48 automated tests passing.
 - **Held-out test pages: 98.1% field accuracy at $0, with no AI** (0.49% wrong values saved without asking).
 - **Not done yet:** the demo video, Arabic, and the full photo flow over real WhatsApp. See [Status](#status).
 
@@ -152,11 +152,12 @@ Results are cached per (image, pipeline version, model), and the raw OCR output 
 The agent ([server/agent.ts](server/agent.ts)) is a deterministic, button-driven state machine; the model is never used to chat.
 
 - **Collecting pages:** photos from one midwife form one registry until she types *terminé* or 10 minutes pass. Identical photos get "Ignore / Use anyway", with no new AI call.
-- **Per-page review:** each page gets a summary ("142 values read, 3 I'm not sure about"). For each doubt she sees what was read, the confidence and the reason, with **Correct / Fix it / Illegible on paper**. "Fix it" accepts typed values, which go through the same parsing and checks.
+- **Per-page review:** each page gets a summary ("142 values read, 3 I'm not sure about"). For each doubt she sees what was read, the confidence and the reason, with **Correct / Fix it / Illegible on paper**. "Fix it" accepts typed values, which go through the same parsing and checks. On a mostly empty grid, **"Rest of the page is blank"** records every remaining box where nothing was read as blank in one tap; boxes where something was read are still asked about.
+- **Queued registries:** one review at a time. A registry finished while another is under review is announced as waiting its turn, and the open question is asked again.
 - **Other actions:** retake a photo, fix any field by name, and full **manual entry** when reading fails.
 - **Linking:** by the form number (*N° de fiche*). Otherwise the agent proposes candidates from non-identifying fields (age ±1, gravidity/parity, LMP/EDD ±7 days, delivery date, birth weight): **[Patient 1] [Patient 2] [None, create new] [I'm not sure]**. "I'm not sure" goes to the office. The system never merges on its own.
 - **Re-photographed registry:** new values are added; values that differ are listed as *on file → photo* for the midwife to accept, keep or pick.
-- **Commands:** `dossier <N° de fiche>` returns the patient's file (facts only); `statut`, `aide`, `langue` (French ↔ English); `reset` deletes this phone's unfinished registries (after a yes/no check) when a conversation gets stuck. Saved records are kept.
+- **Commands:** `dossier <N° de fiche>` returns the patient's file (facts only); `statut`, `aide`, `langue` (French ↔ English); `reset` deletes this phone's unfinished registries (after a yes/no check) when a conversation gets stuck. Saved records are kept. It is also offered as a choice whenever the agent doesn't understand a reply.
 
 ## Offline
 
@@ -284,7 +285,7 @@ templates/     registered paper forms
 web/src/       office console + dashboard, PDF report (device/: encrypted vault and offline outbox, tested, not in the UI)
 eval/          answer key (redacted), template geometry, evaluation and model comparison
 tools/         PDF answer-key extractor, template builder, WhatsApp setup check
-tests/         46 tests: parsing, lifecycle, offline queue, full conversations, resets, PDF report, CSV export, Meta / Twilio / Vonage adapters
+tests/         48 tests: parsing, lifecycle, offline queue, full conversations, resets, PDF report, CSV export, Meta / Twilio / Vonage adapters
 DATA_NOTES.md  dataset inspection        PROPOSAL.md  design decisions
 ```
 

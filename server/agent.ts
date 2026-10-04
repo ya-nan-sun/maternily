@@ -48,6 +48,9 @@ interface PageRow {
 const MAX_TEXT = 3500;
 
 export class Agent {
+  /** Set while re-asking after a message the agent didn't understand: the next choices get "Start over". */
+  private offerReset = false;
+
   constructor(private db: Db, private onNewWork: () => void = () => {}) {}
 
   // ------------------------------------------------------------------ plumbing
@@ -61,6 +64,10 @@ export class Agent {
     this.db.prepare("INSERT INTO conversations (midwife_id, state) VALUES (?, ?) ON CONFLICT(midwife_id) DO UPDATE SET state = excluded.state").run(mid, JSON.stringify(c));
   }
   send(mid: string, text: string, buttons?: Button[], refs?: OutboundMessage["refs"]) {
+    if (this.offerReset && buttons?.length) {
+      buttons = [...buttons, { id: "reset:ask", title: L(this.conv(mid).lang, "🧹 Tout recommencer", "🧹 Start over") }];
+      this.offerReset = false;
+    }
     const msg: OutboundMessage = { id: randomUUID(), midwifeId: mid, text: text.slice(0, MAX_TEXT), buttons, createdAt: now(), refs };
     this.db.prepare("INSERT INTO outbound (id, midwife_id, payload, created_at) VALUES (?, ?, ?, ?)").run(msg.id, mid, JSON.stringify(msg), msg.createdAt);
   }
@@ -205,6 +212,15 @@ export class Agent {
     return id;
   }
 
+  /**
+   * After a registry closes: start its review, or, when another review is already open, say it waits
+   * its turn and re-ask the open question (on numbered channels the "Terminé" choice just replaced it).
+   */
+  private afterClose(mid: string, c: Conv): void {
+    if (!c.active) return this.maybeStartReview(mid);
+    this.reprompt(mid, c, L(c.lang, "📌 Ce registre passe après celui en cours. ", "📌 This registry comes after the one in progress. "));
+  }
+
   private closeDoc(mid: string, c: Conv, reason: string): void {
     const docId = c.collectingDocId;
     if (!docId) return;
@@ -249,7 +265,15 @@ export class Agent {
     if (a?.step === "review_page" && /^(oui|yes|ok|okay|d ?accord|je confirme|confirme|confirmer|confirm|c ?est bon|correct)\b/.test(f.replace(/['’]/g, " "))) {
       return this.onButton(mid, "rv:confirm");
     }
-    if (a) return this.reprompt(mid, c, L(lang, "Je n'ai pas compris. ", "I didn't understand. "));
+    if (a) {
+      // Confusion is where midwives get stuck: the re-asked question also offers a way out.
+      this.offerReset = true;
+      try {
+        return this.reprompt(mid, c, L(lang, "Je n'ai pas compris. ", "I didn't understand. "));
+      } finally {
+        this.offerReset = false;
+      }
+    }
     this.send(
       mid,
       L(lang, "Bonjour 👋 Envoyez les photos des pages du registre, puis appuyez sur « Terminé ». Tapez « aide » pour l'aide.",
@@ -340,6 +364,7 @@ export class Agent {
         return this.send(mid, L(c.lang, "Langue : français 🇫🇷", "Language: English 🇬🇧"));
       }
       case "reset": {
+        if (arg === "ask") return this.askReset(mid, lang);
         if (arg === "yes") return this.discardDrafts(mid, c);
         this.send(mid, L(lang, "👍 Rien n'a été effacé.", "👍 Nothing was deleted."));
         return a ? this.reprompt(mid, c) : undefined;
@@ -350,10 +375,7 @@ export class Agent {
           return this.send(mid, L(lang, "Aucune page en cours. Envoyez d'abord les photos du registre.", "No pages in progress. Send the registry photos first."));
         }
         this.closeDoc(mid, c, "midwife tapped done");
-        // A review is already open: say the new registry waits its turn, and re-ask the open question
-        // (on numbered channels the "Terminé" choice just replaced it).
-        if (a) return this.reprompt(mid, c, L(lang, "📌 Ce registre passe après celui en cours. ", "📌 This registry comes after the one in progress. "));
-        return this.maybeStartReview(mid);
+        return this.afterClose(mid, c);
       }
       case "dup": {
         const p = this.page(arg2);
@@ -461,8 +483,11 @@ export class Agent {
     for (const d of idle) {
       tx(this.db, () => {
         const c = this.conv(d.midwife_id);
-        if (c.collectingDocId === d.id) this.closeDoc(d.midwife_id, c, "10 minutes without new pages");
-        else this.db.prepare("UPDATE documents SET closed_at = ? WHERE id = ?").run(now(), d.id);
+        if (c.collectingDocId === d.id) {
+          this.closeDoc(d.midwife_id, c, "10 minutes without new pages");
+          return this.afterClose(d.midwife_id, c);
+        }
+        this.db.prepare("UPDATE documents SET closed_at = ? WHERE id = ?").run(now(), d.id);
         this.maybeStartReview(d.midwife_id);
       });
     }
@@ -651,6 +676,9 @@ export class Agent {
           { id: "q:blank", title: L(lang, "Vide sur le papier", "Blank on paper") },
           { id: "q:illegible", title: L(lang, "Illisible pour moi", "Illegible for me too") },
           { id: "q:unknown", title: L(lang, "Inconnu", "Unknown") },
+          ...(this.emptyLeft(p, a.queue ?? []) > 0
+            ? [{ id: "q:restblank", title: L(lang, "⏭️ Le reste de la page est vide", "⏭️ Rest of the page is blank") }]
+            : []),
         ],
         { docId: p.doc_id, captureId: p.capture_id },
       );
@@ -693,8 +721,23 @@ export class Agent {
       this.updateField(a.captureId, a.key, { status: "NOT_PROVIDED", value: null, raw: null, reasons: [] });
     } else if (answer === "unknown") {
       this.updateField(a.captureId, a.key, { status: "UNKNOWN", value: null, reasons: [] });
+    } else if (answer === "restblank") {
+      // The midwife says the rest of the page is blank: boxes where nothing was read become blank.
+      // Boxes where something was read are still asked about, so no written value is dropped.
+      const fields = this.pageFields(this.page(a.captureId));
+      const empty = new Set([a.key, ...(a.queue ?? [])].filter((k) => fields[k]?.value === null || fields[k]?.value === undefined));
+      for (const k of empty) this.updateField(a.captureId, k, { status: "NOT_PROVIDED", value: null, raw: null, reasons: [] });
+      c.active = { ...a, queue: (a.queue ?? []).filter((k) => !empty.has(k)) };
+      this.save(mid, c);
+      this.send(mid, L(c.lang, `⏭️ ${empty.size} case(s) notée(s) vides.`, `⏭️ ${empty.size} box(es) recorded as blank.`));
     }
     return this.afterAnswer(mid, c);
+  }
+
+  /** Questions still queued on this page for boxes where nothing was read. */
+  private emptyLeft(p: PageRow, queue: string[]): number {
+    const fields = this.pageFields(p);
+    return queue.filter((k) => fields[k]?.value === null || fields[k]?.value === undefined).length;
   }
 
   private afterAnswer(mid: string, c: Conv): void {

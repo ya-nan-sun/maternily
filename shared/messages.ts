@@ -1,6 +1,6 @@
-// The internal message format. The simulated phone speaks it directly; a
-// WhatsApp Cloud API adapter would translate webhooks into InboundMessage and
-// OutboundMessage into reply-button / list messages (>3 buttons become a list).
+// The internal message format. Each channel adapter (Vonage, Meta, Twilio, Telegram)
+// translates its webhooks into InboundMessage and OutboundMessage into buttons, lists
+// or numbered choices.
 
 import type { RecordState } from "./lifecycle.ts";
 

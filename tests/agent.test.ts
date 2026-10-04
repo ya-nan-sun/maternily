@@ -6,6 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
 import type { InboundMessage, OutboundMessage } from "../shared/messages.ts";
+import { FIELDS } from "../shared/catalog.ts";
 import { valuesEqual } from "../shared/normalize.ts";
 import { Agent } from "../server/agent.ts";
 import { openDb, type Db } from "../server/db.ts";
@@ -184,6 +185,48 @@ describe("multi-page registry, review and registration", () => {
     for (let i = 0; i < 20 && conv().active?.captureId === first && !newMessages().some((m) => /Confirmez-vous/.test(m.text)); i++) press(conv().active.step === "review_page" ? "rv:start" : "q:ok");
     type("Oui je confirme");
     expect((db.prepare("SELECT confirmed FROM pages WHERE capture_id = ?").get(first) as { confirmed: number }).confirmed).toBe(1);
+  });
+
+  it("marks the rest of a page blank in one tap, but still asks about boxes where something was read", async () => {
+    agent.handle(photo(pagesOf(2)[1].file));
+    type("terminé");
+    await pipeline.drain();
+    const cid = conv().active.captureId as string;
+    const fields = JSON.parse((db.prepare("SELECT fields FROM pages WHERE capture_id = ?").get(cid) as { fields: string }).fields) as Record<string, { key: string; value: unknown; status: string; raw: string | null; confirmedBy: string; reasons: string[] }>;
+    const ordered = FIELDS.map((f) => f.key).filter((k) => fields[k]);
+    const empties = ordered.slice(0, 3);
+    const written = ordered.slice(3).find((k) => fields[k].value !== null)!;
+    for (const f of Object.values(fields)) if (f.status === "NEEDS_REVIEW" || f.status === "ILLEGIBLE") f.status = "KNOWN";
+    for (const k of empties) Object.assign(fields[k], { value: null, raw: null, status: "ILLEGIBLE", confirmedBy: "AI" });
+    Object.assign(fields[written], { status: "NEEDS_REVIEW", confirmedBy: "AI" });
+    db.prepare("UPDATE pages SET fields = ? WHERE capture_id = ?").run(JSON.stringify(fields), cid);
+
+    // Confused midwife: the re-asked page also offers a way out.
+    newMessages();
+    type("hein ?");
+    expect(newMessages().at(-1)?.buttons?.map((b) => b.id)).toContain("reset:ask");
+
+    press("rv:start");
+    expect(newMessages().at(-1)?.buttons?.map((b) => b.id)).toContain("q:restblank");
+    press("q:restblank");
+    const after = JSON.parse((db.prepare("SELECT fields FROM pages WHERE capture_id = ?").get(cid) as { fields: string }).fields);
+    for (const k of empties) expect(after[k]).toMatchObject({ status: "NOT_PROVIDED", confirmedBy: "MIDWIFE" });
+    expect(conv().active).toMatchObject({ step: "question", key: written }); // the written box is still checked
+  });
+
+  it("says so when a registry closes on the idle timer while another review is open", async () => {
+    const at = (min: number) => new Date(Date.UTC(2026, 9, 4, 9, min)).toISOString();
+    agent.handle({ ...photo(pagesOf(2)[0].file), capturedAt: at(0) });
+    agent.handle(inbound("text", { text: "terminé" }, at(1)));
+    await pipeline.drain();
+    agent.handle({ ...photo(pagesOf(3)[0].file), capturedAt: at(30) });
+    const waiting = conv().collectingDocId as string;
+    db.prepare("UPDATE documents SET last_activity_at = '2000-01-01T00:00:00.000Z' WHERE id = ?").run(waiting);
+    newMessages();
+    agent.tick();
+    const msgs = newMessages();
+    expect(msgs.some((m) => /passe après|comes after/.test(m.text))).toBe(true);
+    expect(msgs.at(-1)?.buttons?.length).toBeGreaterThan(0);
   });
 
   it("'reset' discards unfinished registries but keeps saved records", async () => {

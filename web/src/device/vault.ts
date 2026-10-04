@@ -1,4 +1,4 @@
-// Encrypted storage on the (simulated) phone. Everything the device keeps —
+// Encrypted storage on the phone (for an offline app; tested, not in the web UI). Everything the device keeps —
 // queued photos, messages, the chat — is AES-GCM encrypted with a key derived
 // from the midwife's PIN. Nothing is readable at rest without the PIN.
 

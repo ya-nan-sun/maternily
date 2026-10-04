@@ -1,14 +1,12 @@
 import express, { type NextFunction, type Request, type Response } from "express";
 import fs from "node:fs";
 import path from "node:path";
-import { z } from "zod";
 import { FIELD_BY_KEY, SECTION_LABELS } from "../shared/catalog.ts";
-import type { CaptureStatus, OutboundMessage, PollResponse } from "../shared/messages.ts";
 import type { Bp } from "../shared/normalize.ts";
 import { formatValue } from "../shared/normalize.ts";
 import { Agent, linkDocument, registerDocument } from "./agent.ts";
 import { config } from "./config.ts";
-import { now, setState, tx, type Db } from "./db.ts";
+import { now, tx, type Db } from "./db.ts";
 import { exportCsv } from "./export.ts";
 import { deleteAllImages, readImage } from "./images.ts";
 import { descriptor, documentValues, patientValues } from "./records.ts";
@@ -16,18 +14,7 @@ import { receiveTwilio, twilioStatus } from "./twilio.ts";
 import { receiveVonage, vonageStatus } from "./vonage.ts";
 import { receiveWebhook, verifyWebhook } from "./whatsapp.ts";
 
-const SAMPLES_DIR = "dayone-participants/data/Paper Registry";
 const CSV = "dayone-participants/data/maternal_registry_synthetic.csv";
-
-const Inbound = z.object({
-  id: z.string().min(8).max(80),
-  midwifeId: z.string().min(1).max(40),
-  kind: z.enum(["image", "text", "button"]),
-  text: z.string().max(2000).optional(),
-  buttonId: z.string().max(200).optional(),
-  image: z.object({ data: z.string(), mime: z.enum(["image/jpeg", "image/png", "image/webp"]) }).optional(),
-  capturedAt: z.string(),
-});
 
 type Role = "supervisor" | "analyst";
 function role(req: Request): Role | null {
@@ -69,35 +56,6 @@ export function createApi(db: Db, agent: Agent, kick: () => void) {
         ? `PaddleOCR PP-OCRv6_${process.env.OCR_MODEL_SIZE ?? "medium"} + form templates`
         : "mock-ground-truth";
     res.json({ ok: true, extractor: config.extractor, model, effort: config.effort, aiFallback: config.extractor === "template" ? config.aiFallback : "none" });
-  });
-
-  // ---------------------------------------------------------------- simulated phone
-  app.post("/api/sim/messages", (req, res) => {
-    const parsed = Inbound.safeParse(req.body);
-    if (!parsed.success) return res.status(400).json({ error: parsed.error.issues[0]?.message });
-    const fresh = agent.handle(parsed.data);
-    kick();
-    res.json({ accepted: true, duplicate: !fresh });
-  });
-
-  app.get("/api/sim/:mid/poll", (req, res) => {
-    const mid = String(req.params.mid);
-    const since = Number(req.query.since ?? 0);
-    const rows = db.prepare("SELECT seq, payload FROM outbound WHERE midwife_id = ? AND seq > ? ORDER BY seq LIMIT 200").all(mid, since) as { seq: number; payload: string }[];
-    const captures = db
-      .prepare(
-        `SELECT p.capture_id, p.doc_id, p.page_no, p.state AS page_state, d.state AS doc_state FROM pages p JOIN documents d ON d.id = p.doc_id
-         WHERE p.midwife_id = ? ORDER BY p.received_at DESC LIMIT 100`,
-      )
-      .all(mid) as { capture_id: string; doc_id: string; page_no: number; page_state: string; doc_state: string }[];
-    const body: PollResponse = {
-      messages: rows.map((r) => JSON.parse(r.payload) as OutboundMessage),
-      captures: captures.map(
-        (c): CaptureStatus => ({ captureId: c.capture_id, docId: c.doc_id, pageNo: c.page_no, pageState: c.page_state as CaptureStatus["pageState"], docState: c.doc_state as CaptureStatus["docState"] }),
-      ),
-      lastSeq: rows.length ? rows[rows.length - 1].seq : since,
-    };
-    res.json(body);
   });
 
   app.get("/api/office/documents/:id/report", requireRole("supervisor"), (req, res) => {
@@ -150,29 +108,6 @@ export function createApi(db: Db, agent: Agent, kick: () => void) {
       }),
       fields,
     });
-  });
-
-  /** The device confirms it received the "registered" message and dropped its local copy. */
-  app.post("/api/sim/:mid/ack", (req, res) => {
-    const docId = String(req.body?.docId ?? "");
-    const doc = db.prepare("SELECT state FROM documents WHERE id = ? AND midwife_id = ?").get(docId, String(req.params.mid)) as { state: string } | undefined;
-    if (!doc) return res.status(404).json({ error: "unknown document" });
-    if (doc.state === "REGISTERED") setState(db, "document", docId, "SYNCED", "device confirmed and removed its local copy");
-    res.json({ ok: true });
-  });
-
-  app.get("/api/samples", (_req, res) => {
-    const indexFile = "eval/ground_truth/index.json";
-    const index = fs.existsSync(indexFile)
-      ? (JSON.parse(fs.readFileSync(indexFile, "utf8")) as { images: { file: string; pdfPage: number | null; patient: number | null; duplicateOf: string | null; realPhoto: boolean }[] }).images
-      : [];
-    res.json(index);
-  });
-  app.get("/api/samples/:file", (req, res) => {
-    const file = path.basename(String(req.params.file));
-    const full = path.join(SAMPLES_DIR, file);
-    if (!fs.existsSync(full)) return res.status(404).end();
-    res.sendFile(path.resolve(full));
   });
 
   // ---------------------------------------------------------------- office console
