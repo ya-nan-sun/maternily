@@ -87,6 +87,8 @@ CREATE TABLE IF NOT EXISTS channel_prompts (midwife_id TEXT PRIMARY KEY, buttons
 const MIGRATIONS = [
   "ALTER TABLE midwives ADD COLUMN channel TEXT NOT NULL DEFAULT 'simulator'",
   "ALTER TABLE midwives ADD COLUMN phone TEXT",
+  // Device time of the message that closed a registry ("terminé"), for late-arriving photos.
+  "ALTER TABLE documents ADD COLUMN closed_capture_at TEXT",
 ];
 
 export function openDb(file = path.join(config.dataDir, "maternily.db")): Db {

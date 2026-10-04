@@ -10,11 +10,11 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { fieldsOf, type Section } from "../../shared/catalog.ts";
+import { fieldsOf, type FieldDef, type Section } from "../../shared/catalog.ts";
 import { fold, levenshtein } from "../../shared/normalize.ts";
 import { assignRuns, joinRuns, normLabel, sameText, type Run, type Template, type TemplatePage } from "../../shared/template.ts";
 import { config } from "../config.ts";
-import { inkRatios, ocrPage, type OcrLine } from "./ocr-client.ts";
+import { inkRatios, ocrPage, readCrops, type OcrLine } from "./ocr-client.ts";
 import { postprocess } from "./postprocess.ts";
 import { AiUnavailableError, type Extractor, type ExtractorUsage, type FallbackReader, type RawExtraction } from "./types.ts";
 
@@ -80,6 +80,59 @@ function snapWord(v: string): string {
   const exact = COMMON_WORDS.find((w) => fold(w) === n);
   if (exact) return exact;
   return COMMON_WORDS.find((w) => fold(w).length >= 4 && levenshtein(n, fold(w)) <= 1) ?? v;
+}
+
+const DIGIT_TYPES = new Set(["date", "int", "number", "bp", "ga"]);
+const LOOKALIKE_DIGITS: Record<string, string> = { o: "0", O: "0", s: "5", S: "5", z: "2", Z: "2", l: "1", I: "1", i: "1", "|": "1" };
+
+/** Remove a single "1" that is really the "/" of a blood pressure (e.g. "118174" → "118/74"), if exactly one split is plausible. */
+function splitBp(digits: string): string | null {
+  const options: string[] = [];
+  for (let i = 1; i < digits.length - 1; i++) {
+    if (digits[i] !== "1") continue;
+    const s = Number(digits.slice(0, i));
+    const d = Number(digits.slice(i + 1));
+    if (s >= 70 && s <= 250 && d >= 40 && d <= 150 && s > d) options.push(`${s}/${d}`);
+  }
+  return options.length === 1 ? options[0] : null;
+}
+
+/**
+ * Undo common OCR confusions on handwriting, using what the field expects.
+ * Returns the cleaned text and whether a guess was made that the midwife should confirm.
+ */
+export function cleanOcrText(def: FieldDef, text: string): { text: string; guessed: boolean } {
+  let t = text.replace(/(\p{L})_(\p{L})/gu, "$1-$2").replace(/_/g, " ").trim();
+  let guessed = false;
+  if (DIGIT_TYPES.has(def.type)) {
+    // Unit "g" read as "9" (before any space handling): "3626 9" → "3626 g", "13.2 9g/dL" → "13.2 g/dL", "0.8 9/L" → "0.8 g/L".
+    if (def.unit === "g") t = t.replace(/^(\d{3,4})\s+9$/, "$1 g");
+    if (def.unit === "g/dL" || def.unit === "g/L") t = t.replace(/^[^\d]*(\d+(?:[.,]\d+)?)\s*9?(g?\/(?:dL|L))$/i, (_m, n, u) => `${n} ${u.startsWith("g") ? u : "g" + u}`);
+    if (def.type === "date") {
+      // Dates hold no letters: every look-alike is a digit, and spaces are stray.
+      t = t.replace(/[oOsSzZlIi|]/g, (ch) => LOOKALIKE_DIGITS[ch]).replace(/\s+/g, "");
+    } else {
+      // Elsewhere units are letters ("cm", "SA"): only convert look-alikes that touch digits or separators.
+      for (let pass = 0; pass < 3; pass++) {
+        t = t.replace(/[oOsSzZlIi|](?=[\d/.,])|(?<=[\d/.,])[oOsSzZlIi|]/g, (ch) => LOOKALIKE_DIGITS[ch] ?? ch);
+      }
+    }
+    t = t.replace(/(\d) (?=\d)/g, "$1");
+    if (def.type === "bp" && /^\d{5,6}$/.test(t)) {
+      const split = splitBp(t);
+      if (split) {
+        t = split;
+        guessed = true;
+      }
+    }
+  } else if (def.type === "bool") {
+    const f = fold(t);
+    if (f !== "oui" && levenshtein(f, "oui") === 1) t = "Oui";
+    else if (f !== "non" && levenshtein(f, "non") === 1 && f.length >= 2) t = "Non";
+  } else if (def.type === "text") {
+    t = t.replace(/(\p{L}) \| (\p{L})/gu, "$1 l $2"); // a lone "|" between letters is usually an "l"
+  }
+  return { text: t, guessed };
 }
 
 export function loadTemplates(dir = "templates"): Template[] {
@@ -150,7 +203,7 @@ function handwrittenRuns(page: TemplatePage, lines: OcrLine[], toTemplate: Affin
 }
 
 /** Bump when the reading logic below changes: it is part of the result cache key. */
-const PIPELINE_VERSION = 3;
+const PIPELINE_VERSION = 4;
 
 export class TemplateExtractor implements Extractor {
   name = "template";
@@ -197,6 +250,11 @@ export class TemplateExtractor implements Extractor {
     const boxInk = new Map(boxes.map((b, i) => [b, ratios[i]]));
     const cellInk = new Map(emptyCells.map((c, i) => [c.key, ratios[boxes.length + i]]));
 
+    // Second chance: cells with ink but no text on the full page are re-read cropped and enlarged.
+    const unread = emptyCells.filter((c) => c.kind === "cell" && (cellInk.get(c.key) ?? 0) > 0.012);
+    const rereads = await readCrops(image, unread.map((c) => (c.kind === "cell" ? rect(c.x0 + 2, c.y - 4, c.x1 - 2, c.y + 10) : [])));
+    const reread = new Map(unread.map((c, i) => [c.key, rereads[i]]));
+
     const fields: RawExtraction["fields"] = [];
     for (const def of fieldsOf(section)) {
       if (def.input === "checkbox" && boxes.some((b) => b.key === def.key)) {
@@ -210,13 +268,22 @@ export class TemplateExtractor implements Extractor {
         continue;
       }
       const runs = written.get(def.key);
-      if (runs?.length) {
-        const v = joinRuns(runs);
-        const c = Math.min(...runs.map((r) => r.score ?? 0.5));
-        if (DASH.test(v.replace(/\s/g, ""))) fields.push({ k: def.key, v: "—", s: "NA", c });
-        else fields.push({ k: def.key, v: def.type === "text" ? snapWord(v) : v, s: "K", c });
+      const second = reread.get(def.key);
+      const found = runs?.length
+        ? { text: joinRuns(runs), score: Math.min(...runs.map((r) => r.score ?? 0.5)) }
+        : second?.text
+          ? { text: second.text, score: second.score * 0.95 }
+          : null;
+      if (found) {
+        if (DASH.test(found.text.replace(/\s/g, ""))) {
+          fields.push({ k: def.key, v: "—", s: "NA", c: found.score });
+          continue;
+        }
+        const { text, guessed } = cleanOcrText(def, found.text);
+        const c = guessed ? Math.min(found.score, 0.6) : found.score;
+        fields.push({ k: def.key, v: def.type === "text" ? snapWord(text) : text, s: "K", c });
       } else if ((cellInk.get(def.key) ?? 0) > 0.012) {
-        // Ink in the cell but no text recognized: something is written that OCR could not read.
+        // Ink in the cell but no text recognized, even on a second look.
         fields.push({ k: def.key, v: "", s: "I", c: 0.3 });
       }
     }

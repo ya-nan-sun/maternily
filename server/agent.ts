@@ -85,7 +85,11 @@ export class Agent {
 
   // ------------------------------------------------------------------ inbound
   /** Returns false when the message id was already received (device retry). */
+  /** Device time of the message being handled (messages can arrive long after they were written). */
+  private currentCapturedAt: string | null = null;
+
   handle(msg: InboundMessage): boolean {
+    this.currentCapturedAt = msg.capturedAt;
     const fresh = tx(this.db, () => {
       const exists = this.db.prepare("SELECT 1 FROM inbound WHERE id = ?").get(msg.id);
       if (exists) return false;
@@ -118,7 +122,7 @@ export class Agent {
       replaces = c.active.captureId;
       pageNo = this.page(replaces).page_no;
     } else {
-      docId = this.collectingDoc(mid, c, msg.capturedAt);
+      docId = this.lateDoc(mid, c, msg.capturedAt) ?? this.collectingDoc(mid, c, msg.capturedAt);
       pageNo = ((this.db.prepare("SELECT MAX(page_no) AS n FROM pages WHERE doc_id = ?").get(docId) as { n: number | null }).n ?? 0) + 1;
     }
 
@@ -162,6 +166,29 @@ export class Agent {
     }
   }
 
+  /**
+   * A phone that reconnects sends its queued photos and "terminé" in a burst, and they can
+   * arrive slightly out of order. A photo taken before "terminé" belongs to the registry it
+   * closed, as long as that registry has not been validated yet.
+   */
+  private lateDoc(mid: string, c: Conv, capturedAt: string): string | null {
+    if (c.collectingDocId) return null;
+    const doc = this.db
+      .prepare(
+        `SELECT id, closed_capture_at FROM documents WHERE midwife_id = ? AND closed_capture_at IS NOT NULL
+         AND state IN ('PENDING_AI', 'AI_PROCESSED', 'NEEDS_REVIEW') ORDER BY opened_at DESC LIMIT 1`,
+      )
+      .get(mid) as { id: string; closed_capture_at: string } | undefined;
+    if (!doc) return null;
+    const first = this.db.prepare("SELECT MIN(captured_at) AS t FROM pages WHERE doc_id = ?").get(doc.id) as { t: string | null };
+    const taken = Date.parse(capturedAt);
+    const closedAt = Date.parse(doc.closed_capture_at) + 5_000; // same-second timestamps count as "before"
+    const openedAt = first.t ? Date.parse(first.t) - config.sessionIdleMinutes * 60_000 : -Infinity;
+    if (taken > closedAt || taken < openedAt) return null;
+    this.db.prepare("UPDATE documents SET last_activity_at = ? WHERE id = ?").run(now(), doc.id);
+    return doc.id;
+  }
+
   /** The open multi-page document, or a new one if none is open or the last photo is too old. */
   private collectingDoc(mid: string, c: Conv, capturedAt: string): string {
     if (c.collectingDocId) {
@@ -181,7 +208,9 @@ export class Agent {
   private closeDoc(mid: string, c: Conv, reason: string): void {
     const docId = c.collectingDocId;
     if (!docId) return;
-    this.db.prepare("UPDATE documents SET closed_at = ? WHERE id = ?").run(now(), docId);
+    const lastPhoto = (this.db.prepare("SELECT MAX(captured_at) AS t FROM pages WHERE doc_id = ?").get(docId) as { t: string | null }).t;
+    const closedCaptureAt = reason === "midwife tapped done" ? this.currentCapturedAt ?? lastPhoto : lastPhoto;
+    this.db.prepare("UPDATE documents SET closed_at = ?, closed_capture_at = ? WHERE id = ?").run(now(), closedCaptureAt, docId);
     const n = this.docPages(docId).length;
     c.collectingDocId = null;
     this.save(mid, c);

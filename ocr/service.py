@@ -3,6 +3,7 @@
 Loads the models once and answers two requests over HTTP on localhost:
   POST /ocr  {"image": <base64>}                      -> {"width", "height", "lines": [{"text", "score", "box": [x0, y0, x1, y1]}]}
   POST /ink  {"image": <base64>, "rects": [[x0, y0, x1, y1], ...]} -> {"ratios": [...]}  (share of dark pixels inside each rect)
+  POST /crops {"image": <base64>, "rects": [...]}                 -> {"results": [{"text", "score"}]}  (re-read single cells, enlarged)
   GET  /health
 
 Images are processed in memory and never written to disk.
@@ -49,6 +50,27 @@ def read_lines(rgb: np.ndarray) -> list:
             ys = [float(p[1]) for p in poly]
             lines.append({"text": text, "score": round(float(score), 4), "box": [min(xs), min(ys), max(xs), max(ys)]})
     return lines
+
+
+def read_crops(rgb: np.ndarray, rects: list, scale: float = 2.0) -> list:
+    """Second chance for cells where ink was seen but no text detected on the full page:
+    crop the cell with a margin, enlarge it, and read it on its own."""
+    h, w = rgb.shape[:2]
+    out = []
+    for x0, y0, x1, y1 in rects:
+        mx, my = (x1 - x0) * 0.08, (y1 - y0) * 0.25
+        a, b = int(max(0, x0 - mx)), int(min(w, x1 + mx))
+        c, d = int(max(0, y0 - my)), int(min(h, y1 + my))
+        if b - a < 4 or d - c < 4:
+            out.append({"text": "", "score": 0.0})
+            continue
+        crop = Image.fromarray(rgb[c:d, a:b]).resize((int((b - a) * scale), int((d - c) * scale)), Image.LANCZOS)
+        texts, scores = [], []
+        for line in read_lines(np.array(crop)):
+            texts.append(line["text"])
+            scores.append(line["score"])
+        out.append({"text": " ".join(texts).strip(), "score": round(min(scores), 4) if scores else 0.0})
+    return out
 
 
 def ink_ratios(rgb: np.ndarray, rects: list, snap: bool = True) -> list:
@@ -103,6 +125,8 @@ class Handler(BaseHTTPRequestHandler):
                 t = time.time()
                 lines = read_lines(rgb)
                 return self._send(200, {"width": rgb.shape[1], "height": rgb.shape[0], "lines": lines, "seconds": round(time.time() - t, 2)})
+            if self.path == "/crops":
+                return self._send(200, {"results": read_crops(rgb, body["rects"])})
             if self.path == "/ink":
                 return self._send(200, {"ratios": ink_ratios(rgb, body["rects"], body.get("snap", True))})
             self._send(404, {"error": "not found"})

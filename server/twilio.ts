@@ -27,9 +27,10 @@ const basicAuth = () => ({ Authorization: "Basic " + Buffer.from(`${SID()}:${TOK
 export const twilioEnabled = () => Boolean(SID() && TOKEN() && FROM());
 export const midwifeIdForTwilio = (waId: string) => `tw:${waId}`;
 
-/** The public base URL Twilio calls (needed to check signatures): PUBLIC_URL, else the cloudflared tunnel. */
+/** The public base URL providers call (webhooks, signatures): PUBLIC_URL, else NGROK_DOMAIN, else the cloudflared tunnel. */
 export function publicUrl(): string {
   if (env("PUBLIC_URL")) return env("PUBLIC_URL").replace(/\/$/, "");
+  if (env("NGROK_DOMAIN")) return `https://${env("NGROK_DOMAIN").replace(/^https?:\/\//, "").replace(/\/$/, "")}`;
   const log = fs.existsSync("work/tunnel.log") ? fs.readFileSync("work/tunnel.log", "utf8") : "";
   return log.match(/https:\/\/[a-z0-9-]+\.trycloudflare\.com/)?.[0] ?? "";
 }

@@ -47,9 +47,17 @@ export function ensureOcrService(): Promise<void> {
   return starting;
 }
 
-async function post<T>(route: string, body: unknown): Promise<T> {
+async function post<T>(route: string, body: unknown, retried = false): Promise<T> {
   await ensureOcrService();
-  const r = await fetch(`${BASE}${route}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  let r: Response;
+  try {
+    r = await fetch(`${BASE}${route}`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  } catch (e) {
+    // The service went away (restarted, or its parent process exited): start it again once.
+    if (retried) throw e;
+    starting = null;
+    return post<T>(route, body, true);
+  }
   const json = (await r.json()) as T & { error?: string };
   if (!r.ok) throw new Error(`OCR service: ${json.error ?? r.status}`);
   return json;
@@ -59,3 +67,7 @@ export const ocrPage = (image: Buffer) => post<OcrPage>("/ocr", { image: image.t
 /** Ink inside rects. snap: first move each rect onto the printed square border found nearby (checkboxes). */
 export const inkRatios = (image: Buffer, rects: number[][], snap = true) =>
   post<{ ratios: number[] }>("/ink", { image: image.toString("base64"), rects, snap }).then((r) => r.ratios);
+
+/** Re-read single cells (cropped and enlarged) where ink was seen but no text was detected. */
+export const readCrops = (image: Buffer, rects: number[][]) =>
+  rects.length ? post<{ results: { text: string; score: number }[] }>("/crops", { image: image.toString("base64"), rects }).then((r) => r.results) : Promise.resolve([]);

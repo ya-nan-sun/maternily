@@ -1,0 +1,293 @@
+{
+ "extractor": "template",
+ "model": "paddleocr-medium-v4+no-ai-fallback",
+ "effort": "medium",
+ "split": "test",
+ "pages": 40,
+ "failures": [],
+ "sectionAccuracy": 1,
+ "fieldAccuracy": 0.9813008130081301,
+ "fieldsScored": 1230,
+ "uncertainty": {
+  "errors": 23,
+  "errorsFlagged": 0.7391304347826086,
+  "silentErrors": 6,
+  "silentErrorRate": 0.004878048780487805,
+  "questionsAsked": 29,
+  "flaggedButCorrect": 12,
+  "acceptedAndCorrect": 1195
+ },
+ "bySection": {
+  "COVER": "100.0%",
+  "IDENTIFICATION_HISTORY": "97.8%",
+  "CURRENT_PREGNANCY": "96.9%",
+  "DELIVERY": "96.1%",
+  "PP_EARLY_MOTHER": "100.0%",
+  "PP_EARLY_NEWBORN": "100.0%",
+  "PP_LATE_MOTHER": "99.1%",
+  "PP_LATE_NEWBORN": "100.0%"
+ },
+ "byType": {
+  "text": "100.0%",
+  "choice": "99.1%",
+  "bool": "98.7%",
+  "multi": "100.0%",
+  "int": "92.2%",
+  "date": "94.2%",
+  "number": "99.1%",
+  "ga": "100.0%",
+  "bp": "88.6%",
+  "lab": "100.0%",
+  "role": "100.0%"
+ },
+ "byInput": {
+  "written": "97.7%",
+  "checkbox": "99.2%"
+ },
+ "byFont": {
+  "Caveat": "96.0%",
+  "ShadowsIntoLight": "99.5%",
+  "NanumPen": "97.8%",
+  "Gaegu": "98.4%",
+  "ReenieBeanie": "99.6%"
+ },
+ "calibration": [
+  {
+   "confidence": "0-20%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "20-40%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "40-60%",
+   "n": 9,
+   "accuracy": "33.3%"
+  },
+  {
+   "confidence": "60-80%",
+   "n": 11,
+   "accuracy": "81.8%"
+  },
+  {
+   "confidence": "80-100%",
+   "n": 1200,
+   "accuracy": "99.6%"
+  }
+ ],
+ "statusConfusion": {
+  "KNOWN": {
+   "KNOWN": 1200,
+   "NEEDS_REVIEW": 29,
+   "NOT_PROVIDED": 1
+  },
+  "NOT_PROVIDED": {
+   "NOT_PROVIDED": 1101,
+   "KNOWN": 4,
+   "NEEDS_REVIEW": 1
+  },
+  "NOT_APPLICABLE": {
+   "NOT_APPLICABLE": 46,
+   "NOT_PROVIDED": 12,
+   "NEEDS_REVIEW": 1
+  }
+ },
+ "cost": {
+  "thisRunUsd": 0,
+  "perPageUsd": 0,
+  "perRegistryUsd": 0,
+  "avgOutputTokens": 0,
+  "avgLatencyMs": 34330.65,
+  "calls": 40,
+  "cachedCalls": 0
+ },
+ "errors": [
+  {
+   "file": "dossiers_specimen_10_patientes-42__1RrCOGAZgm.png",
+   "key": "obs.preterm.count",
+   "expected": "1",
+   "got": "7",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.7932
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-42__1RrCOGAZgm.png",
+   "key": "prev.3.weight",
+   "expected": "3677 g",
+   "got": "36779",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-43.png",
+   "key": "preg.postTerm",
+   "expected": "04/09/2026",
+   "got": "Rh+04/09/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-43.png",
+   "key": "anc.T1V2.bp",
+   "expected": "120/63",
+   "got": "720/63",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-43.png",
+   "key": "anc.T2V1.bp",
+   "expected": "117/61",
+   "got": "177/61",
+   "status": "KNOWN",
+   "confidence": 0.9537
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-43.png",
+   "key": "anc.T2V1.fhr",
+   "expected": "149",
+   "got": "749",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-43.png",
+   "key": "anc.T2V2.fhr",
+   "expected": "144",
+   "got": "744",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-43.png",
+   "key": "anc.T2V3.bp",
+   "expected": "111/72",
+   "got": "171/72",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.7871
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-43.png",
+   "key": "anc.M7.weight",
+   "expected": "81.1",
+   "got": "87.1",
+   "status": "KNOWN",
+   "confidence": 0.9118
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-43.png",
+   "key": "anc.M7.fhr",
+   "expected": "142",
+   "got": "742",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-47__1IUs1h6KZQ.png",
+   "key": "ppm.late.bp",
+   "expected": "117/63",
+   "got": "177/63",
+   "status": "KNOWN",
+   "confidence": 0.9454
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-51__1ArSWOxwYZ.png",
+   "key": "preg.lmp",
+   "expected": "23/11/2025",
+   "got": "23/1/2025",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-58.png",
+   "key": "id.livingChildren",
+   "expected": "1",
+   "got": null,
+   "status": "NOT_PROVIDED",
+   "confidence": 0.9
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-59.png",
+   "key": "anc.T1V2.visitDate",
+   "expected": "15/03/2026",
+   "got": "15103/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-59.png",
+   "key": "anc.T2V1.appointment",
+   "expected": "30/05/2026",
+   "got": "30105/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-59.png",
+   "key": "anc.T2V2.visitDate",
+   "expected": "25/05/2026",
+   "got": "25105/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-59.png",
+   "key": "anc.M7.appointment",
+   "expected": "25/08/2026",
+   "got": "25108/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-59.png",
+   "key": "anc.M7.visitDate",
+   "expected": "28/07/2026",
+   "got": "28107/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-66.png",
+   "key": "id.livingChildren",
+   "expected": "0",
+   "got": "O",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-68.png",
+   "key": "del.placeType",
+   "expected": "PRIVATE_CLINIC",
+   "got": "BIRTH_HOME, MATERNITY, PRIVATE_CLINIC",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-68.png",
+   "key": "del.homeAssisted",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-68.png",
+   "key": "del.episiotomy",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-75.png",
+   "key": "anc.T2V1.edema",
+   "expected": "Non",
+   "got": "Non Non",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  }
+ ]
+}

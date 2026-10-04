@@ -142,6 +142,21 @@ describe("multi-page registry, review and registration", () => {
     for (const banned of ["Tazi", "CB609814", "06 00 76 13 48", "Rue Al Qods", "Meryem"]) expect(dump).not.toContain(banned);
   });
 
+  it("keeps a photo that arrives after 'terminé' in its registry when it was taken before", async () => {
+    const [p1, p2, p3] = pagesOf(3).slice(0, 3);
+    const t = (s: number) => new Date(Date.UTC(2026, 9, 4, 9, 0, s)).toISOString();
+    const shot = (file: string, at: string) => ({ ...photo(file), capturedAt: at });
+    // Reconnection burst, out of order: page 3 (taken at :20) arrives after "terminé" (typed at :30).
+    agent.handle(shot(p1.file, t(0)));
+    agent.handle(shot(p2.file, t(10)));
+    agent.handle(inbound("text", { text: "terminé" }, t(30)));
+    agent.handle(shot(p3.file, t(20)));
+    // A new registry photographed later still starts a new registry.
+    agent.handle(shot(pagesOf(4)[0].file, new Date(Date.UTC(2026, 9, 4, 11)).toISOString()));
+    const docs = db.prepare("SELECT d.id, COUNT(p.capture_id) AS pages FROM documents d JOIN pages p ON p.doc_id = d.id GROUP BY d.id ORDER BY d.opened_at").all() as { pages: number }[];
+    expect(docs.map((d) => d.pages)).toEqual([3, 1]);
+  });
+
   it("is idempotent when the device retries the same message", () => {
     const msg = photo(pagesOf(2)[0].file);
     expect(agent.handle(msg)).toBe(true);
