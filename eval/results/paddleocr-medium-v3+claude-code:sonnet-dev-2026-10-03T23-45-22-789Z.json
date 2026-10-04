@@ -1,0 +1,108 @@
+{
+ "extractor": "template",
+ "model": "paddleocr-medium-v3+claude-code:sonnet",
+ "effort": "medium",
+ "split": "dev",
+ "pages": 8,
+ "failures": [],
+ "sectionAccuracy": 1,
+ "fieldAccuracy": 0.9961389961389961,
+ "fieldsScored": 259,
+ "uncertainty": {
+  "errors": 1,
+  "errorsFlagged": 0,
+  "silentErrors": 1,
+  "silentErrorRate": 0.003861003861003861,
+  "questionsAsked": 0,
+  "flaggedButCorrect": 0,
+  "acceptedAndCorrect": 258
+ },
+ "bySection": {
+  "COVER": "100.0%",
+  "IDENTIFICATION_HISTORY": "100.0%",
+  "CURRENT_PREGNANCY": "99.1%",
+  "DELIVERY": "100.0%",
+  "PP_EARLY_MOTHER": "100.0%",
+  "PP_EARLY_NEWBORN": "100.0%",
+  "PP_LATE_MOTHER": "100.0%",
+  "PP_LATE_NEWBORN": "100.0%"
+ },
+ "byType": {
+  "text": "100.0%",
+  "choice": "100.0%",
+  "bool": "100.0%",
+  "multi": "100.0%",
+  "int": "100.0%",
+  "date": "100.0%",
+  "number": "96.2%",
+  "ga": "100.0%",
+  "bp": "100.0%",
+  "lab": "100.0%",
+  "role": "100.0%"
+ },
+ "byInput": {
+  "written": "99.5%",
+  "checkbox": "100.0%"
+ },
+ "byFont": {
+  "Caveat": "99.6%"
+ },
+ "calibration": [
+  {
+   "confidence": "0-20%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "20-40%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "40-60%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "60-80%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "80-100%",
+   "n": 259,
+   "accuracy": "99.6%"
+  }
+ ],
+ "statusConfusion": {
+  "KNOWN": {
+   "KNOWN": 259
+  },
+  "NOT_PROVIDED": {
+   "NOT_PROVIDED": 197
+  },
+  "NOT_APPLICABLE": {
+   "NOT_APPLICABLE": 22,
+   "NOT_PROVIDED": 1
+  }
+ },
+ "cost": {
+  "thisRunUsd": 0,
+  "perPageUsd": 0,
+  "perRegistryUsd": 0,
+  "avgOutputTokens": 89.25,
+  "avgLatencyMs": 20294.125,
+  "calls": 8,
+  "cachedCalls": 0
+ },
+ "errors": [
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M8.fundalHeight",
+   "expected": "31",
+   "got": "37",
+   "status": "KNOWN",
+   "confidence": 0.9457
+  }
+ ]
+}

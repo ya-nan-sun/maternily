@@ -1,0 +1,101 @@
+{
+ "pdfPage": 60,
+ "patient": 8,
+ "pageInRecord": 4,
+ "section": "DELIVERY",
+ "fields": {
+  "del.placeSetting": {
+   "raw": "SUPERVISED",
+   "status": "KNOWN",
+   "value": "SUPERVISED"
+  },
+  "del.placeType": {
+   "raw": "PRIVATE_CLINIC",
+   "status": "KNOWN",
+   "value": "PRIVATE_CLINIC"
+  },
+  "del.homeAssisted": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "del.date": {
+   "raw": "25/09/2026",
+   "status": "KNOWN",
+   "value": "2026-09-25"
+  },
+  "del.mode": {
+   "raw": "VAGINAL",
+   "status": "KNOWN",
+   "value": "VAGINAL"
+  },
+  "del.instrument": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "del.episiotomy": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "del.csIndication": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "del.complicationsPresent": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "del.complicationTiming": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "del.complications": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "del.complicationOther": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "del.newbornStatus": {
+   "raw": "ALIVE",
+   "status": "KNOWN",
+   "value": "ALIVE"
+  },
+  "del.sex": {
+   "raw": "M",
+   "status": "KNOWN",
+   "value": "M"
+  },
+  "del.birthWeight": {
+   "raw": "3492 g",
+   "status": "KNOWN",
+   "value": 3492
+  },
+  "del.headCirc": {
+   "raw": "35 cm",
+   "status": "KNOWN",
+   "value": 35
+  },
+  "del.anomaly": {
+   "raw": "Aucune",
+   "status": "KNOWN",
+   "value": "Aucune"
+  },
+  "del.gaAtBirth": {
+   "raw": "39 SA",
+   "status": "KNOWN",
+   "value": {
+    "weeks": 39,
+    "days": 0
+   }
+  }
+ }
+}

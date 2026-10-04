@@ -1,0 +1,161 @@
+{
+ "pdfPage": 69,
+ "patient": 9,
+ "pageInRecord": 5,
+ "section": "PP_EARLY_MOTHER",
+ "fields": {
+  "ppm.early.consultDate": {
+   "raw": "06/02/2026",
+   "status": "KNOWN",
+   "value": "2026-02-06"
+  },
+  "ppm.early.timing": {
+   "raw": "IN_WINDOW",
+   "status": "KNOWN",
+   "value": "IN_WINDOW"
+  },
+  "ppm.early.temp": {
+   "raw": "36.9",
+   "status": "KNOWN",
+   "value": 36.9
+  },
+  "ppm.early.bp": {
+   "raw": "120/73",
+   "status": "KNOWN",
+   "value": {
+    "systolic": 120,
+    "diastolic": 73
+   }
+  },
+  "ppm.early.pulse": {
+   "raw": "75",
+   "status": "KNOWN",
+   "value": 75
+  },
+  "ppm.early.weight": {
+   "raw": "78 kg",
+   "status": "KNOWN",
+   "value": 78
+  },
+  "ppm.early.conjunctivae": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": "NORMAL"
+  },
+  "ppm.early.uterineGlobe": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "ppm.early.lochia": {
+   "raw": "FADE, BLOODY",
+   "status": "KNOWN",
+   "value": [
+    "FADE",
+    "BLOODY"
+   ]
+  },
+  "ppm.early.perineum": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": [
+    "NORMAL"
+   ]
+  },
+  "ppm.early.sphincters": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": "NORMAL"
+  },
+  "ppm.early.cesarean": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "ppm.early.scar": {
+   "raw": "Propre",
+   "status": "KNOWN",
+   "value": "Propre"
+  },
+  "ppm.early.breasts": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": "NORMAL"
+  },
+  "ppm.early.calves": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": [
+    "NORMAL"
+   ]
+  },
+  "ppm.early.complicationsPresent": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "ppm.early.complications": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppm.early.medication": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppm.early.medicationDetail": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppm.early.treatment": {
+   "raw": "IRON, VITAMIN_A",
+   "status": "KNOWN",
+   "value": [
+    "IRON",
+    "VITAMIN_A"
+   ]
+  },
+  "ppm.early.treatmentOther": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppm.early.nextAppointment": {
+   "raw": "13/03/2026",
+   "status": "KNOWN",
+   "value": "2026-03-13"
+  },
+  "ppm.early.fpDesired": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "ppm.early.fpMethod": {
+   "raw": "IUD",
+   "status": "KNOWN",
+   "value": "IUD"
+  },
+  "ppm.early.fpMethodOther": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppm.early.fpPrescribed": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppm.early.fpReferred": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppm.early.fpReason": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  }
+ }
+}

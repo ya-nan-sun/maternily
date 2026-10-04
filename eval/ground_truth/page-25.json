@@ -1,0 +1,54 @@
+{
+ "pdfPage": 25,
+ "patient": 4,
+ "pageInRecord": 1,
+ "section": "COVER",
+ "fields": {
+  "cover.ficheNumber": {
+   "raw": "2026-995-004",
+   "status": "KNOWN",
+   "value": "2026-995-004"
+  },
+  "cover.region": {
+   "raw": "B\u0000ni Mellal-Kh\u0000nifra",
+   "status": "KNOWN",
+   "value": "Bni Mellal-Khnifra",
+   "missingGlyph": true
+  },
+  "cover.province": {
+   "raw": "Azilal",
+   "status": "KNOWN",
+   "value": "Azilal"
+  },
+  "cover.facilityName": {
+   "raw": "CSCA Ait Mhamed",
+   "status": "KNOWN",
+   "value": "CSCA Ait Mhamed"
+  },
+  "cover.facilityType": {
+   "raw": "CSCA",
+   "status": "KNOWN",
+   "value": "CSCA"
+  },
+  "cover.coverageMode": {
+   "raw": "FIXE",
+   "status": "KNOWN",
+   "value": "FIXE"
+  },
+  "cover.riskPregnancy": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "cover.riskTypes": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "cover.riskOther": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  }
+ }
+}

@@ -1,0 +1,6400 @@
+{
+ "id": "specimen-v1",
+ "name": "Fiche de surveillance de la grossesse et du post-partum (spécimen synthétique)",
+ "pageSize": [
+  595.2756,
+  841.8898
+ ],
+ "boxSize": 8,
+ "pages": [
+  {
+   "pageInRecord": 1,
+   "section": "COVER",
+   "title": "FICHE DE SURVEILLANCE DE LA GROSSESSE ET DU POST-PARTUM",
+   "labels": [
+    {
+     "text": "FICHE DE SURVEILLANCE DE LA GROSSESSE ET DU POST-PARTUM",
+     "x": 40,
+     "y": 799.9
+    },
+    {
+     "text": "Modèle de formulaire neutre (spécimen)",
+     "x": 40,
+     "y": 785.9
+    },
+    {
+     "text": "N° de la fiche :",
+     "x": 50,
+     "y": 731.9
+    },
+    {
+     "text": "Région :",
+     "x": 50,
+     "y": 696.9
+    },
+    {
+     "text": "Province :",
+     "x": 320,
+     "y": 696.9
+    },
+    {
+     "text": "Nom de l'établissement sanitaire :",
+     "x": 50,
+     "y": 661.9
+    },
+    {
+     "text": "Type de l'établissement sanitaire :",
+     "x": 50,
+     "y": 626.9
+    },
+    {
+     "text": "DR",
+     "x": 62,
+     "y": 596.9
+    },
+    {
+     "text": "CSC",
+     "x": 202,
+     "y": 596.9
+    },
+    {
+     "text": "CSU",
+     "x": 322,
+     "y": 596.9
+    },
+    {
+     "text": "CSCA",
+     "x": 62,
+     "y": 566.9
+    },
+    {
+     "text": "CSUA",
+     "x": 202,
+     "y": 566.9
+    },
+    {
+     "text": "Fixe",
+     "x": 102,
+     "y": 511.9
+    },
+    {
+     "text": "Mobile",
+     "x": 242,
+     "y": 511.9
+    },
+    {
+     "text": "Nom/Prénom de la parturiente :",
+     "x": 50,
+     "y": 456.9
+    },
+    {
+     "text": "Grossesse classée à risque :",
+     "x": 75,
+     "y": 393.9
+    },
+    {
+     "text": "Si grossesse à risque, préciser le type de risque :",
+     "x": 60,
+     "y": 371.9
+    },
+    {
+     "text": "Anémie",
+     "x": 77,
+     "y": 346.9
+    },
+    {
+     "text": "H.T.A",
+     "x": 77,
+     "y": 328.9
+    },
+    {
+     "text": "Diabète",
+     "x": 77,
+     "y": 310.9
+    },
+    {
+     "text": "Cardiopathie",
+     "x": 77,
+     "y": 292.9
+    },
+    {
+     "text": "Métrorragie",
+     "x": 302,
+     "y": 346.9
+    },
+    {
+     "text": "Infection",
+     "x": 302,
+     "y": 328.9
+    },
+    {
+     "text": "Pré-éclampsie",
+     "x": 302,
+     "y": 310.9
+    },
+    {
+     "text": "Eclampsie",
+     "x": 302,
+     "y": 292.9
+    },
+    {
+     "text": "Autres à préciser : ......................................",
+     "x": 290,
+     "y": 273.9
+    },
+    {
+     "text": "Document synthétique généré pour l'entraînement de modèles — aucune donnée réelle — ne pas utiliser comme dossier médical.",
+     "x": 40,
+     "y": 15.9
+    }
+   ],
+   "identifierLines": [
+    [
+     50,
+     456.9
+    ]
+   ],
+   "mappings": [
+    {
+     "kind": "line",
+     "key": "cover.ficheNumber",
+     "lx": 50,
+     "ly": 731.9
+    },
+    {
+     "kind": "line",
+     "key": "cover.region",
+     "lx": 50,
+     "ly": 696.9,
+     "maxW": 260
+    },
+    {
+     "kind": "line",
+     "key": "cover.province",
+     "lx": 320,
+     "ly": 696.9
+    },
+    {
+     "kind": "line",
+     "key": "cover.facilityName",
+     "lx": 50,
+     "ly": 661.9
+    },
+    {
+     "kind": "line",
+     "key": "cover.riskOther",
+     "lx": 290,
+     "ly": 273.9
+    },
+    {
+     "kind": "box",
+     "key": "cover.facilityType",
+     "bx": 90,
+     "by": 595.9,
+     "option": "DR"
+    },
+    {
+     "kind": "box",
+     "key": "cover.facilityType",
+     "bx": 230,
+     "by": 595.9,
+     "option": "CSC"
+    },
+    {
+     "kind": "box",
+     "key": "cover.facilityType",
+     "bx": 350,
+     "by": 595.9,
+     "option": "CSU"
+    },
+    {
+     "kind": "box",
+     "key": "cover.facilityType",
+     "bx": 90,
+     "by": 565.9,
+     "option": "CSCA"
+    },
+    {
+     "kind": "box",
+     "key": "cover.facilityType",
+     "bx": 230,
+     "by": 565.9,
+     "option": "CSUA"
+    },
+    {
+     "kind": "box",
+     "key": "cover.coverageMode",
+     "bx": 90,
+     "by": 510.9,
+     "option": "FIXE"
+    },
+    {
+     "kind": "box",
+     "key": "cover.coverageMode",
+     "bx": 230,
+     "by": 510.9,
+     "option": "MOBILE"
+    },
+    {
+     "kind": "box",
+     "key": "cover.riskPregnancy",
+     "bx": 60,
+     "by": 392.9
+    },
+    {
+     "kind": "box",
+     "key": "cover.riskTypes",
+     "bx": 65,
+     "by": 345.9,
+     "option": "ANEMIA"
+    },
+    {
+     "kind": "box",
+     "key": "cover.riskTypes",
+     "bx": 65,
+     "by": 327.9,
+     "option": "HTA"
+    },
+    {
+     "kind": "box",
+     "key": "cover.riskTypes",
+     "bx": 65,
+     "by": 309.9,
+     "option": "DIABETES"
+    },
+    {
+     "kind": "box",
+     "key": "cover.riskTypes",
+     "bx": 65,
+     "by": 291.9,
+     "option": "CARDIOPATHY"
+    },
+    {
+     "kind": "box",
+     "key": "cover.riskTypes",
+     "bx": 290,
+     "by": 345.9,
+     "option": "METRORRHAGIA"
+    },
+    {
+     "kind": "box",
+     "key": "cover.riskTypes",
+     "bx": 290,
+     "by": 327.9,
+     "option": "INFECTION"
+    },
+    {
+     "kind": "box",
+     "key": "cover.riskTypes",
+     "bx": 290,
+     "by": 309.9,
+     "option": "PREECLAMPSIA"
+    },
+    {
+     "kind": "box",
+     "key": "cover.riskTypes",
+     "bx": 290,
+     "by": 291.9,
+     "option": "ECLAMPSIA"
+    }
+   ]
+  },
+  {
+   "pageInRecord": 2,
+   "section": "IDENTIFICATION_HISTORY",
+   "title": "IDENTIFICATION ET ANTÉCÉDENTS",
+   "labels": [
+    {
+     "text": "IDENTIFICATION ET ANTÉCÉDENTS",
+     "x": 40,
+     "y": 799.9
+    },
+    {
+     "text": "Age :",
+     "x": 48,
+     "y": 751.9
+    },
+    {
+     "text": "CIN :",
+     "x": 300,
+     "y": 751.9
+    },
+    {
+     "text": "Niveau d'instruction :",
+     "x": 48,
+     "y": 729.9
+    },
+    {
+     "text": "Profession :",
+     "x": 300,
+     "y": 729.9
+    },
+    {
+     "text": "Adresse :",
+     "x": 48,
+     "y": 707.9
+    },
+    {
+     "text": "Téléphone :",
+     "x": 300,
+     "y": 707.9
+    },
+    {
+     "text": "Nom du Mari :",
+     "x": 48,
+     "y": 685.9
+    },
+    {
+     "text": "Profession :",
+     "x": 300,
+     "y": 685.9
+    },
+    {
+     "text": "Consanguinité",
+     "x": 60,
+     "y": 659.9
+    },
+    {
+     "text": "Grossesse désirée",
+     "x": 312,
+     "y": 659.9
+    },
+    {
+     "text": "ANTÉCÉDENTS HÉRÉDITAIRES ET FAMILIAUX",
+     "x": 40,
+     "y": 633.9
+    },
+    {
+     "text": "Famille de la femme",
+     "x": 135,
+     "y": 617.9
+    },
+    {
+     "text": "Mari/famille",
+     "x": 215,
+     "y": 617.9
+    },
+    {
+     "text": "HTA",
+     "x": 44,
+     "y": 594.9
+    },
+    {
+     "text": "Diabète",
+     "x": 44,
+     "y": 574.9
+    },
+    {
+     "text": "Maladies héréditaires",
+     "x": 44,
+     "y": 554.9
+    },
+    {
+     "text": "Malformations",
+     "x": 44,
+     "y": 534.9
+    },
+    {
+     "text": "Allergie(s)",
+     "x": 44,
+     "y": 514.9
+    },
+    {
+     "text": "ANTÉCÉDENTS DE LA FEMME",
+     "x": 310,
+     "y": 633.9
+    },
+    {
+     "text": "Médicaux",
+     "x": 315,
+     "y": 617.9
+    },
+    {
+     "text": "Chirurgicaux",
+     "x": 380,
+     "y": 617.9
+    },
+    {
+     "text": "Gynécologiques",
+     "x": 458,
+     "y": 617.9
+    },
+    {
+     "text": "ANTÉCÉDENTS OBSTÉTRICAUX — Anomalies des grossesses antérieures",
+     "x": 40,
+     "y": 487.9
+    },
+    {
+     "text": "Nature",
+     "x": 44,
+     "y": 469.9
+    },
+    {
+     "text": "Nombre",
+     "x": 154,
+     "y": 469.9
+    },
+    {
+     "text": "Date",
+     "x": 224,
+     "y": 469.9
+    },
+    {
+     "text": "Lieu",
+     "x": 334,
+     "y": 469.9
+    },
+    {
+     "text": "Age gestationnel (SA)",
+     "x": 424,
+     "y": 469.9
+    },
+    {
+     "text": "Avortement",
+     "x": 44,
+     "y": 450.9
+    },
+    {
+     "text": "Accouchement prématuré",
+     "x": 44,
+     "y": 430.9
+    },
+    {
+     "text": "Mort fœtale in utéro",
+     "x": 44,
+     "y": 410.9
+    },
+    {
+     "text": "Autres à préciser :",
+     "x": 44,
+     "y": 390.9
+    },
+    {
+     "text": "DÉROULEMENT DES ACCOUCHEMENTS ANTÉRIEURS",
+     "x": 40,
+     "y": 361.9
+    },
+    {
+     "text": "Accouch. 1",
+     "x": 153,
+     "y": 344.9
+    },
+    {
+     "text": "Accouch. 2",
+     "x": 234,
+     "y": 344.9
+    },
+    {
+     "text": "Accouch. 3",
+     "x": 315,
+     "y": 344.9
+    },
+    {
+     "text": "Accouch. 4",
+     "x": 396,
+     "y": 344.9
+    },
+    {
+     "text": "Accouch. 5",
+     "x": 477,
+     "y": 344.9
+    },
+    {
+     "text": "Accouchement",
+     "x": 44,
+     "y": 329.9
+    },
+    {
+     "text": "Date",
+     "x": 44,
+     "y": 301.9
+    },
+    {
+     "text": "Modalité d'extraction",
+     "x": 44,
+     "y": 273.9
+    },
+    {
+     "text": "Si césarienne : indication",
+     "x": 44,
+     "y": 245.9
+    },
+    {
+     "text": "Complication (type)",
+     "x": 44,
+     "y": 217.9
+    },
+    {
+     "text": "Poids nouveau-né(s)",
+     "x": 44,
+     "y": 189.9
+    },
+    {
+     "text": "Compl. nouveau-né (type)",
+     "x": 44,
+     "y": 161.9
+    },
+    {
+     "text": "Gestation :",
+     "x": 40,
+     "y": 116.9
+    },
+    {
+     "text": "Parité :",
+     "x": 160,
+     "y": 116.9
+    },
+    {
+     "text": "Nombre d'enfants vivants :",
+     "x": 280,
+     "y": 116.9
+    },
+    {
+     "text": "VAT :",
+     "x": 40,
+     "y": 93.9
+    },
+    {
+     "text": "1",
+     "x": 87,
+     "y": 93.9
+    },
+    {
+     "text": "2",
+     "x": 127,
+     "y": 93.9
+    },
+    {
+     "text": "3",
+     "x": 167,
+     "y": 93.9
+    },
+    {
+     "text": "4",
+     "x": 207,
+     "y": 93.9
+    },
+    {
+     "text": "5",
+     "x": 247,
+     "y": 93.9
+    },
+    {
+     "text": "Vaccinée contre la rubéole",
+     "x": 52,
+     "y": 73.9
+    },
+    {
+     "text": "Le",
+     "x": 300,
+     "y": 73.9
+    },
+    {
+     "text": "Vaccinée contre l'hépatite B",
+     "x": 52,
+     "y": 57.9
+    },
+    {
+     "text": "Le",
+     "x": 300,
+     "y": 57.9
+    },
+    {
+     "text": "Frottis cervical / IVA (moins de 3 ans) :",
+     "x": 40,
+     "y": 39.9
+    },
+    {
+     "text": "Document synthétique généré pour l'entraînement de modèles — aucune donnée réelle — ne pas utiliser comme dossier médical.",
+     "x": 40,
+     "y": 15.9
+    }
+   ],
+   "identifierLines": [
+    [
+     300,
+     751.9
+    ],
+    [
+     48,
+     707.9
+    ],
+    [
+     300,
+     707.9
+    ],
+    [
+     48,
+     685.9
+    ]
+   ],
+   "mappings": [
+    {
+     "kind": "line",
+     "key": "id.age",
+     "lx": 48,
+     "ly": 751.9,
+     "maxW": 240
+    },
+    {
+     "kind": "line",
+     "key": "id.education",
+     "lx": 48,
+     "ly": 729.9,
+     "maxW": 240
+    },
+    {
+     "kind": "line",
+     "key": "id.occupation",
+     "lx": 300,
+     "ly": 729.9
+    },
+    {
+     "kind": "line",
+     "key": "id.husbandOccupation",
+     "lx": 300,
+     "ly": 685.9
+    },
+    {
+     "kind": "line",
+     "key": "id.gravidity",
+     "lx": 40,
+     "ly": 116.9,
+     "maxW": 115
+    },
+    {
+     "kind": "line",
+     "key": "id.parity",
+     "lx": 160,
+     "ly": 116.9,
+     "maxW": 115
+    },
+    {
+     "kind": "line",
+     "key": "id.livingChildren",
+     "lx": 280,
+     "ly": 116.9
+    },
+    {
+     "kind": "line",
+     "key": "id.rubellaDate",
+     "lx": 300,
+     "ly": 73.9
+    },
+    {
+     "kind": "line",
+     "key": "id.hepBDate",
+     "lx": 300,
+     "ly": 57.9
+    },
+    {
+     "kind": "line",
+     "key": "id.papSmear",
+     "lx": 40,
+     "ly": 39.9
+    },
+    {
+     "kind": "box",
+     "key": "id.consanguinity",
+     "bx": 48,
+     "by": 658.9
+    },
+    {
+     "kind": "box",
+     "key": "id.desiredPregnancy",
+     "bx": 300,
+     "by": 658.9
+    },
+    {
+     "kind": "box",
+     "key": "id.rubellaVaccinated",
+     "bx": 40,
+     "by": 72.9
+    },
+    {
+     "kind": "box",
+     "key": "id.hepBVaccinated",
+     "bx": 40,
+     "by": 56.9
+    },
+    {
+     "kind": "box",
+     "key": "id.tetanusDoses",
+     "bx": 75,
+     "by": 92.9,
+     "option": "1"
+    },
+    {
+     "kind": "box",
+     "key": "id.tetanusDoses",
+     "bx": 115,
+     "by": 92.9,
+     "option": "2"
+    },
+    {
+     "kind": "box",
+     "key": "id.tetanusDoses",
+     "bx": 155,
+     "by": 92.9,
+     "option": "3"
+    },
+    {
+     "kind": "box",
+     "key": "id.tetanusDoses",
+     "bx": 195,
+     "by": 92.9,
+     "option": "4"
+    },
+    {
+     "kind": "box",
+     "key": "id.tetanusDoses",
+     "bx": 235,
+     "by": 92.9,
+     "option": "5"
+    },
+    {
+     "kind": "cell",
+     "key": "fam.hta.wife",
+     "x0": 130,
+     "x1": 210,
+     "y": 594.9
+    },
+    {
+     "kind": "cell",
+     "key": "fam.hta.husband",
+     "x0": 210,
+     "x1": 295,
+     "y": 594.9
+    },
+    {
+     "kind": "cell",
+     "key": "fam.diabetes.wife",
+     "x0": 130,
+     "x1": 210,
+     "y": 574.9
+    },
+    {
+     "kind": "cell",
+     "key": "fam.diabetes.husband",
+     "x0": 210,
+     "x1": 295,
+     "y": 574.9
+    },
+    {
+     "kind": "cell",
+     "key": "fam.hereditary.wife",
+     "x0": 130,
+     "x1": 210,
+     "y": 554.9
+    },
+    {
+     "kind": "cell",
+     "key": "fam.hereditary.husband",
+     "x0": 210,
+     "x1": 295,
+     "y": 554.9
+    },
+    {
+     "kind": "cell",
+     "key": "fam.malformations.wife",
+     "x0": 130,
+     "x1": 210,
+     "y": 534.9
+    },
+    {
+     "kind": "cell",
+     "key": "fam.malformations.husband",
+     "x0": 210,
+     "x1": 295,
+     "y": 534.9
+    },
+    {
+     "kind": "cell",
+     "key": "fam.allergies.wife",
+     "x0": 130,
+     "x1": 210,
+     "y": 514.9
+    },
+    {
+     "kind": "cell",
+     "key": "fam.allergies.husband",
+     "x0": 210,
+     "x1": 295,
+     "y": 514.9
+    },
+    {
+     "kind": "cell",
+     "key": "hist.medical",
+     "x0": 305,
+     "x1": 375,
+     "y": 593,
+     "yBand": [
+      505,
+      612
+     ]
+    },
+    {
+     "kind": "cell",
+     "key": "hist.surgical",
+     "x0": 375,
+     "x1": 455,
+     "y": 593,
+     "yBand": [
+      505,
+      612
+     ]
+    },
+    {
+     "kind": "cell",
+     "key": "hist.gyneco",
+     "x0": 455,
+     "x1": 560,
+     "y": 593,
+     "yBand": [
+      505,
+      612
+     ]
+    },
+    {
+     "kind": "cell",
+     "key": "obs.abortion.count",
+     "x0": 150,
+     "x1": 220,
+     "y": 450.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.abortion.date",
+     "x0": 220,
+     "x1": 330,
+     "y": 450.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.abortion.place",
+     "x0": 330,
+     "x1": 420,
+     "y": 450.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.abortion.ga",
+     "x0": 420,
+     "x1": 560,
+     "y": 450.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.preterm.count",
+     "x0": 150,
+     "x1": 220,
+     "y": 430.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.preterm.date",
+     "x0": 220,
+     "x1": 330,
+     "y": 430.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.preterm.place",
+     "x0": 330,
+     "x1": 420,
+     "y": 430.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.preterm.ga",
+     "x0": 420,
+     "x1": 560,
+     "y": 430.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.fetalDeath.count",
+     "x0": 150,
+     "x1": 220,
+     "y": 410.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.fetalDeath.date",
+     "x0": 220,
+     "x1": 330,
+     "y": 410.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.fetalDeath.place",
+     "x0": 330,
+     "x1": 420,
+     "y": 410.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.fetalDeath.ga",
+     "x0": 420,
+     "x1": 560,
+     "y": 410.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.other.count",
+     "x0": 150,
+     "x1": 220,
+     "y": 390.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.other.date",
+     "x0": 220,
+     "x1": 330,
+     "y": 390.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.other.place",
+     "x0": 330,
+     "x1": 420,
+     "y": 390.9
+    },
+    {
+     "kind": "cell",
+     "key": "obs.other.ga",
+     "x0": 420,
+     "x1": 560,
+     "y": 390.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.1.date",
+     "x0": 150,
+     "x1": 231,
+     "y": 301.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.1.mode",
+     "x0": 150,
+     "x1": 231,
+     "y": 273.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.1.csIndication",
+     "x0": 150,
+     "x1": 231,
+     "y": 245.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.1.complication",
+     "x0": 150,
+     "x1": 231,
+     "y": 217.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.1.weight",
+     "x0": 150,
+     "x1": 231,
+     "y": 189.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.1.nbComplication",
+     "x0": 150,
+     "x1": 231,
+     "y": 161.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.2.date",
+     "x0": 231,
+     "x1": 312,
+     "y": 301.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.2.mode",
+     "x0": 231,
+     "x1": 312,
+     "y": 273.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.2.csIndication",
+     "x0": 231,
+     "x1": 312,
+     "y": 245.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.2.complication",
+     "x0": 231,
+     "x1": 312,
+     "y": 217.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.2.weight",
+     "x0": 231,
+     "x1": 312,
+     "y": 189.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.2.nbComplication",
+     "x0": 231,
+     "x1": 312,
+     "y": 161.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.3.date",
+     "x0": 312,
+     "x1": 393,
+     "y": 301.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.3.mode",
+     "x0": 312,
+     "x1": 393,
+     "y": 273.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.3.csIndication",
+     "x0": 312,
+     "x1": 393,
+     "y": 245.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.3.complication",
+     "x0": 312,
+     "x1": 393,
+     "y": 217.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.3.weight",
+     "x0": 312,
+     "x1": 393,
+     "y": 189.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.3.nbComplication",
+     "x0": 312,
+     "x1": 393,
+     "y": 161.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.4.date",
+     "x0": 393,
+     "x1": 474,
+     "y": 301.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.4.mode",
+     "x0": 393,
+     "x1": 474,
+     "y": 273.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.4.csIndication",
+     "x0": 393,
+     "x1": 474,
+     "y": 245.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.4.complication",
+     "x0": 393,
+     "x1": 474,
+     "y": 217.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.4.weight",
+     "x0": 393,
+     "x1": 474,
+     "y": 189.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.4.nbComplication",
+     "x0": 393,
+     "x1": 474,
+     "y": 161.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.5.date",
+     "x0": 474,
+     "x1": 555,
+     "y": 301.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.5.mode",
+     "x0": 474,
+     "x1": 555,
+     "y": 273.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.5.csIndication",
+     "x0": 474,
+     "x1": 555,
+     "y": 245.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.5.complication",
+     "x0": 474,
+     "x1": 555,
+     "y": 217.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.5.weight",
+     "x0": 474,
+     "x1": 555,
+     "y": 189.9
+    },
+    {
+     "kind": "cell",
+     "key": "prev.5.nbComplication",
+     "x0": 474,
+     "x1": 555,
+     "y": 161.9
+    }
+   ]
+  },
+  {
+   "pageInRecord": 3,
+   "section": "CURRENT_PREGNANCY",
+   "title": "GROSSESSE ACTUELLE",
+   "labels": [
+    {
+     "text": "GROSSESSE ACTUELLE",
+     "x": 40,
+     "y": 799.9
+    },
+    {
+     "text": "DDR :",
+     "x": 40,
+     "y": 763.9
+    },
+    {
+     "text": "Taille :",
+     "x": 190,
+     "y": 763.9
+    },
+    {
+     "text": "Groupage :",
+     "x": 320,
+     "y": 763.9
+    },
+    {
+     "text": "A",
+     "x": 387,
+     "y": 763.9
+    },
+    {
+     "text": "B",
+     "x": 419,
+     "y": 763.9
+    },
+    {
+     "text": "O",
+     "x": 451,
+     "y": 763.9
+    },
+    {
+     "text": "AB",
+     "x": 483,
+     "y": 763.9
+    },
+    {
+     "text": "Rh-",
+     "x": 517,
+     "y": 763.9
+    },
+    {
+     "text": "Rh+",
+     "x": 517,
+     "y": 749.9
+    },
+    {
+     "text": "DATE PRÉVUE D'ACCOUCHEMENT :",
+     "x": 40,
+     "y": 746.9
+    },
+    {
+     "text": "DATE DE DÉPASSEMENT DE TERME :",
+     "x": 270,
+     "y": 746.9
+    },
+    {
+     "text": "Prestations / Visites",
+     "x": 44,
+     "y": 709.9
+    },
+    {
+     "text": "1er trimestre",
+     "x": 174,
+     "y": 723.9
+    },
+    {
+     "text": "2ème trimestre",
+     "x": 308.4,
+     "y": 723.9
+    },
+    {
+     "text": "3ème trimestre",
+     "x": 442.9,
+     "y": 723.9
+    },
+    {
+     "text": "Visite 1",
+     "x": 154,
+     "y": 708.9
+    },
+    {
+     "text": "Visite 2",
+     "x": 198.8,
+     "y": 708.9
+    },
+    {
+     "text": "Visite 3",
+     "x": 243.6,
+     "y": 708.9
+    },
+    {
+     "text": "Visite 1",
+     "x": 288.4,
+     "y": 708.9
+    },
+    {
+     "text": "Visite 2",
+     "x": 333.2,
+     "y": 708.9
+    },
+    {
+     "text": "Visite 3",
+     "x": 378,
+     "y": 708.9
+    },
+    {
+     "text": "7ème mois",
+     "x": 422.9,
+     "y": 708.9
+    },
+    {
+     "text": "8ème mois",
+     "x": 467.7,
+     "y": 708.9
+    },
+    {
+     "text": "9ème mois",
+     "x": 512.5,
+     "y": 708.9
+    },
+    {
+     "text": "Rendez-vous",
+     "x": 44,
+     "y": 691.9
+    },
+    {
+     "text": "Venue le",
+     "x": 44,
+     "y": 674.1
+    },
+    {
+     "text": "Visites de relance",
+     "x": 44,
+     "y": 656.3
+    },
+    {
+     "text": "Age probable",
+     "x": 44,
+     "y": 638.5
+    },
+    {
+     "text": "EXAMEN CLINIQUE",
+     "x": 44,
+     "y": 620.7
+    },
+    {
+     "text": "Poids (kg)",
+     "x": 44,
+     "y": 602.9
+    },
+    {
+     "text": "TA",
+     "x": 44,
+     "y": 585.1
+    },
+    {
+     "text": "Anomalies squelette",
+     "x": 44,
+     "y": 567.3
+    },
+    {
+     "text": "État des conjonctives",
+     "x": 44,
+     "y": 549.5
+    },
+    {
+     "text": "Examen des seins",
+     "x": 44,
+     "y": 531.7
+    },
+    {
+     "text": "Œdèmes",
+     "x": 44,
+     "y": 513.9
+    },
+    {
+     "text": "Mouvements actifs",
+     "x": 44,
+     "y": 496.1
+    },
+    {
+     "text": "HU (cm)",
+     "x": 44,
+     "y": 478.3
+    },
+    {
+     "text": "BCF",
+     "x": 44,
+     "y": 460.5
+    },
+    {
+     "text": "Examen au spéculum",
+     "x": 44,
+     "y": 442.7
+    },
+    {
+     "text": "TV : état du col",
+     "x": 44,
+     "y": 424.9
+    },
+    {
+     "text": "TV : présentation",
+     "x": 44,
+     "y": 407.1
+    },
+    {
+     "text": "TV : bassin",
+     "x": 44,
+     "y": 389.3
+    },
+    {
+     "text": "EXAMEN BIOLOGIQUE",
+     "x": 44,
+     "y": 371.5
+    },
+    {
+     "text": "Glucosurie",
+     "x": 44,
+     "y": 353.7
+    },
+    {
+     "text": "Albuminurie",
+     "x": 44,
+     "y": 335.9
+    },
+    {
+     "text": "Rubéole",
+     "x": 44,
+     "y": 318.1
+    },
+    {
+     "text": "Toxoplasmose",
+     "x": 44,
+     "y": 300.3
+    },
+    {
+     "text": "Syphilis (TPHA/VDRL)",
+     "x": 44,
+     "y": 282.5
+    },
+    {
+     "text": "Ag HBs",
+     "x": 44,
+     "y": 264.7
+    },
+    {
+     "text": "Sérologie VIH",
+     "x": 44,
+     "y": 246.9
+    },
+    {
+     "text": "Hémoglobine",
+     "x": 44,
+     "y": 229.1
+    },
+    {
+     "text": "Plaquettes",
+     "x": 44,
+     "y": 211.3
+    },
+    {
+     "text": "Bilan glycémique",
+     "x": 44,
+     "y": 193.5
+    },
+    {
+     "text": "RAI (si Rh négatif)",
+     "x": 44,
+     "y": 175.7
+    },
+    {
+     "text": "TRAITEMENT",
+     "x": 44,
+     "y": 157.9
+    },
+    {
+     "text": "Fer",
+     "x": 44,
+     "y": 140.1
+    },
+    {
+     "text": "EXAMEN FAIT PAR",
+     "x": 44,
+     "y": 122.3
+    },
+    {
+     "text": "Examen fait par",
+     "x": 44,
+     "y": 104.5
+    },
+    {
+     "text": "Document synthétique généré pour l'entraînement de modèles — aucune donnée réelle — ne pas utiliser comme dossier médical.",
+     "x": 40,
+     "y": 15.9
+    }
+   ],
+   "identifierLines": [],
+   "mappings": [
+    {
+     "kind": "line",
+     "key": "preg.lmp",
+     "lx": 40,
+     "ly": 763.9,
+     "maxW": 145
+    },
+    {
+     "kind": "line",
+     "key": "preg.height",
+     "lx": 190,
+     "ly": 763.9,
+     "maxW": 125
+    },
+    {
+     "kind": "line",
+     "key": "preg.edd",
+     "lx": 40,
+     "ly": 746.9,
+     "maxW": 225
+    },
+    {
+     "kind": "line",
+     "key": "preg.postTerm",
+     "lx": 270,
+     "ly": 746.9,
+     "maxW": 230
+    },
+    {
+     "kind": "box",
+     "key": "preg.bloodGroup",
+     "bx": 375,
+     "by": 762.9,
+     "option": "A"
+    },
+    {
+     "kind": "box",
+     "key": "preg.bloodGroup",
+     "bx": 407,
+     "by": 762.9,
+     "option": "B"
+    },
+    {
+     "kind": "box",
+     "key": "preg.bloodGroup",
+     "bx": 439,
+     "by": 762.9,
+     "option": "O"
+    },
+    {
+     "kind": "box",
+     "key": "preg.bloodGroup",
+     "bx": 471,
+     "by": 762.9,
+     "option": "AB"
+    },
+    {
+     "kind": "box",
+     "key": "preg.rhesus",
+     "bx": 505,
+     "by": 762.9,
+     "option": "NEG"
+    },
+    {
+     "kind": "box",
+     "key": "preg.rhesus",
+     "bx": 505,
+     "by": 748.9,
+     "option": "POS"
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.appointment",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 691.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.visitDate",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 674.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.followUp",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 656.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.ga",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 638.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.weight",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 602.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.bp",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 585.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.skeletal",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 567.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.conjunctivae",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 549.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.breasts",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 531.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.edema",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 513.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.fetalMovements",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 496.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.fundalHeight",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 478.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.fhr",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 460.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.speculum",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 442.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.cervix",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 424.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.presentation",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 407.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.pelvis",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 389.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.glycosuria",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 353.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.albuminuria",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 335.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.rubella",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 318.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.toxo",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 300.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.syphilis",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 282.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.hbsag",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 264.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.hiv",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 246.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.hb",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 229.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.platelets",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 211.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.glycemia",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 193.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.rai",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 175.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.iron",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 140.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V1.examiner",
+     "x0": 151,
+     "x1": 195.8,
+     "y": 104.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.appointment",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 691.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.visitDate",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 674.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.followUp",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 656.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.ga",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 638.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.weight",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 602.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.bp",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 585.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.skeletal",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 567.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.conjunctivae",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 549.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.breasts",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 531.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.edema",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 513.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.fetalMovements",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 496.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.fundalHeight",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 478.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.fhr",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 460.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.speculum",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 442.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.cervix",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 424.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.presentation",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 407.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.pelvis",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 389.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.glycosuria",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 353.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.albuminuria",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 335.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.rubella",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 318.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.toxo",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 300.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.syphilis",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 282.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.hbsag",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 264.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.hiv",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 246.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.hb",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 229.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.platelets",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 211.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.glycemia",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 193.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.rai",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 175.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.iron",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 140.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V2.examiner",
+     "x0": 195.8,
+     "x1": 240.60000000000002,
+     "y": 104.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.appointment",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 691.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.visitDate",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 674.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.followUp",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 656.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.ga",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 638.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.weight",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 602.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.bp",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 585.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.skeletal",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 567.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.conjunctivae",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 549.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.breasts",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 531.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.edema",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 513.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.fetalMovements",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 496.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.fundalHeight",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 478.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.fhr",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 460.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.speculum",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 442.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.cervix",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 424.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.presentation",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 407.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.pelvis",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 389.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.glycosuria",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 353.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.albuminuria",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 335.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.rubella",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 318.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.toxo",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 300.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.syphilis",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 282.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.hbsag",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 264.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.hiv",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 246.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.hb",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 229.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.platelets",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 211.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.glycemia",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 193.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.rai",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 175.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.iron",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 140.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T1V3.examiner",
+     "x0": 240.6,
+     "x1": 285.4,
+     "y": 104.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.appointment",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 691.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.visitDate",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 674.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.followUp",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 656.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.ga",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 638.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.weight",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 602.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.bp",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 585.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.skeletal",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 567.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.conjunctivae",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 549.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.breasts",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 531.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.edema",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 513.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.fetalMovements",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 496.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.fundalHeight",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 478.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.fhr",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 460.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.speculum",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 442.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.cervix",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 424.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.presentation",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 407.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.pelvis",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 389.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.glycosuria",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 353.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.albuminuria",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 335.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.rubella",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 318.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.toxo",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 300.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.syphilis",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 282.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.hbsag",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 264.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.hiv",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 246.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.hb",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 229.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.platelets",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 211.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.glycemia",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 193.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.rai",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 175.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.iron",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 140.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V1.examiner",
+     "x0": 285.4,
+     "x1": 330.2,
+     "y": 104.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.appointment",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 691.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.visitDate",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 674.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.followUp",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 656.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.ga",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 638.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.weight",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 602.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.bp",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 585.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.skeletal",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 567.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.conjunctivae",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 549.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.breasts",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 531.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.edema",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 513.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.fetalMovements",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 496.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.fundalHeight",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 478.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.fhr",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 460.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.speculum",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 442.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.cervix",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 424.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.presentation",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 407.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.pelvis",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 389.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.glycosuria",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 353.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.albuminuria",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 335.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.rubella",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 318.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.toxo",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 300.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.syphilis",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 282.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.hbsag",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 264.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.hiv",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 246.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.hb",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 229.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.platelets",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 211.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.glycemia",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 193.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.rai",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 175.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.iron",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 140.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V2.examiner",
+     "x0": 330.2,
+     "x1": 375,
+     "y": 104.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.appointment",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 691.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.visitDate",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 674.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.followUp",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 656.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.ga",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 638.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.weight",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 602.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.bp",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 585.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.skeletal",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 567.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.conjunctivae",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 549.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.breasts",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 531.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.edema",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 513.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.fetalMovements",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 496.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.fundalHeight",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 478.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.fhr",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 460.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.speculum",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 442.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.cervix",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 424.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.presentation",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 407.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.pelvis",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 389.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.glycosuria",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 353.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.albuminuria",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 335.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.rubella",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 318.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.toxo",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 300.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.syphilis",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 282.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.hbsag",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 264.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.hiv",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 246.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.hb",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 229.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.platelets",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 211.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.glycemia",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 193.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.rai",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 175.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.iron",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 140.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.T2V3.examiner",
+     "x0": 375,
+     "x1": 419.8,
+     "y": 104.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.appointment",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 691.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.visitDate",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 674.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.followUp",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 656.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.ga",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 638.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.weight",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 602.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.bp",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 585.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.skeletal",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 567.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.conjunctivae",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 549.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.breasts",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 531.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.edema",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 513.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.fetalMovements",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 496.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.fundalHeight",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 478.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.fhr",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 460.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.speculum",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 442.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.cervix",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 424.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.presentation",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 407.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.pelvis",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 389.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.glycosuria",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 353.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.albuminuria",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 335.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.rubella",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 318.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.toxo",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 300.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.syphilis",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 282.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.hbsag",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 264.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.hiv",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 246.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.hb",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 229.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.platelets",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 211.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.glycemia",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 193.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.rai",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 175.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.iron",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 140.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M7.examiner",
+     "x0": 419.9,
+     "x1": 464.7,
+     "y": 104.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.appointment",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 691.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.visitDate",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 674.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.followUp",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 656.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.ga",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 638.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.weight",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 602.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.bp",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 585.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.skeletal",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 567.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.conjunctivae",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 549.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.breasts",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 531.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.edema",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 513.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.fetalMovements",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 496.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.fundalHeight",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 478.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.fhr",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 460.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.speculum",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 442.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.cervix",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 424.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.presentation",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 407.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.pelvis",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 389.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.glycosuria",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 353.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.albuminuria",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 335.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.rubella",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 318.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.toxo",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 300.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.syphilis",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 282.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.hbsag",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 264.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.hiv",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 246.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.hb",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 229.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.platelets",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 211.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.glycemia",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 193.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.rai",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 175.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.iron",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 140.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M8.examiner",
+     "x0": 464.7,
+     "x1": 509.5,
+     "y": 104.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.appointment",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 691.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.visitDate",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 674.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.followUp",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 656.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.ga",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 638.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.weight",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 602.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.bp",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 585.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.skeletal",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 567.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.conjunctivae",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 549.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.breasts",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 531.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.edema",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 513.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.fetalMovements",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 496.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.fundalHeight",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 478.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.fhr",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 460.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.speculum",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 442.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.cervix",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 424.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.presentation",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 407.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.pelvis",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 389.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.glycosuria",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 353.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.albuminuria",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 335.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.rubella",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 318.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.toxo",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 300.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.syphilis",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 282.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.hbsag",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 264.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.hiv",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 246.9
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.hb",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 229.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.platelets",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 211.3
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.glycemia",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 193.5
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.rai",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 175.7
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.iron",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 140.1
+    },
+    {
+     "kind": "cell",
+     "key": "anc.M9.examiner",
+     "x0": 509.5,
+     "x1": 554.3,
+     "y": 104.5
+    }
+   ]
+  },
+  {
+   "pageInRecord": 4,
+   "section": "DELIVERY",
+   "title": "DÉROULEMENT DE L'ACCOUCHEMENT",
+   "labels": [
+    {
+     "text": "DÉROULEMENT DE L'ACCOUCHEMENT",
+     "x": 40,
+     "y": 799.9
+    },
+    {
+     "text": "Patiente :",
+     "x": 40,
+     "y": 756.9
+    },
+    {
+     "text": "Lieu",
+     "x": 40,
+     "y": 716.9
+    },
+    {
+     "text": "En milieu surveillé",
+     "x": 52,
+     "y": 696.9
+    },
+    {
+     "text": "Maison d'accouchement",
+     "x": 227,
+     "y": 701.9
+    },
+    {
+     "text": "Maternité",
+     "x": 227,
+     "y": 685.9
+    },
+    {
+     "text": "Clinique privée",
+     "x": 227,
+     "y": 669.9
+    },
+    {
+     "text": "Autres : ...........................................................",
+     "x": 215,
+     "y": 649.9
+    },
+    {
+     "text": "A domicile",
+     "x": 52,
+     "y": 606.9
+    },
+    {
+     "text": "Assisté par un personnel qualifié",
+     "x": 227,
+     "y": 606.9
+    },
+    {
+     "text": "Autres : ...........................................................",
+     "x": 215,
+     "y": 583.9
+    },
+    {
+     "text": "Date de l'accouchement :",
+     "x": 40,
+     "y": 536.9
+    },
+    {
+     "text": "Mode de l'accouchement :",
+     "x": 40,
+     "y": 496.9
+    },
+    {
+     "text": "Voie basse non instrumentale",
+     "x": 227,
+     "y": 491.9
+    },
+    {
+     "text": "Voie basse instrumentale",
+     "x": 227,
+     "y": 473.9
+    },
+    {
+     "text": "Forceps",
+     "x": 262,
+     "y": 457.9
+    },
+    {
+     "text": "Ventouse",
+     "x": 262,
+     "y": 441.9
+    },
+    {
+     "text": "Avec épisiotomie",
+     "x": 262,
+     "y": 425.9
+    },
+    {
+     "text": "Césarienne : Programmée",
+     "x": 227,
+     "y": 405.9
+    },
+    {
+     "text": "Urgence",
+     "x": 402,
+     "y": 405.9
+    },
+    {
+     "text": "Préciser l'indication :",
+     "x": 215,
+     "y": 385.9
+    },
+    {
+     "text": "Présence de complications",
+     "x": 40,
+     "y": 336.9
+    },
+    {
+     "text": "Au moment de l'accouchement",
+     "x": 227,
+     "y": 333.9
+    },
+    {
+     "text": "Suites de couches",
+     "x": 227,
+     "y": 317.9
+    },
+    {
+     "text": "Type de complications :",
+     "x": 215,
+     "y": 299.9
+    },
+    {
+     "text": "Pré-éclampsie",
+     "x": 262,
+     "y": 281.9
+    },
+    {
+     "text": "Eclampsie",
+     "x": 262,
+     "y": 266.9
+    },
+    {
+     "text": "Hémorragie",
+     "x": 262,
+     "y": 251.9
+    },
+    {
+     "text": "Infection",
+     "x": 262,
+     "y": 236.9
+    },
+    {
+     "text": "Autres",
+     "x": 262,
+     "y": 221.9
+    },
+    {
+     "text": "Si autres à préciser : ...............................",
+     "x": 250,
+     "y": 201.9
+    },
+    {
+     "text": "Etat du nouveau-né :",
+     "x": 40,
+     "y": 156.9
+    },
+    {
+     "text": "Vivant",
+     "x": 227,
+     "y": 156.9
+    },
+    {
+     "text": "Mort-né",
+     "x": 297,
+     "y": 156.9
+    },
+    {
+     "text": "Décès < 24 heures",
+     "x": 377,
+     "y": 156.9
+    },
+    {
+     "text": "Sexe :",
+     "x": 215,
+     "y": 131.9
+    },
+    {
+     "text": "Poids à la naissance :",
+     "x": 215,
+     "y": 111.9
+    },
+    {
+     "text": "Périmètre crânien à la naissance :",
+     "x": 215,
+     "y": 91.9
+    },
+    {
+     "text": "Anomalie à préciser :",
+     "x": 215,
+     "y": 69.9
+    },
+    {
+     "text": "Âge gestationnel :",
+     "x": 215,
+     "y": 49.9
+    },
+    {
+     "text": "Document synthétique généré pour l'entraînement de modèles — aucune donnée réelle — ne pas utiliser comme dossier médical.",
+     "x": 40,
+     "y": 15.9
+    }
+   ],
+   "identifierLines": [
+    [
+     40,
+     756.9
+    ]
+   ],
+   "mappings": [
+    {
+     "kind": "line",
+     "key": "del.date",
+     "lx": 40,
+     "ly": 536.9
+    },
+    {
+     "kind": "line",
+     "key": "del.csIndication",
+     "lx": 215,
+     "ly": 385.9
+    },
+    {
+     "kind": "line",
+     "key": "del.complicationOther",
+     "lx": 250,
+     "ly": 201.9
+    },
+    {
+     "kind": "line",
+     "key": "del.sex",
+     "lx": 215,
+     "ly": 131.9
+    },
+    {
+     "kind": "line",
+     "key": "del.birthWeight",
+     "lx": 215,
+     "ly": 111.9
+    },
+    {
+     "kind": "line",
+     "key": "del.headCirc",
+     "lx": 215,
+     "ly": 91.9
+    },
+    {
+     "kind": "line",
+     "key": "del.anomaly",
+     "lx": 215,
+     "ly": 69.9
+    },
+    {
+     "kind": "line",
+     "key": "del.gaAtBirth",
+     "lx": 215,
+     "ly": 49.9
+    },
+    {
+     "kind": "box",
+     "key": "del.placeSetting",
+     "bx": 40,
+     "by": 695.9,
+     "option": "SUPERVISED"
+    },
+    {
+     "kind": "box",
+     "key": "del.placeSetting",
+     "bx": 40,
+     "by": 605.9,
+     "option": "HOME"
+    },
+    {
+     "kind": "box",
+     "key": "del.placeType",
+     "bx": 215,
+     "by": 700.9,
+     "option": "BIRTH_HOME"
+    },
+    {
+     "kind": "box",
+     "key": "del.placeType",
+     "bx": 215,
+     "by": 684.9,
+     "option": "MATERNITY"
+    },
+    {
+     "kind": "box",
+     "key": "del.placeType",
+     "bx": 215,
+     "by": 668.9,
+     "option": "PRIVATE_CLINIC"
+    },
+    {
+     "kind": "box",
+     "key": "del.homeAssisted",
+     "bx": 215,
+     "by": 605.9
+    },
+    {
+     "kind": "box",
+     "key": "del.mode",
+     "bx": 215,
+     "by": 490.9,
+     "option": "VAGINAL"
+    },
+    {
+     "kind": "box",
+     "key": "del.mode",
+     "bx": 215,
+     "by": 472.9,
+     "option": "VAGINAL_INSTRUMENTAL"
+    },
+    {
+     "kind": "box",
+     "key": "del.mode",
+     "bx": 215,
+     "by": 404.9,
+     "option": "CESAREAN_PLANNED"
+    },
+    {
+     "kind": "box",
+     "key": "del.mode",
+     "bx": 390,
+     "by": 404.9,
+     "option": "CESAREAN_EMERGENCY"
+    },
+    {
+     "kind": "box",
+     "key": "del.instrument",
+     "bx": 250,
+     "by": 456.9,
+     "option": "FORCEPS"
+    },
+    {
+     "kind": "box",
+     "key": "del.instrument",
+     "bx": 250,
+     "by": 440.9,
+     "option": "VACUUM"
+    },
+    {
+     "kind": "box",
+     "key": "del.episiotomy",
+     "bx": 250,
+     "by": 424.9
+    },
+    {
+     "kind": "box",
+     "key": "del.complicationsPresent",
+     "bx": 190,
+     "by": 335.9
+    },
+    {
+     "kind": "box",
+     "key": "del.complicationTiming",
+     "bx": 215,
+     "by": 332.9,
+     "option": "AT_DELIVERY"
+    },
+    {
+     "kind": "box",
+     "key": "del.complicationTiming",
+     "bx": 215,
+     "by": 316.9,
+     "option": "POSTPARTUM"
+    },
+    {
+     "kind": "box",
+     "key": "del.complications",
+     "bx": 250,
+     "by": 280.9,
+     "option": "PREECLAMPSIA"
+    },
+    {
+     "kind": "box",
+     "key": "del.complications",
+     "bx": 250,
+     "by": 265.9,
+     "option": "ECLAMPSIA"
+    },
+    {
+     "kind": "box",
+     "key": "del.complications",
+     "bx": 250,
+     "by": 250.9,
+     "option": "HEMORRHAGE"
+    },
+    {
+     "kind": "box",
+     "key": "del.complications",
+     "bx": 250,
+     "by": 235.9,
+     "option": "INFECTION"
+    },
+    {
+     "kind": "box",
+     "key": "del.complications",
+     "bx": 250,
+     "by": 220.9,
+     "option": "OTHER"
+    },
+    {
+     "kind": "box",
+     "key": "del.newbornStatus",
+     "bx": 215,
+     "by": 155.9,
+     "option": "ALIVE"
+    },
+    {
+     "kind": "box",
+     "key": "del.newbornStatus",
+     "bx": 285,
+     "by": 155.9,
+     "option": "STILLBORN"
+    },
+    {
+     "kind": "box",
+     "key": "del.newbornStatus",
+     "bx": 365,
+     "by": 155.9,
+     "option": "DEATH_24H"
+    }
+   ]
+  },
+  {
+   "pageInRecord": 5,
+   "section": "PP_EARLY_MOTHER",
+   "title": "CONSULTATION DU POST-PARTUM PRÉCOCE",
+   "labels": [
+    {
+     "text": "CONSULTATION DU POST-PARTUM PRÉCOCE",
+     "x": 40,
+     "y": 799.9
+    },
+    {
+     "text": "Date de la consultation :",
+     "x": 330,
+     "y": 761.9
+    },
+    {
+     "text": "Entre le 7ème et 8ème jour après l'accouchement",
+     "x": 40,
+     "y": 759.9
+    },
+    {
+     "text": "Après le 8ème jour de l'accouchement",
+     "x": 40,
+     "y": 745.9
+    },
+    {
+     "text": "Etat général :",
+     "x": 46,
+     "y": 717.9
+    },
+    {
+     "text": "T°",
+     "x": 46,
+     "y": 699.9
+    },
+    {
+     "text": "TA",
+     "x": 150,
+     "y": 699.9
+    },
+    {
+     "text": "Pouls",
+     "x": 260,
+     "y": 699.9
+    },
+    {
+     "text": "Poids",
+     "x": 360,
+     "y": 699.9
+    },
+    {
+     "text": "Etat des conjonctives :",
+     "x": 46,
+     "y": 679.9
+    },
+    {
+     "text": "Normales",
+     "x": 172,
+     "y": 679.9
+    },
+    {
+     "text": "Décolorées",
+     "x": 262,
+     "y": 679.9
+    },
+    {
+     "text": "Présence du globe utérin",
+     "x": 58,
+     "y": 661.9
+    },
+    {
+     "text": "Etat des lochies :",
+     "x": 46,
+     "y": 643.9
+    },
+    {
+     "text": "Fade",
+     "x": 172,
+     "y": 643.9
+    },
+    {
+     "text": "fétide",
+     "x": 242,
+     "y": 643.9
+    },
+    {
+     "text": "claires",
+     "x": 172,
+     "y": 627.9
+    },
+    {
+     "text": "sanglantes",
+     "x": 242,
+     "y": 627.9
+    },
+    {
+     "text": "Jaunâtres",
+     "x": 322,
+     "y": 627.9
+    },
+    {
+     "text": "Etat du périnée :",
+     "x": 46,
+     "y": 607.9
+    },
+    {
+     "text": "Normal",
+     "x": 72,
+     "y": 591.9
+    },
+    {
+     "text": "Épisiotomie",
+     "x": 72,
+     "y": 575.9
+    },
+    {
+     "text": "Déchirure",
+     "x": 72,
+     "y": 559.9
+    },
+    {
+     "text": "Réparée",
+     "x": 212,
+     "y": 575.9
+    },
+    {
+     "text": "Etat des sphincters (anal et urétral) :",
+     "x": 46,
+     "y": 537.9
+    },
+    {
+     "text": "Normal",
+     "x": 242,
+     "y": 537.9
+    },
+    {
+     "text": "Anormal",
+     "x": 312,
+     "y": 537.9
+    },
+    {
+     "text": "Césarienne :",
+     "x": 58,
+     "y": 517.9
+    },
+    {
+     "text": "Etat de la cicatrice :",
+     "x": 180,
+     "y": 517.9
+    },
+    {
+     "text": "Etat des seins :",
+     "x": 46,
+     "y": 497.9
+    },
+    {
+     "text": "Normal",
+     "x": 142,
+     "y": 497.9
+    },
+    {
+     "text": "lymphangite",
+     "x": 212,
+     "y": 497.9
+    },
+    {
+     "text": "mastite et abcès",
+     "x": 302,
+     "y": 497.9
+    },
+    {
+     "text": "Etat des mollets :",
+     "x": 46,
+     "y": 477.9
+    },
+    {
+     "text": "Normal",
+     "x": 72,
+     "y": 461.9
+    },
+    {
+     "text": "Rouges",
+     "x": 142,
+     "y": 461.9
+    },
+    {
+     "text": "Chauds",
+     "x": 212,
+     "y": 461.9
+    },
+    {
+     "text": "Douloureux à la dorsiflexion",
+     "x": 282,
+     "y": 461.9
+    },
+    {
+     "text": "Présence de complication :",
+     "x": 46,
+     "y": 437.9
+    },
+    {
+     "text": "Hémorragie",
+     "x": 72,
+     "y": 419.9
+    },
+    {
+     "text": "Infection",
+     "x": 72,
+     "y": 404.9
+    },
+    {
+     "text": "Eclampsie",
+     "x": 72,
+     "y": 389.9
+    },
+    {
+     "text": "Phlébite",
+     "x": 72,
+     "y": 374.9
+    },
+    {
+     "text": "Complications mammaires",
+     "x": 232,
+     "y": 419.9
+    },
+    {
+     "text": "Anémie",
+     "x": 232,
+     "y": 404.9
+    },
+    {
+     "text": "Autres",
+     "x": 232,
+     "y": 389.9
+    },
+    {
+     "text": "Notion de prise de médicaments :",
+     "x": 46,
+     "y": 353.9
+    },
+    {
+     "text": "CONDUITE À TENIR :",
+     "x": 46,
+     "y": 333.9
+    },
+    {
+     "text": "Traitement prescrit :",
+     "x": 46,
+     "y": 317.9
+    },
+    {
+     "text": "Fer",
+     "x": 72,
+     "y": 301.9
+    },
+    {
+     "text": "Vitamine A",
+     "x": 152,
+     "y": 301.9
+    },
+    {
+     "text": "Autres à préciser : ..........................................",
+     "x": 46,
+     "y": 281.9
+    },
+    {
+     "text": "Prochain rendez-vous le",
+     "x": 46,
+     "y": 267.9
+    },
+    {
+     "text": "PLANIFICATION FAMILIALE",
+     "x": 46,
+     "y": 227.9
+    },
+    {
+     "text": "Désire utiliser une méthode",
+     "x": 58,
+     "y": 209.9
+    },
+    {
+     "text": "Si oui, laquelle :",
+     "x": 46,
+     "y": 191.9
+    },
+    {
+     "text": "pilule",
+     "x": 152,
+     "y": 191.9
+    },
+    {
+     "text": "DIU",
+     "x": 222,
+     "y": 191.9
+    },
+    {
+     "text": "Autre à préciser : ..........................",
+     "x": 280,
+     "y": 191.9
+    },
+    {
+     "text": "Prescription faite",
+     "x": 58,
+     "y": 173.9
+    },
+    {
+     "text": "Référée :",
+     "x": 58,
+     "y": 157.9
+    },
+    {
+     "text": "Si la mère ne désire pas une méthode contraceptive : Pourquoi ?",
+     "x": 46,
+     "y": 139.9
+    },
+    {
+     "text": "Document synthétique généré pour l'entraînement de modèles — aucune donnée réelle — ne pas utiliser comme dossier médical.",
+     "x": 40,
+     "y": 15.9
+    }
+   ],
+   "identifierLines": [],
+   "mappings": [
+    {
+     "kind": "line",
+     "key": "ppm.early.consultDate",
+     "lx": 330,
+     "ly": 761.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.early.temp",
+     "lx": 46,
+     "ly": 699.9,
+     "maxW": 100
+    },
+    {
+     "kind": "line",
+     "key": "ppm.early.bp",
+     "lx": 150,
+     "ly": 699.9,
+     "maxW": 105
+    },
+    {
+     "kind": "line",
+     "key": "ppm.early.pulse",
+     "lx": 260,
+     "ly": 699.9,
+     "maxW": 95
+    },
+    {
+     "kind": "line",
+     "key": "ppm.early.weight",
+     "lx": 360,
+     "ly": 699.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.early.scar",
+     "lx": 180,
+     "ly": 517.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.early.treatmentOther",
+     "lx": 46,
+     "ly": 281.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.early.nextAppointment",
+     "lx": 46,
+     "ly": 267.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.early.fpMethodOther",
+     "lx": 280,
+     "ly": 191.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.early.medicationDetail",
+     "lx": 46,
+     "ly": 353.9,
+     "maxW": 520
+    },
+    {
+     "kind": "cell",
+     "key": "ppm.early.fpReason",
+     "x0": 40,
+     "x1": 560,
+     "y": 125,
+     "yBand": [
+      105,
+      136
+     ]
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.timing",
+     "bx": 250,
+     "by": 758.9,
+     "option": "IN_WINDOW"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.timing",
+     "bx": 250,
+     "by": 744.9,
+     "option": "AFTER_WINDOW"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.conjunctivae",
+     "bx": 160,
+     "by": 678.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.conjunctivae",
+     "bx": 250,
+     "by": 678.9,
+     "option": "PALE"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.uterineGlobe",
+     "bx": 46,
+     "by": 660.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.lochia",
+     "bx": 160,
+     "by": 642.9,
+     "option": "FADE"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.lochia",
+     "bx": 230,
+     "by": 642.9,
+     "option": "FETID"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.lochia",
+     "bx": 160,
+     "by": 626.9,
+     "option": "CLEAR"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.lochia",
+     "bx": 230,
+     "by": 626.9,
+     "option": "BLOODY"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.lochia",
+     "bx": 310,
+     "by": 626.9,
+     "option": "YELLOWISH"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.perineum",
+     "bx": 60,
+     "by": 590.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.perineum",
+     "bx": 60,
+     "by": 574.9,
+     "option": "EPISIOTOMY"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.perineum",
+     "bx": 200,
+     "by": 574.9,
+     "option": "REPAIRED"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.perineum",
+     "bx": 60,
+     "by": 558.9,
+     "option": "TEAR"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.sphincters",
+     "bx": 230,
+     "by": 536.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.sphincters",
+     "bx": 300,
+     "by": 536.9,
+     "option": "ABNORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.cesarean",
+     "bx": 46,
+     "by": 516.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.breasts",
+     "bx": 130,
+     "by": 496.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.breasts",
+     "bx": 200,
+     "by": 496.9,
+     "option": "LYMPHANGITIS"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.breasts",
+     "bx": 290,
+     "by": 496.9,
+     "option": "MASTITIS"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.calves",
+     "bx": 60,
+     "by": 460.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.calves",
+     "bx": 130,
+     "by": 460.9,
+     "option": "RED"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.calves",
+     "bx": 200,
+     "by": 460.9,
+     "option": "WARM"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.calves",
+     "bx": 270,
+     "by": 460.9,
+     "option": "PAINFUL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.complicationsPresent",
+     "bx": 190,
+     "by": 436.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.complications",
+     "bx": 60,
+     "by": 418.9,
+     "option": "HEMORRHAGE"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.complications",
+     "bx": 220,
+     "by": 418.9,
+     "option": "BREAST"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.complications",
+     "bx": 60,
+     "by": 403.9,
+     "option": "INFECTION"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.complications",
+     "bx": 220,
+     "by": 403.9,
+     "option": "ANEMIA"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.complications",
+     "bx": 60,
+     "by": 388.9,
+     "option": "ECLAMPSIA"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.complications",
+     "bx": 220,
+     "by": 388.9,
+     "option": "OTHER"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.complications",
+     "bx": 60,
+     "by": 373.9,
+     "option": "PHLEBITIS"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.medication",
+     "bx": 190,
+     "by": 352.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.treatment",
+     "bx": 60,
+     "by": 300.9,
+     "option": "IRON"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.treatment",
+     "bx": 140,
+     "by": 300.9,
+     "option": "VITAMIN_A"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.fpDesired",
+     "bx": 46,
+     "by": 208.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.fpMethod",
+     "bx": 140,
+     "by": 190.9,
+     "option": "PILL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.fpMethod",
+     "bx": 210,
+     "by": 190.9,
+     "option": "IUD"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.fpPrescribed",
+     "bx": 46,
+     "by": 172.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.early.fpReferred",
+     "bx": 46,
+     "by": 156.9
+    }
+   ]
+  },
+  {
+   "pageInRecord": 6,
+   "section": "PP_EARLY_NEWBORN",
+   "title": "CONSULTATION DU POST-PARTUM PRÉCOCE",
+   "labels": [
+    {
+     "text": "CONSULTATION DU POST-PARTUM PRÉCOCE",
+     "x": 40,
+     "y": 799.9
+    },
+    {
+     "text": "NOUVEAU-NÉ",
+     "x": 40,
+     "y": 785.9
+    },
+    {
+     "text": "Date de la consultation :",
+     "x": 330,
+     "y": 761.9
+    },
+    {
+     "text": "Age",
+     "x": 46,
+     "y": 725.9
+    },
+    {
+     "text": "Température",
+     "x": 190,
+     "y": 725.9
+    },
+    {
+     "text": "Poids",
+     "x": 380,
+     "y": 725.9
+    },
+    {
+     "text": "Taille",
+     "x": 46,
+     "y": 703.9
+    },
+    {
+     "text": "Périmètre crânien",
+     "x": 190,
+     "y": 703.9
+    },
+    {
+     "text": "Nouveau-né prématuré",
+     "x": 58,
+     "y": 681.9
+    },
+    {
+     "text": "Nouveau-né hypotrophe",
+     "x": 202,
+     "y": 681.9
+    },
+    {
+     "text": "Allaitement :",
+     "x": 46,
+     "y": 659.9
+    },
+    {
+     "text": "exclusivement au sein",
+     "x": 122,
+     "y": 659.9
+    },
+    {
+     "text": "Artificiel",
+     "x": 262,
+     "y": 659.9
+    },
+    {
+     "text": "mixte",
+     "x": 342,
+     "y": 659.9
+    },
+    {
+     "text": "Signes d'une affection grave :",
+     "x": 46,
+     "y": 637.9
+    },
+    {
+     "text": "Convulsions",
+     "x": 62,
+     "y": 617.9
+    },
+    {
+     "text": "Refus de téter",
+     "x": 187,
+     "y": 617.9
+    },
+    {
+     "text": "Hématémèses",
+     "x": 312,
+     "y": 617.9
+    },
+    {
+     "text": "Mélaenas",
+     "x": 437,
+     "y": 617.9
+    },
+    {
+     "text": "Diarrhée",
+     "x": 62,
+     "y": 599.9
+    },
+    {
+     "text": "Ictère",
+     "x": 187,
+     "y": 599.9
+    },
+    {
+     "text": "Tirage sous costal",
+     "x": 312,
+     "y": 599.9
+    },
+    {
+     "text": "Toux",
+     "x": 437,
+     "y": 599.9
+    },
+    {
+     "text": "Rythme respiratoire anormal",
+     "x": 62,
+     "y": 581.9
+    },
+    {
+     "text": "Fièvre",
+     "x": 187,
+     "y": 581.9
+    },
+    {
+     "text": "Hypothermie",
+     "x": 312,
+     "y": 581.9
+    },
+    {
+     "text": "Autres à préciser :",
+     "x": 46,
+     "y": 556.9
+    },
+    {
+     "text": "Contusions, lésions traumatiques et malformations :",
+     "x": 46,
+     "y": 529.9
+    },
+    {
+     "text": "Bosse sérosanguine ou céphalohématome",
+     "x": 72,
+     "y": 509.9
+    },
+    {
+     "text": "Luxation congénitale de la hanche",
+     "x": 72,
+     "y": 493.9
+    },
+    {
+     "text": "Diminution ou absence de la mobilité d'un membre",
+     "x": 72,
+     "y": 477.9
+    },
+    {
+     "text": "Autres à préciser :",
+     "x": 60,
+     "y": 453.9
+    },
+    {
+     "text": "Evaluation de l'allaitement maternel :",
+     "x": 46,
+     "y": 429.9
+    },
+    {
+     "text": "Normal",
+     "x": 262,
+     "y": 429.9
+    },
+    {
+     "text": "A problèmes",
+     "x": 332,
+     "y": 429.9
+    },
+    {
+     "text": "Etat vaccinal",
+     "x": 46,
+     "y": 409.9
+    },
+    {
+     "text": "Vaccins administrés ce jour :",
+     "x": 60,
+     "y": 391.9
+    },
+    {
+     "text": "BCG",
+     "x": 202,
+     "y": 391.9
+    },
+    {
+     "text": "HB",
+     "x": 262,
+     "y": 391.9
+    },
+    {
+     "text": "Supplémentation en vitamine D",
+     "x": 58,
+     "y": 371.9
+    },
+    {
+     "text": "Présence de complications et de malformation :",
+     "x": 46,
+     "y": 347.9
+    },
+    {
+     "text": "Ictère",
+     "x": 72,
+     "y": 327.9
+    },
+    {
+     "text": "Infection",
+     "x": 152,
+     "y": 327.9
+    },
+    {
+     "text": "Conjonctivite",
+     "x": 232,
+     "y": 327.9
+    },
+    {
+     "text": "Traumatisme",
+     "x": 72,
+     "y": 309.9
+    },
+    {
+     "text": "Malformation",
+     "x": 152,
+     "y": 309.9
+    },
+    {
+     "text": "Autres",
+     "x": 72,
+     "y": 291.9
+    },
+    {
+     "text": "Vu par :",
+     "x": 46,
+     "y": 251.9
+    },
+    {
+     "text": "Décision prise :",
+     "x": 46,
+     "y": 221.9
+    },
+    {
+     "text": "Traitement prescrit :",
+     "x": 46,
+     "y": 191.9
+    },
+    {
+     "text": "Transfert",
+     "x": 58,
+     "y": 156.9
+    },
+    {
+     "text": "Préciser l'établissement de référence :",
+     "x": 120,
+     "y": 156.9
+    },
+    {
+     "text": "Les trois règles de la prise en charge du nouveau-né à domicile :",
+     "x": 52,
+     "y": 117.9
+    },
+    {
+     "text": "1. Allaitement maternel exclusif   2. Maintien au chaud   3. Quand revenir immédiatement ?",
+     "x": 52,
+     "y": 103.9
+    },
+    {
+     "text": "Revenir pour une visite de suivi nécessaire le",
+     "x": 46,
+     "y": 71.9
+    },
+    {
+     "text": "Document synthétique généré pour l'entraînement de modèles — aucune donnée réelle — ne pas utiliser comme dossier médical.",
+     "x": 40,
+     "y": 15.9
+    }
+   ],
+   "identifierLines": [],
+   "mappings": [
+    {
+     "kind": "line",
+     "key": "ppn.early.consultDate",
+     "lx": 330,
+     "ly": 761.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.ageDays",
+     "lx": 46,
+     "ly": 725.9,
+     "maxW": 140
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.temp",
+     "lx": 190,
+     "ly": 725.9,
+     "maxW": 185
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.weight",
+     "lx": 380,
+     "ly": 725.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.length",
+     "lx": 46,
+     "ly": 703.9,
+     "maxW": 140
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.headCirc",
+     "lx": 190,
+     "ly": 703.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.dangerOther",
+     "lx": 46,
+     "ly": 556.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.traumaOther",
+     "lx": 60,
+     "ly": 453.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.seenBy",
+     "lx": 46,
+     "ly": 251.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.decision",
+     "lx": 46,
+     "ly": 221.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.treatment",
+     "lx": 46,
+     "ly": 191.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.referralFacility",
+     "lx": 120,
+     "ly": 156.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.early.nextVisit",
+     "lx": 46,
+     "ly": 71.9
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.premature",
+     "bx": 46,
+     "by": 680.9
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.hypotrophic",
+     "bx": 190,
+     "by": 680.9
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.feeding",
+     "bx": 110,
+     "by": 658.9,
+     "option": "EXCLUSIVE"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.feeding",
+     "bx": 250,
+     "by": 658.9,
+     "option": "ARTIFICIAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.feeding",
+     "bx": 330,
+     "by": 658.9,
+     "option": "MIXED"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.trauma",
+     "bx": 60,
+     "by": 508.9,
+     "option": "CEPHALHEMATOMA"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.trauma",
+     "bx": 60,
+     "by": 492.9,
+     "option": "HIP_DISLOCATION"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.trauma",
+     "bx": 60,
+     "by": 476.9,
+     "option": "LIMB_MOBILITY"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.bfEval",
+     "bx": 250,
+     "by": 428.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.bfEval",
+     "bx": 320,
+     "by": 428.9,
+     "option": "PROBLEMS"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.vaccines",
+     "bx": 190,
+     "by": 390.9,
+     "option": "BCG"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.vaccines",
+     "bx": 250,
+     "by": 390.9,
+     "option": "HB"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.vitaminD",
+     "bx": 46,
+     "by": 370.9
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.complications",
+     "bx": 60,
+     "by": 326.9,
+     "option": "JAUNDICE"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.complications",
+     "bx": 140,
+     "by": 326.9,
+     "option": "INFECTION"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.complications",
+     "bx": 220,
+     "by": 326.9,
+     "option": "CONJUNCTIVITIS"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.complications",
+     "bx": 60,
+     "by": 308.9,
+     "option": "TRAUMA"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.complications",
+     "bx": 140,
+     "by": 308.9,
+     "option": "MALFORMATION"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.complications",
+     "bx": 60,
+     "by": 290.9,
+     "option": "OTHER"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.transfer",
+     "bx": 46,
+     "by": 155.9
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.dangerSigns",
+     "bx": 50,
+     "by": 616.9,
+     "option": "CONVULSIONS"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.dangerSigns",
+     "bx": 175,
+     "by": 616.9,
+     "option": "NOT_FEEDING"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.dangerSigns",
+     "bx": 300,
+     "by": 616.9,
+     "option": "HEMATEMESIS"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.dangerSigns",
+     "bx": 425,
+     "by": 616.9,
+     "option": "MELENA"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.dangerSigns",
+     "bx": 50,
+     "by": 598.9,
+     "option": "DIARRHEA"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.dangerSigns",
+     "bx": 175,
+     "by": 598.9,
+     "option": "JAUNDICE"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.dangerSigns",
+     "bx": 300,
+     "by": 598.9,
+     "option": "CHEST_INDRAWING"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.dangerSigns",
+     "bx": 425,
+     "by": 598.9,
+     "option": "COUGH"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.dangerSigns",
+     "bx": 50,
+     "by": 580.9,
+     "option": "ABNORMAL_BREATHING"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.dangerSigns",
+     "bx": 175,
+     "by": 580.9,
+     "option": "FEVER"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.early.dangerSigns",
+     "bx": 300,
+     "by": 580.9,
+     "option": "HYPOTHERMIA"
+    }
+   ]
+  },
+  {
+   "pageInRecord": 7,
+   "section": "PP_LATE_MOTHER",
+   "title": "CONSULTATION DU POST-PARTUM TARDIF",
+   "labels": [
+    {
+     "text": "CONSULTATION DU POST-PARTUM TARDIF",
+     "x": 40,
+     "y": 799.9
+    },
+    {
+     "text": "Date de la consultation :",
+     "x": 330,
+     "y": 761.9
+    },
+    {
+     "text": "Entre le 40ème et 50ème jour après l'accouchement",
+     "x": 40,
+     "y": 759.9
+    },
+    {
+     "text": "Après le 50ème jour de l'accouchement",
+     "x": 40,
+     "y": 745.9
+    },
+    {
+     "text": "Etat général :",
+     "x": 46,
+     "y": 717.9
+    },
+    {
+     "text": "T°",
+     "x": 46,
+     "y": 699.9
+    },
+    {
+     "text": "TA",
+     "x": 150,
+     "y": 699.9
+    },
+    {
+     "text": "Pouls",
+     "x": 260,
+     "y": 699.9
+    },
+    {
+     "text": "Poids",
+     "x": 360,
+     "y": 699.9
+    },
+    {
+     "text": "Etat des conjonctives :",
+     "x": 46,
+     "y": 679.9
+    },
+    {
+     "text": "Normales",
+     "x": 172,
+     "y": 679.9
+    },
+    {
+     "text": "Décolorées",
+     "x": 262,
+     "y": 679.9
+    },
+    {
+     "text": "Présence du globe utérin",
+     "x": 58,
+     "y": 661.9
+    },
+    {
+     "text": "Etat des lochies :",
+     "x": 46,
+     "y": 643.9
+    },
+    {
+     "text": "Fade",
+     "x": 172,
+     "y": 643.9
+    },
+    {
+     "text": "fétide",
+     "x": 242,
+     "y": 643.9
+    },
+    {
+     "text": "claires",
+     "x": 172,
+     "y": 627.9
+    },
+    {
+     "text": "sanglantes",
+     "x": 242,
+     "y": 627.9
+    },
+    {
+     "text": "Jaunâtres",
+     "x": 322,
+     "y": 627.9
+    },
+    {
+     "text": "Etat du périnée :",
+     "x": 46,
+     "y": 607.9
+    },
+    {
+     "text": "Normal",
+     "x": 72,
+     "y": 591.9
+    },
+    {
+     "text": "Épisiotomie",
+     "x": 72,
+     "y": 575.9
+    },
+    {
+     "text": "Déchirure",
+     "x": 72,
+     "y": 559.9
+    },
+    {
+     "text": "Réparée",
+     "x": 212,
+     "y": 575.9
+    },
+    {
+     "text": "Etat des sphincters (anal et urétral) :",
+     "x": 46,
+     "y": 537.9
+    },
+    {
+     "text": "Normal",
+     "x": 242,
+     "y": 537.9
+    },
+    {
+     "text": "Anormal",
+     "x": 312,
+     "y": 537.9
+    },
+    {
+     "text": "Césarienne :",
+     "x": 58,
+     "y": 517.9
+    },
+    {
+     "text": "Etat de la cicatrice :",
+     "x": 180,
+     "y": 517.9
+    },
+    {
+     "text": "Etat des seins :",
+     "x": 46,
+     "y": 497.9
+    },
+    {
+     "text": "Normal",
+     "x": 142,
+     "y": 497.9
+    },
+    {
+     "text": "lymphangite",
+     "x": 212,
+     "y": 497.9
+    },
+    {
+     "text": "mastite et abcès",
+     "x": 302,
+     "y": 497.9
+    },
+    {
+     "text": "Etat des mollets :",
+     "x": 46,
+     "y": 477.9
+    },
+    {
+     "text": "Normal",
+     "x": 72,
+     "y": 461.9
+    },
+    {
+     "text": "Rouges",
+     "x": 142,
+     "y": 461.9
+    },
+    {
+     "text": "Chauds",
+     "x": 212,
+     "y": 461.9
+    },
+    {
+     "text": "Douloureux à la dorsiflexion",
+     "x": 282,
+     "y": 461.9
+    },
+    {
+     "text": "Présence de complication :",
+     "x": 46,
+     "y": 437.9
+    },
+    {
+     "text": "Hémorragie",
+     "x": 72,
+     "y": 419.9
+    },
+    {
+     "text": "Infection",
+     "x": 72,
+     "y": 404.9
+    },
+    {
+     "text": "Eclampsie",
+     "x": 72,
+     "y": 389.9
+    },
+    {
+     "text": "Phlébite",
+     "x": 72,
+     "y": 374.9
+    },
+    {
+     "text": "Complications mammaires",
+     "x": 232,
+     "y": 419.9
+    },
+    {
+     "text": "Anémie",
+     "x": 232,
+     "y": 404.9
+    },
+    {
+     "text": "Autres",
+     "x": 232,
+     "y": 389.9
+    },
+    {
+     "text": "Notion de prise de médicaments :",
+     "x": 46,
+     "y": 353.9
+    },
+    {
+     "text": "CONDUITE À TENIR :",
+     "x": 46,
+     "y": 333.9
+    },
+    {
+     "text": "Traitement prescrit :",
+     "x": 46,
+     "y": 317.9
+    },
+    {
+     "text": "Fer",
+     "x": 72,
+     "y": 301.9
+    },
+    {
+     "text": "Vitamine A",
+     "x": 152,
+     "y": 301.9
+    },
+    {
+     "text": "Autres à préciser : ..........................................",
+     "x": 46,
+     "y": 281.9
+    },
+    {
+     "text": "Prochain rendez-vous le",
+     "x": 46,
+     "y": 267.9
+    },
+    {
+     "text": "PLANIFICATION FAMILIALE",
+     "x": 46,
+     "y": 227.9
+    },
+    {
+     "text": "Désire utiliser une méthode",
+     "x": 58,
+     "y": 209.9
+    },
+    {
+     "text": "Si oui, laquelle :",
+     "x": 46,
+     "y": 191.9
+    },
+    {
+     "text": "pilule",
+     "x": 152,
+     "y": 191.9
+    },
+    {
+     "text": "DIU",
+     "x": 222,
+     "y": 191.9
+    },
+    {
+     "text": "Autre à préciser : ..........................",
+     "x": 280,
+     "y": 191.9
+    },
+    {
+     "text": "Prescription faite",
+     "x": 58,
+     "y": 173.9
+    },
+    {
+     "text": "Référée :",
+     "x": 58,
+     "y": 157.9
+    },
+    {
+     "text": "Si la mère ne désire pas une méthode contraceptive : Pourquoi ?",
+     "x": 46,
+     "y": 139.9
+    },
+    {
+     "text": "Document synthétique généré pour l'entraînement de modèles — aucune donnée réelle — ne pas utiliser comme dossier médical.",
+     "x": 40,
+     "y": 15.9
+    }
+   ],
+   "identifierLines": [],
+   "mappings": [
+    {
+     "kind": "line",
+     "key": "ppm.late.consultDate",
+     "lx": 330,
+     "ly": 761.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.late.temp",
+     "lx": 46,
+     "ly": 699.9,
+     "maxW": 100
+    },
+    {
+     "kind": "line",
+     "key": "ppm.late.bp",
+     "lx": 150,
+     "ly": 699.9,
+     "maxW": 105
+    },
+    {
+     "kind": "line",
+     "key": "ppm.late.pulse",
+     "lx": 260,
+     "ly": 699.9,
+     "maxW": 95
+    },
+    {
+     "kind": "line",
+     "key": "ppm.late.weight",
+     "lx": 360,
+     "ly": 699.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.late.scar",
+     "lx": 180,
+     "ly": 517.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.late.treatmentOther",
+     "lx": 46,
+     "ly": 281.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.late.nextAppointment",
+     "lx": 46,
+     "ly": 267.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.late.fpMethodOther",
+     "lx": 280,
+     "ly": 191.9
+    },
+    {
+     "kind": "line",
+     "key": "ppm.late.medicationDetail",
+     "lx": 46,
+     "ly": 353.9,
+     "maxW": 520
+    },
+    {
+     "kind": "cell",
+     "key": "ppm.late.fpReason",
+     "x0": 40,
+     "x1": 560,
+     "y": 125,
+     "yBand": [
+      105,
+      136
+     ]
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.timing",
+     "bx": 270,
+     "by": 758.9,
+     "option": "IN_WINDOW"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.timing",
+     "bx": 250,
+     "by": 744.9,
+     "option": "AFTER_WINDOW"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.conjunctivae",
+     "bx": 160,
+     "by": 678.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.conjunctivae",
+     "bx": 250,
+     "by": 678.9,
+     "option": "PALE"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.uterineGlobe",
+     "bx": 46,
+     "by": 660.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.lochia",
+     "bx": 160,
+     "by": 642.9,
+     "option": "FADE"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.lochia",
+     "bx": 230,
+     "by": 642.9,
+     "option": "FETID"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.lochia",
+     "bx": 160,
+     "by": 626.9,
+     "option": "CLEAR"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.lochia",
+     "bx": 230,
+     "by": 626.9,
+     "option": "BLOODY"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.lochia",
+     "bx": 310,
+     "by": 626.9,
+     "option": "YELLOWISH"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.perineum",
+     "bx": 60,
+     "by": 590.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.perineum",
+     "bx": 60,
+     "by": 574.9,
+     "option": "EPISIOTOMY"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.perineum",
+     "bx": 200,
+     "by": 574.9,
+     "option": "REPAIRED"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.perineum",
+     "bx": 60,
+     "by": 558.9,
+     "option": "TEAR"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.sphincters",
+     "bx": 230,
+     "by": 536.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.sphincters",
+     "bx": 300,
+     "by": 536.9,
+     "option": "ABNORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.cesarean",
+     "bx": 46,
+     "by": 516.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.breasts",
+     "bx": 130,
+     "by": 496.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.breasts",
+     "bx": 200,
+     "by": 496.9,
+     "option": "LYMPHANGITIS"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.breasts",
+     "bx": 290,
+     "by": 496.9,
+     "option": "MASTITIS"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.calves",
+     "bx": 60,
+     "by": 460.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.calves",
+     "bx": 130,
+     "by": 460.9,
+     "option": "RED"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.calves",
+     "bx": 200,
+     "by": 460.9,
+     "option": "WARM"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.calves",
+     "bx": 270,
+     "by": 460.9,
+     "option": "PAINFUL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.complicationsPresent",
+     "bx": 190,
+     "by": 436.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.complications",
+     "bx": 60,
+     "by": 418.9,
+     "option": "HEMORRHAGE"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.complications",
+     "bx": 220,
+     "by": 418.9,
+     "option": "BREAST"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.complications",
+     "bx": 60,
+     "by": 403.9,
+     "option": "INFECTION"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.complications",
+     "bx": 220,
+     "by": 403.9,
+     "option": "ANEMIA"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.complications",
+     "bx": 60,
+     "by": 388.9,
+     "option": "ECLAMPSIA"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.complications",
+     "bx": 220,
+     "by": 388.9,
+     "option": "OTHER"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.complications",
+     "bx": 60,
+     "by": 373.9,
+     "option": "PHLEBITIS"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.medication",
+     "bx": 190,
+     "by": 352.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.treatment",
+     "bx": 60,
+     "by": 300.9,
+     "option": "IRON"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.treatment",
+     "bx": 140,
+     "by": 300.9,
+     "option": "VITAMIN_A"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.fpDesired",
+     "bx": 46,
+     "by": 208.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.fpMethod",
+     "bx": 140,
+     "by": 190.9,
+     "option": "PILL"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.fpMethod",
+     "bx": 210,
+     "by": 190.9,
+     "option": "IUD"
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.fpPrescribed",
+     "bx": 46,
+     "by": 172.9
+    },
+    {
+     "kind": "box",
+     "key": "ppm.late.fpReferred",
+     "bx": 46,
+     "by": 156.9
+    }
+   ]
+  },
+  {
+   "pageInRecord": 8,
+   "section": "PP_LATE_NEWBORN",
+   "title": "CONSULTATION DU POST-PARTUM TARDIF",
+   "labels": [
+    {
+     "text": "CONSULTATION DU POST-PARTUM TARDIF",
+     "x": 40,
+     "y": 799.9
+    },
+    {
+     "text": "NOUVEAU-NÉ",
+     "x": 40,
+     "y": 785.9
+    },
+    {
+     "text": "Date de la consultation :",
+     "x": 330,
+     "y": 761.9
+    },
+    {
+     "text": "Age",
+     "x": 46,
+     "y": 725.9
+    },
+    {
+     "text": "Température",
+     "x": 190,
+     "y": 725.9
+    },
+    {
+     "text": "Poids",
+     "x": 380,
+     "y": 725.9
+    },
+    {
+     "text": "Taille",
+     "x": 46,
+     "y": 703.9
+    },
+    {
+     "text": "Périmètre crânien",
+     "x": 190,
+     "y": 703.9
+    },
+    {
+     "text": "Nouveau-né prématuré",
+     "x": 58,
+     "y": 681.9
+    },
+    {
+     "text": "Nouveau-né hypotrophe",
+     "x": 202,
+     "y": 681.9
+    },
+    {
+     "text": "Allaitement :",
+     "x": 46,
+     "y": 659.9
+    },
+    {
+     "text": "exclusivement au sein",
+     "x": 122,
+     "y": 659.9
+    },
+    {
+     "text": "Artificiel",
+     "x": 262,
+     "y": 659.9
+    },
+    {
+     "text": "mixte",
+     "x": 342,
+     "y": 659.9
+    },
+    {
+     "text": "Signes d'une affection grave :",
+     "x": 46,
+     "y": 637.9
+    },
+    {
+     "text": "Convulsions",
+     "x": 62,
+     "y": 617.9
+    },
+    {
+     "text": "Refus de téter",
+     "x": 187,
+     "y": 617.9
+    },
+    {
+     "text": "Hématémèses",
+     "x": 312,
+     "y": 617.9
+    },
+    {
+     "text": "Mélaenas",
+     "x": 437,
+     "y": 617.9
+    },
+    {
+     "text": "Diarrhée",
+     "x": 62,
+     "y": 599.9
+    },
+    {
+     "text": "Ictère",
+     "x": 187,
+     "y": 599.9
+    },
+    {
+     "text": "Tirage sous costal",
+     "x": 312,
+     "y": 599.9
+    },
+    {
+     "text": "Toux",
+     "x": 437,
+     "y": 599.9
+    },
+    {
+     "text": "Rythme respiratoire anormal",
+     "x": 62,
+     "y": 581.9
+    },
+    {
+     "text": "Fièvre",
+     "x": 187,
+     "y": 581.9
+    },
+    {
+     "text": "Hypothermie",
+     "x": 312,
+     "y": 581.9
+    },
+    {
+     "text": "Autres à préciser :",
+     "x": 46,
+     "y": 556.9
+    },
+    {
+     "text": "Contusions, lésions traumatiques et malformations :",
+     "x": 46,
+     "y": 529.9
+    },
+    {
+     "text": "Bosse sérosanguine ou céphalohématome",
+     "x": 72,
+     "y": 509.9
+    },
+    {
+     "text": "Luxation congénitale de la hanche",
+     "x": 72,
+     "y": 493.9
+    },
+    {
+     "text": "Diminution ou absence de la mobilité d'un membre",
+     "x": 72,
+     "y": 477.9
+    },
+    {
+     "text": "Autres à préciser :",
+     "x": 60,
+     "y": 453.9
+    },
+    {
+     "text": "Evaluation de l'allaitement maternel :",
+     "x": 46,
+     "y": 429.9
+    },
+    {
+     "text": "Normal",
+     "x": 262,
+     "y": 429.9
+    },
+    {
+     "text": "A problèmes",
+     "x": 332,
+     "y": 429.9
+    },
+    {
+     "text": "Etat vaccinal",
+     "x": 46,
+     "y": 409.9
+    },
+    {
+     "text": "Vaccins administrés ce jour :",
+     "x": 60,
+     "y": 391.9
+    },
+    {
+     "text": "BCG",
+     "x": 202,
+     "y": 391.9
+    },
+    {
+     "text": "HB",
+     "x": 262,
+     "y": 391.9
+    },
+    {
+     "text": "Supplémentation en vitamine D",
+     "x": 58,
+     "y": 371.9
+    },
+    {
+     "text": "Présence de complications et de malformation :",
+     "x": 46,
+     "y": 347.9
+    },
+    {
+     "text": "Ictère",
+     "x": 72,
+     "y": 327.9
+    },
+    {
+     "text": "Infection",
+     "x": 152,
+     "y": 327.9
+    },
+    {
+     "text": "Conjonctivite",
+     "x": 232,
+     "y": 327.9
+    },
+    {
+     "text": "Traumatisme",
+     "x": 72,
+     "y": 309.9
+    },
+    {
+     "text": "Malformation",
+     "x": 152,
+     "y": 309.9
+    },
+    {
+     "text": "Autres",
+     "x": 72,
+     "y": 291.9
+    },
+    {
+     "text": "Vu par :",
+     "x": 46,
+     "y": 251.9
+    },
+    {
+     "text": "Décision prise :",
+     "x": 46,
+     "y": 221.9
+    },
+    {
+     "text": "Traitement prescrit :",
+     "x": 46,
+     "y": 191.9
+    },
+    {
+     "text": "Transfert",
+     "x": 58,
+     "y": 156.9
+    },
+    {
+     "text": "Préciser l'établissement de référence :",
+     "x": 120,
+     "y": 156.9
+    },
+    {
+     "text": "Les trois règles de la prise en charge du nouveau-né à domicile :",
+     "x": 52,
+     "y": 117.9
+    },
+    {
+     "text": "1. Allaitement maternel exclusif   2. Maintien au chaud   3. Quand revenir immédiatement ?",
+     "x": 52,
+     "y": 103.9
+    },
+    {
+     "text": "Revenir pour une visite de suivi nécessaire le",
+     "x": 46,
+     "y": 71.9
+    },
+    {
+     "text": "Document synthétique généré pour l'entraînement de modèles — aucune donnée réelle — ne pas utiliser comme dossier médical.",
+     "x": 40,
+     "y": 15.9
+    }
+   ],
+   "identifierLines": [],
+   "mappings": [
+    {
+     "kind": "line",
+     "key": "ppn.late.consultDate",
+     "lx": 330,
+     "ly": 761.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.ageDays",
+     "lx": 46,
+     "ly": 725.9,
+     "maxW": 140
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.temp",
+     "lx": 190,
+     "ly": 725.9,
+     "maxW": 185
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.weight",
+     "lx": 380,
+     "ly": 725.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.length",
+     "lx": 46,
+     "ly": 703.9,
+     "maxW": 140
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.headCirc",
+     "lx": 190,
+     "ly": 703.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.dangerOther",
+     "lx": 46,
+     "ly": 556.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.traumaOther",
+     "lx": 60,
+     "ly": 453.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.seenBy",
+     "lx": 46,
+     "ly": 251.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.decision",
+     "lx": 46,
+     "ly": 221.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.treatment",
+     "lx": 46,
+     "ly": 191.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.referralFacility",
+     "lx": 120,
+     "ly": 156.9
+    },
+    {
+     "kind": "line",
+     "key": "ppn.late.nextVisit",
+     "lx": 46,
+     "ly": 71.9
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.premature",
+     "bx": 46,
+     "by": 680.9
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.hypotrophic",
+     "bx": 190,
+     "by": 680.9
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.feeding",
+     "bx": 110,
+     "by": 658.9,
+     "option": "EXCLUSIVE"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.feeding",
+     "bx": 250,
+     "by": 658.9,
+     "option": "ARTIFICIAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.feeding",
+     "bx": 330,
+     "by": 658.9,
+     "option": "MIXED"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.trauma",
+     "bx": 60,
+     "by": 508.9,
+     "option": "CEPHALHEMATOMA"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.trauma",
+     "bx": 60,
+     "by": 492.9,
+     "option": "HIP_DISLOCATION"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.trauma",
+     "bx": 60,
+     "by": 476.9,
+     "option": "LIMB_MOBILITY"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.bfEval",
+     "bx": 250,
+     "by": 428.9,
+     "option": "NORMAL"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.bfEval",
+     "bx": 320,
+     "by": 428.9,
+     "option": "PROBLEMS"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.vaccines",
+     "bx": 190,
+     "by": 390.9,
+     "option": "BCG"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.vaccines",
+     "bx": 250,
+     "by": 390.9,
+     "option": "HB"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.vitaminD",
+     "bx": 46,
+     "by": 370.9
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.complications",
+     "bx": 60,
+     "by": 326.9,
+     "option": "JAUNDICE"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.complications",
+     "bx": 140,
+     "by": 326.9,
+     "option": "INFECTION"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.complications",
+     "bx": 220,
+     "by": 326.9,
+     "option": "CONJUNCTIVITIS"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.complications",
+     "bx": 60,
+     "by": 308.9,
+     "option": "TRAUMA"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.complications",
+     "bx": 140,
+     "by": 308.9,
+     "option": "MALFORMATION"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.complications",
+     "bx": 60,
+     "by": 290.9,
+     "option": "OTHER"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.transfer",
+     "bx": 46,
+     "by": 155.9
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.dangerSigns",
+     "bx": 50,
+     "by": 616.9,
+     "option": "CONVULSIONS"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.dangerSigns",
+     "bx": 175,
+     "by": 616.9,
+     "option": "NOT_FEEDING"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.dangerSigns",
+     "bx": 300,
+     "by": 616.9,
+     "option": "HEMATEMESIS"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.dangerSigns",
+     "bx": 425,
+     "by": 616.9,
+     "option": "MELENA"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.dangerSigns",
+     "bx": 50,
+     "by": 598.9,
+     "option": "DIARRHEA"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.dangerSigns",
+     "bx": 175,
+     "by": 598.9,
+     "option": "JAUNDICE"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.dangerSigns",
+     "bx": 300,
+     "by": 598.9,
+     "option": "CHEST_INDRAWING"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.dangerSigns",
+     "bx": 425,
+     "by": 598.9,
+     "option": "COUGH"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.dangerSigns",
+     "bx": 50,
+     "by": 580.9,
+     "option": "ABNORMAL_BREATHING"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.dangerSigns",
+     "bx": 175,
+     "by": 580.9,
+     "option": "FEVER"
+    },
+    {
+     "kind": "box",
+     "key": "ppn.late.dangerSigns",
+     "bx": 300,
+     "by": 580.9,
+     "option": "HYPOTHERMIA"
+    }
+   ]
+  }
+ ]
+}

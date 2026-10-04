@@ -1,0 +1,106 @@
+{
+ "pdfPage": 28,
+ "patient": 4,
+ "pageInRecord": 4,
+ "section": "DELIVERY",
+ "fields": {
+  "del.placeSetting": {
+   "raw": "SUPERVISED",
+   "status": "KNOWN",
+   "value": "SUPERVISED"
+  },
+  "del.placeType": {
+   "raw": "PRIVATE_CLINIC",
+   "status": "KNOWN",
+   "value": "PRIVATE_CLINIC"
+  },
+  "del.homeAssisted": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "del.date": {
+   "raw": "28/06/2026",
+   "status": "KNOWN",
+   "value": "2026-06-28"
+  },
+  "del.mode": {
+   "raw": "CESAREAN_PLANNED",
+   "status": "KNOWN",
+   "value": "CESAREAN_PLANNED"
+  },
+  "del.instrument": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "del.episiotomy": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "del.csIndication": {
+   "raw": "Ut\u0000rus cicatriciel",
+   "status": "KNOWN",
+   "value": "Utrus cicatriciel",
+   "missingGlyph": true
+  },
+  "del.complicationsPresent": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "del.complicationTiming": {
+   "raw": "AT_DELIVERY",
+   "status": "KNOWN",
+   "value": [
+    "AT_DELIVERY"
+   ]
+  },
+  "del.complications": {
+   "raw": "HEMORRHAGE",
+   "status": "KNOWN",
+   "value": [
+    "HEMORRHAGE"
+   ]
+  },
+  "del.complicationOther": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "del.newbornStatus": {
+   "raw": "ALIVE",
+   "status": "KNOWN",
+   "value": "ALIVE"
+  },
+  "del.sex": {
+   "raw": "M",
+   "status": "KNOWN",
+   "value": "M"
+  },
+  "del.birthWeight": {
+   "raw": "2967 g",
+   "status": "KNOWN",
+   "value": 2967
+  },
+  "del.headCirc": {
+   "raw": "36 cm",
+   "status": "KNOWN",
+   "value": 36
+  },
+  "del.anomaly": {
+   "raw": "Aucune",
+   "status": "KNOWN",
+   "value": "Aucune"
+  },
+  "del.gaAtBirth": {
+   "raw": "40 SA",
+   "status": "KNOWN",
+   "value": {
+    "weeks": 40,
+    "days": 0
+   }
+  }
+ }
+}

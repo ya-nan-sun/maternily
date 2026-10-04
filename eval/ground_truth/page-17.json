@@ -1,0 +1,53 @@
+{
+ "pdfPage": 17,
+ "patient": 3,
+ "pageInRecord": 1,
+ "section": "COVER",
+ "fields": {
+  "cover.ficheNumber": {
+   "raw": "2026-711-003",
+   "status": "KNOWN",
+   "value": "2026-711-003"
+  },
+  "cover.region": {
+   "raw": "Marrakech-Safi",
+   "status": "KNOWN",
+   "value": "Marrakech-Safi"
+  },
+  "cover.province": {
+   "raw": "Al Haouz",
+   "status": "KNOWN",
+   "value": "Al Haouz"
+  },
+  "cover.facilityName": {
+   "raw": "DR Tahannaout Sud",
+   "status": "KNOWN",
+   "value": "DR Tahannaout Sud"
+  },
+  "cover.facilityType": {
+   "raw": "DR",
+   "status": "KNOWN",
+   "value": "DR"
+  },
+  "cover.coverageMode": {
+   "raw": "MOBILE",
+   "status": "KNOWN",
+   "value": "MOBILE"
+  },
+  "cover.riskPregnancy": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "cover.riskTypes": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "cover.riskOther": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  }
+ }
+}

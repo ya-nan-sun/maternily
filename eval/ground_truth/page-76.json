@@ -1,0 +1,105 @@
+{
+ "pdfPage": 76,
+ "patient": 10,
+ "pageInRecord": 4,
+ "section": "DELIVERY",
+ "fields": {
+  "del.placeSetting": {
+   "raw": "SUPERVISED",
+   "status": "KNOWN",
+   "value": "SUPERVISED"
+  },
+  "del.placeType": {
+   "raw": "MATERNITY",
+   "status": "KNOWN",
+   "value": "MATERNITY"
+  },
+  "del.homeAssisted": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "del.date": {
+   "raw": "07/07/2026",
+   "status": "KNOWN",
+   "value": "2026-07-07"
+  },
+  "del.mode": {
+   "raw": "CESAREAN_EMERGENCY",
+   "status": "KNOWN",
+   "value": "CESAREAN_EMERGENCY"
+  },
+  "del.instrument": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "del.episiotomy": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "del.csIndication": {
+   "raw": "Souffrance fœtale",
+   "status": "KNOWN",
+   "value": "Souffrance fœtale"
+  },
+  "del.complicationsPresent": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "del.complicationTiming": {
+   "raw": "AT_DELIVERY",
+   "status": "KNOWN",
+   "value": [
+    "AT_DELIVERY"
+   ]
+  },
+  "del.complications": {
+   "raw": "INFECTION",
+   "status": "KNOWN",
+   "value": [
+    "INFECTION"
+   ]
+  },
+  "del.complicationOther": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "del.newbornStatus": {
+   "raw": "ALIVE",
+   "status": "KNOWN",
+   "value": "ALIVE"
+  },
+  "del.sex": {
+   "raw": "F",
+   "status": "KNOWN",
+   "value": "F"
+  },
+  "del.birthWeight": {
+   "raw": "3119 g",
+   "status": "KNOWN",
+   "value": 3119
+  },
+  "del.headCirc": {
+   "raw": "35 cm",
+   "status": "KNOWN",
+   "value": 35
+  },
+  "del.anomaly": {
+   "raw": "Aucune",
+   "status": "KNOWN",
+   "value": "Aucune"
+  },
+  "del.gaAtBirth": {
+   "raw": "39 SA",
+   "status": "KNOWN",
+   "value": {
+    "weeks": 39,
+    "days": 0
+   }
+  }
+ }
+}

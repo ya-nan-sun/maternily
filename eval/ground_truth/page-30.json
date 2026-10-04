@@ -1,0 +1,129 @@
+{
+ "pdfPage": 30,
+ "patient": 4,
+ "pageInRecord": 6,
+ "section": "PP_EARLY_NEWBORN",
+ "fields": {
+  "ppn.early.consultDate": {
+   "raw": "05/07/2026",
+   "status": "KNOWN",
+   "value": "2026-07-05"
+  },
+  "ppn.early.ageDays": {
+   "raw": "7 jours",
+   "status": "KNOWN",
+   "value": 7
+  },
+  "ppn.early.temp": {
+   "raw": "37.2 \u0000C",
+   "status": "KNOWN",
+   "value": 37.2,
+   "missingGlyph": true
+  },
+  "ppn.early.weight": {
+   "raw": "2927 g",
+   "status": "KNOWN",
+   "value": 2927
+  },
+  "ppn.early.length": {
+   "raw": "49 cm",
+   "status": "KNOWN",
+   "value": 49
+  },
+  "ppn.early.headCirc": {
+   "raw": "36 cm",
+   "status": "KNOWN",
+   "value": 36
+  },
+  "ppn.early.premature": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.early.hypotrophic": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.early.feeding": {
+   "raw": "EXCLUSIVE",
+   "status": "KNOWN",
+   "value": "EXCLUSIVE"
+  },
+  "ppn.early.dangerSigns": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.early.dangerOther": {
+   "raw": "N\u0000ant",
+   "status": "KNOWN",
+   "value": "Nant",
+   "missingGlyph": true
+  },
+  "ppn.early.trauma": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.early.traumaOther": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "ppn.early.bfEval": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": "NORMAL"
+  },
+  "ppn.early.vaccines": {
+   "raw": "BCG, HB",
+   "status": "KNOWN",
+   "value": [
+    "BCG",
+    "HB"
+   ]
+  },
+  "ppn.early.vitaminD": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "ppn.early.complications": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.early.seenBy": {
+   "raw": "Sage-femme Hajar",
+   "status": "KNOWN",
+   "value": "MIDWIFE"
+  },
+  "ppn.early.decision": {
+   "raw": "Poursuivre l'allaitement exclusif",
+   "status": "KNOWN",
+   "value": "Poursuivre l'allaitement exclusif"
+  },
+  "ppn.early.treatment": {
+   "raw": "N\u0000ant",
+   "status": "KNOWN",
+   "value": "Nant",
+   "missingGlyph": true
+  },
+  "ppn.early.transfer": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.early.referralFacility": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppn.early.nextVisit": {
+   "raw": "04/08/2026",
+   "status": "KNOWN",
+   "value": "2026-08-04"
+  }
+ }
+}

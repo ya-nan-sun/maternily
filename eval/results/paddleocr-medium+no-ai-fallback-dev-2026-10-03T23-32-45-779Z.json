@@ -1,0 +1,543 @@
+{
+ "extractor": "template",
+ "model": "paddleocr-medium+no-ai-fallback",
+ "effort": "medium",
+ "split": "dev",
+ "pages": 8,
+ "failures": [],
+ "sectionAccuracy": 1,
+ "fieldAccuracy": 0.7876447876447876,
+ "fieldsScored": 259,
+ "uncertainty": {
+  "errors": 55,
+  "errorsFlagged": 0.32727272727272727,
+  "silentErrors": 37,
+  "silentErrorRate": 0.14285714285714285,
+  "questionsAsked": 25,
+  "flaggedButCorrect": 7,
+  "acceptedAndCorrect": 197
+ },
+ "bySection": {
+  "COVER": "62.5%",
+  "IDENTIFICATION_HISTORY": "84.4%",
+  "CURRENT_PREGNANCY": "95.7%",
+  "DELIVERY": "46.7%",
+  "PP_EARLY_MOTHER": "52.2%",
+  "PP_EARLY_NEWBORN": "77.3%",
+  "PP_LATE_MOTHER": "50.0%",
+  "PP_LATE_NEWBORN": "68.2%"
+ },
+ "byType": {
+  "text": "96.4%",
+  "choice": "47.8%",
+  "bool": "71.4%",
+  "multi": "27.3%",
+  "int": "72.2%",
+  "date": "95.8%",
+  "number": "88.5%",
+  "ga": "71.4%",
+  "bp": "100.0%",
+  "lab": "100.0%",
+  "role": "100.0%"
+ },
+ "byInput": {
+  "written": "93.0%",
+  "checkbox": "43.2%"
+ },
+ "byFont": {
+  "Caveat": "78.8%"
+ },
+ "calibration": [
+  {
+   "confidence": "0-20%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "20-40%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "40-60%",
+   "n": 12,
+   "accuracy": "58.3%"
+  },
+  {
+   "confidence": "60-80%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "80-100%",
+   "n": 229,
+   "accuracy": "86.0%"
+  }
+ ],
+ "statusConfusion": {
+  "KNOWN": {
+   "KNOWN": 229,
+   "NEEDS_REVIEW": 25,
+   "NOT_PROVIDED": 5
+  },
+  "NOT_PROVIDED": {
+   "NOT_PROVIDED": 196,
+   "NEEDS_REVIEW": 1
+  },
+  "NOT_APPLICABLE": {
+   "NOT_APPLICABLE": 22,
+   "NOT_PROVIDED": 1
+  }
+ },
+ "cost": {
+  "thisRunUsd": 0,
+  "perPageUsd": 0,
+  "perRegistryUsd": 0,
+  "avgOutputTokens": 0,
+  "avgLatencyMs": 34338.375,
+  "calls": 8,
+  "cachedCalls": 8
+ },
+ "errors": [
+  {
+   "file": "dossiers_specimen_10_patientes-01.png",
+   "key": "cover.facilityType",
+   "expected": "CSCA",
+   "got": "CSU, CSCA",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-01.png",
+   "key": "cover.riskPregnancy",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.55
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-01.png",
+   "key": "cover.riskTypes",
+   "expected": "",
+   "got": "ANEMIA, HTA, DIABETES, CARDIOPATHY, METRORRHAGIA, INFECTION, PREECLAMPSIA, ECLAMPSIA",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-02.png",
+   "key": "id.consanguinity",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-02.png",
+   "key": "id.gravidity",
+   "expected": "3",
+   "got": null,
+   "status": "NOT_PROVIDED",
+   "confidence": 0.9
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-02.png",
+   "key": "id.parity",
+   "expected": "1",
+   "got": null,
+   "status": "NOT_PROVIDED",
+   "confidence": 0.9
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-02.png",
+   "key": "id.livingChildren",
+   "expected": "1",
+   "got": null,
+   "status": "NOT_PROVIDED",
+   "confidence": 0.9
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-02.png",
+   "key": "id.papSmear",
+   "expected": "Normal",
+   "got": null,
+   "status": "NOT_PROVIDED",
+   "confidence": 0.9
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.T2V3.weight",
+   "expected": "64.3",
+   "got": "6 4.3",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M7.ga",
+   "expected": "31 SA",
+   "got": "37 SA",
+   "status": "KNOWN",
+   "confidence": 0.9382
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M7.fhr",
+   "expected": "149",
+   "got": "749",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M8.fundalHeight",
+   "expected": "31",
+   "got": "37",
+   "status": "KNOWN",
+   "confidence": 0.9457
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M9.fhr",
+   "expected": "148",
+   "got": "748",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-04.png",
+   "key": "del.placeSetting",
+   "expected": "SUPERVISED",
+   "got": "SUPERVISED, HOME",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-04.png",
+   "key": "del.placeType",
+   "expected": "MATERNITY",
+   "got": "BIRTH_HOME, MATERNITY, PRIVATE_CLINIC",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-04.png",
+   "key": "del.homeAssisted",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-04.png",
+   "key": "del.mode",
+   "expected": "VAGINAL",
+   "got": "VAGINAL, VAGINAL_INSTRUMENTAL, CESAREAN_EMERGENCY",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-04.png",
+   "key": "del.complications",
+   "expected": "",
+   "got": "ECLAMPSIA",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-04.png",
+   "key": "del.headCirc",
+   "expected": "34 cm",
+   "got": null,
+   "status": "NOT_PROVIDED",
+   "confidence": 0.9
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-04.png",
+   "key": "del.anomaly",
+   "expected": "Aucune",
+   "got": "Aucun",
+   "status": "KNOWN",
+   "confidence": 0.9804
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-04.png",
+   "key": "del.gaAtBirth",
+   "expected": "40 SA",
+   "got": "_40 SA",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-05.png",
+   "key": "ppm.early.timing",
+   "expected": "IN_WINDOW",
+   "got": "IN_WINDOW, AFTER_WINDOW",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-05.png",
+   "key": "ppm.early.conjunctivae",
+   "expected": "NORMAL",
+   "got": "NORMAL, PALE",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-05.png",
+   "key": "ppm.early.lochia",
+   "expected": "FADE, BLOODY",
+   "got": "FADE, FETID, CLEAR, BLOODY, YELLOWISH",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-05.png",
+   "key": "ppm.early.perineum",
+   "expected": "NORMAL",
+   "got": "NORMAL, REPAIRED",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-05.png",
+   "key": "ppm.early.calves",
+   "expected": "NORMAL",
+   "got": "NORMAL, RED, WARM, PAINFUL",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-05.png",
+   "key": "ppm.early.complicationsPresent",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-05.png",
+   "key": "ppm.early.complications",
+   "expected": "",
+   "got": "HEMORRHAGE, BREAST, INFECTION, ANEMIA, OTHER",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-05.png",
+   "key": "ppm.early.medication",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-05.png",
+   "key": "ppm.early.fpMethod",
+   "expected": "PILL",
+   "got": "PILL, IUD",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-05.png",
+   "key": "ppm.early.fpPrescribed",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-05.png",
+   "key": "ppm.early.fpReferred",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-06.png",
+   "key": "ppn.early.hypotrophic",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-06.png",
+   "key": "ppn.early.feeding",
+   "expected": "EXCLUSIVE",
+   "got": "EXCLUSIVE, ARTIFICIAL, MIXED",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-06.png",
+   "key": "ppn.early.dangerSigns",
+   "expected": "",
+   "got": "CONVULSIONS, NOT_FEEDING, HEMATEMESIS, MELENA, JAUNDICE, CHEST_INDRAWING, COUGH, FEVER, HYPOTHERMIA",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-06.png",
+   "key": "ppn.early.trauma",
+   "expected": "",
+   "got": "HIP_DISLOCATION, LIMB_MOBILITY",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-06.png",
+   "key": "ppn.early.complications",
+   "expected": "",
+   "got": "INFECTION, CONJUNCTIVITIS",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-07__1O_M-H0E7z.png",
+   "key": "ppm.late.timing",
+   "expected": "IN_WINDOW",
+   "got": "IN_WINDOW, AFTER_WINDOW",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-07__1O_M-H0E7z.png",
+   "key": "ppm.late.conjunctivae",
+   "expected": "NORMAL",
+   "got": "NORMAL, PALE",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-07__1O_M-H0E7z.png",
+   "key": "ppm.late.lochia",
+   "expected": "FADE, CLEAR",
+   "got": "FADE, FETID, CLEAR, BLOODY, YELLOWISH",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-07__1O_M-H0E7z.png",
+   "key": "ppm.late.cesarean",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-07__1O_M-H0E7z.png",
+   "key": "ppm.late.calves",
+   "expected": "NORMAL",
+   "got": "NORMAL, RED, WARM, PAINFUL",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-07__1O_M-H0E7z.png",
+   "key": "ppm.late.complicationsPresent",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-07__1O_M-H0E7z.png",
+   "key": "ppm.late.complications",
+   "expected": "",
+   "got": "HEMORRHAGE, BREAST, INFECTION, ANEMIA, ECLAMPSIA, OTHER, PHLEBITIS",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-07__1O_M-H0E7z.png",
+   "key": "ppm.late.medication",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-07__1O_M-H0E7z.png",
+   "key": "ppm.late.treatment",
+   "expected": "IRON",
+   "got": "IRON, VITAMIN_A",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-07__1O_M-H0E7z.png",
+   "key": "ppm.late.fpMethod",
+   "expected": "PILL",
+   "got": "PILL, IUD",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-07__1O_M-H0E7z.png",
+   "key": "ppm.late.fpReferred",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-08.png",
+   "key": "ppn.late.hypotrophic",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-08.png",
+   "key": "ppn.late.feeding",
+   "expected": "MIXED",
+   "got": "ARTIFICIAL, MIXED",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-08.png",
+   "key": "ppn.late.dangerSigns",
+   "expected": "",
+   "got": "NOT_FEEDING, HEMATEMESIS, MELENA, JAUNDICE, CHEST_INDRAWING, COUGH, FEVER, HYPOTHERMIA",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-08.png",
+   "key": "ppn.late.vaccines",
+   "expected": "",
+   "got": "BCG, HB",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-08.png",
+   "key": "ppn.late.complications",
+   "expected": "",
+   "got": "JAUNDICE, INFECTION, CONJUNCTIVITIS, MALFORMATION, OTHER",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-08.png",
+   "key": "ppn.late.transfer",
+   "expected": "unchecked",
+   "got": "checked",
+   "status": "KNOWN",
+   "confidence": 0.95
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-08.png",
+   "key": "ppn.late.nextVisit",
+   "expected": "17/05/2026",
+   "got": "_17/05/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  }
+ ]
+}

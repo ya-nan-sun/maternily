@@ -1,0 +1,516 @@
+{
+ "extractor": "template",
+ "model": "paddleocr-medium-v3+no-ai-fallback",
+ "effort": "medium",
+ "split": "dev",
+ "pages": 40,
+ "failures": [],
+ "sectionAccuracy": 1,
+ "fieldAccuracy": 0.9618263473053892,
+ "fieldsScored": 1336,
+ "uncertainty": {
+  "errors": 51,
+  "errorsFlagged": 0.8823529411764706,
+  "silentErrors": 6,
+  "silentErrorRate": 0.004491017964071856,
+  "questionsAsked": 54,
+  "flaggedButCorrect": 9,
+  "acceptedAndCorrect": 1276
+ },
+ "bySection": {
+  "COVER": "100.0%",
+  "IDENTIFICATION_HISTORY": "97.4%",
+  "CURRENT_PREGNANCY": "95.3%",
+  "DELIVERY": "92.4%",
+  "PP_EARLY_MOTHER": "97.5%",
+  "PP_EARLY_NEWBORN": "96.4%",
+  "PP_LATE_MOTHER": "98.2%",
+  "PP_LATE_NEWBORN": "96.4%"
+ },
+ "byType": {
+  "text": "99.4%",
+  "choice": "100.0%",
+  "bool": "99.6%",
+  "multi": "100.0%",
+  "int": "89.7%",
+  "date": "87.8%",
+  "number": "95.3%",
+  "ga": "97.1%",
+  "bp": "97.5%",
+  "lab": "90.0%",
+  "role": "87.5%"
+ },
+ "byInput": {
+  "written": "94.7%",
+  "checkbox": "100.0%"
+ },
+ "byFont": {
+  "Caveat": "98.1%",
+  "ShadowsIntoLight": "95.5%",
+  "NanumPen": "96.6%",
+  "Gaegu": "96.5%",
+  "ReenieBeanie": "94.3%"
+ },
+ "calibration": [
+  {
+   "confidence": "0-20%",
+   "n": 1,
+   "accuracy": "0.0%"
+  },
+  {
+   "confidence": "20-40%",
+   "n": 1,
+   "accuracy": "100.0%"
+  },
+  {
+   "confidence": "40-60%",
+   "n": 16,
+   "accuracy": "25.0%"
+  },
+  {
+   "confidence": "60-80%",
+   "n": 4,
+   "accuracy": "100.0%"
+  },
+  {
+   "confidence": "80-100%",
+   "n": 1282,
+   "accuracy": "99.5%"
+  }
+ ],
+ "statusConfusion": {
+  "KNOWN": {
+   "KNOWN": 1282,
+   "NEEDS_REVIEW": 42,
+   "ILLEGIBLE": 12
+  },
+  "NOT_PROVIDED": {
+   "NOT_PROVIDED": 988,
+   "KNOWN": 1
+  },
+  "NOT_APPLICABLE": {
+   "NOT_APPLICABLE": 63,
+   "NOT_PROVIDED": 4,
+   "NEEDS_REVIEW": 3
+  }
+ },
+ "cost": {
+  "thisRunUsd": 0,
+  "perPageUsd": 0,
+  "perRegistryUsd": 0,
+  "avgOutputTokens": 0,
+  "avgLatencyMs": 27397.25,
+  "calls": 40,
+  "cachedCalls": 8
+ },
+ "errors": [
+  {
+   "file": "dossiers_specimen_10_patientes-02.png",
+   "key": "id.livingChildren",
+   "expected": "1",
+   "got": "7",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M7.ga",
+   "expected": "31 SA",
+   "got": "37 SA",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M7.fhr",
+   "expected": "149",
+   "got": "749",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M8.fundalHeight",
+   "expected": "31",
+   "got": "37",
+   "status": "KNOWN",
+   "confidence": 0.9457
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M9.fhr",
+   "expected": "148",
+   "got": "748",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-10__1U_S1pqftP.png",
+   "key": "prev.1.weight",
+   "expected": "3626 g",
+   "got": "3626 9",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-10__1U_S1pqftP.png",
+   "key": "prev.2.weight",
+   "expected": "3679 g",
+   "got": "3679 9",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-10__1U_S1pqftP.png",
+   "key": "prev.3.weight",
+   "expected": "3001 g",
+   "got": "3001 9",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-11.png",
+   "key": "anc.T1V1.hiv",
+   "expected": "Neg",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-11.png",
+   "key": "anc.T1V1.hb",
+   "expected": "13.2 g/dL",
+   "got": "13.2 9g/dL",
+   "status": "KNOWN",
+   "confidence": 0.9338
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-11.png",
+   "key": "anc.T1V1.glycemia",
+   "expected": "0.8 g/L",
+   "got": "L0.8 9/L",
+   "status": "KNOWN",
+   "confidence": 0.9586
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-11.png",
+   "key": "anc.T1V1.rai",
+   "expected": "Neg",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-11.png",
+   "key": "anc.T1V2.visitDate",
+   "expected": "04/11/2025",
+   "got": "04/1/2025",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-11.png",
+   "key": "anc.T1V2.examiner",
+   "expected": "Sage-femme",
+   "got": "Sage_femme",
+   "status": "KNOWN",
+   "confidence": 0.9652
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-11.png",
+   "key": "anc.M8.fhr",
+   "expected": "132",
+   "got": "32",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-11.png",
+   "key": "anc.M8.albuminuria",
+   "expected": "Neg",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-12__1D4u3zWyes.png",
+   "key": "del.birthWeight",
+   "expected": "3699 g",
+   "got": "3699 9",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-14__1NRsJ9Ddo8.png",
+   "key": "ppn.early.nextVisit",
+   "expected": "29/06/2026",
+   "got": "29/o6/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-18__1YDapV3RjJ.png",
+   "key": "hist.medical",
+   "expected": "Asthme l\u0000ger",
+   "got": "Asthme | ger",
+   "status": "KNOWN",
+   "confidence": 0.9191
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-19__1CnJAvJyYe.png",
+   "key": "anc.T1V1.syphilis",
+   "expected": "Neg",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-19__1CnJAvJyYe.png",
+   "key": "anc.T2V1.bp",
+   "expected": "118/74",
+   "got": "118174",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-19__1CnJAvJyYe.png",
+   "key": "anc.T2V1.albuminuria",
+   "expected": "Neg",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-19__1CnJAvJyYe.png",
+   "key": "anc.T2V3.examiner",
+   "expected": "Sage-femme",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-19__1CnJAvJyYe.png",
+   "key": "anc.M9.glycosuria",
+   "expected": "Neg",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-20__18kYVBTwE4.png",
+   "key": "del.date",
+   "expected": "23/01/2026",
+   "got": "23/o1/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-20__18kYVBTwE4.png",
+   "key": "del.birthWeight",
+   "expected": "3624 g",
+   "got": "3624 9",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-22.png",
+   "key": "ppn.early.nextVisit",
+   "expected": "01/03/2026",
+   "got": "o1/03/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-27__1IYSy5g-zc.png",
+   "key": "preg.height",
+   "expected": "158 cm",
+   "got": "158_cm",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-27__1IYSy5g-zc.png",
+   "key": "anc.T1V1.iron",
+   "expected": "Oui",
+   "got": "Ou",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-27__1IYSy5g-zc.png",
+   "key": "anc.T2V2.albuminuria",
+   "expected": "Neg",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-28__1OtF9rNsnr.png",
+   "key": "del.birthWeight",
+   "expected": "2967 g",
+   "got": "2967_g",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-28__1OtF9rNsnr.png",
+   "key": "del.headCirc",
+   "expected": "36 cm",
+   "got": "36_cm",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-30__1MEUrnbu5W.png",
+   "key": "ppn.early.nextVisit",
+   "expected": "04/08/2026",
+   "got": "O4/o 8/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-31__1Nue3NqAua.png",
+   "key": "ppm.late.consultDate",
+   "expected": "13/08/2026",
+   "got": "13/o8/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-32__1Bx-67ocGy.png",
+   "key": "ppn.late.consultDate",
+   "expected": "13/08/2026",
+   "got": "13/o8/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-32__1Bx-67ocGy.png",
+   "key": "ppn.late.headCirc",
+   "expected": "40 cm",
+   "got": "4o cm",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-32__1Bx-67ocGy.png",
+   "key": "ppn.late.nextVisit",
+   "expected": "12/10/2026",
+   "got": "12/1o/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-35__1G4fXy_5Gm.png",
+   "key": "preg.edd",
+   "expected": "01/05/2026",
+   "got": "01/0s/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-35__1G4fXy_5Gm.png",
+   "key": "preg.postTerm",
+   "expected": "08/05/2026",
+   "got": "08/0s/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-35__1G4fXy_5Gm.png",
+   "key": "anc.T2V2.glycosuria",
+   "expected": "Neg",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-35__1G4fXy_5Gm.png",
+   "key": "anc.T2V2.albuminuria",
+   "expected": "Neg",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-35__1G4fXy_5Gm.png",
+   "key": "anc.T2V2.examiner",
+   "expected": "Dr Chakir",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-35__1G4fXy_5Gm.png",
+   "key": "anc.T2V3.examiner",
+   "expected": "Dr Chakir",
+   "got": "r Dr Benjelloun",
+   "status": "KNOWN",
+   "confidence": 0.9855
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-35__1G4fXy_5Gm.png",
+   "key": "anc.M7.examiner",
+   "expected": "Dr Benjelloun",
+   "got": null,
+   "status": "ILLEGIBLE",
+   "confidence": 0.3
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-36__10YoYqH4k6.png",
+   "key": "del.date",
+   "expected": "08/05/2026",
+   "got": "08/0s/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-37__1ClQJtts9I.png",
+   "key": "ppm.early.consultDate",
+   "expected": "16/05/2026",
+   "got": "16/os/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-37__1ClQJtts9I.png",
+   "key": "ppm.early.medicationDetail",
+   "expected": "Fer 2 cp/j",
+   "got": "ć Fer z cp/j",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.1791
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-37__1ClQJtts9I.png",
+   "key": "ppm.early.nextAppointment",
+   "expected": "20/06/2026",
+   "got": "zo/o6/2o26",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-38__1CXcCUFyrj.png",
+   "key": "ppn.early.nextVisit",
+   "expected": "15/06/2026",
+   "got": "1s/o6/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-39__17KgDI_D25.png",
+   "key": "ppm.late.consultDate",
+   "expected": "25/06/2026",
+   "got": "2s/o6/zo26",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-40__1WnbGI6FRA.png",
+   "key": "ppn.late.nextVisit",
+   "expected": "24/08/2026",
+   "got": "24/o8/2026",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.4
+  }
+ ]
+}

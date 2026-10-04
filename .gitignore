@@ -1,0 +1,10 @@
+node_modules/
+web/dist/
+/data/
+/work/
+.env
+.DS_Store
+eval/results/mock-*
+# Photos of a real, used booklet: may contain real patient data. Never commit.
+dayone-participants/data/Paper Registry/1-*.jpg
+/ocr/.venv/

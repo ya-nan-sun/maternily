@@ -1,0 +1,106 @@
+{
+ "pdfPage": 68,
+ "patient": 9,
+ "pageInRecord": 4,
+ "section": "DELIVERY",
+ "fields": {
+  "del.placeSetting": {
+   "raw": "SUPERVISED",
+   "status": "KNOWN",
+   "value": "SUPERVISED"
+  },
+  "del.placeType": {
+   "raw": "PRIVATE_CLINIC",
+   "status": "KNOWN",
+   "value": "PRIVATE_CLINIC"
+  },
+  "del.homeAssisted": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "del.date": {
+   "raw": "30/01/2026",
+   "status": "KNOWN",
+   "value": "2026-01-30"
+  },
+  "del.mode": {
+   "raw": "CESAREAN_EMERGENCY",
+   "status": "KNOWN",
+   "value": "CESAREAN_EMERGENCY"
+  },
+  "del.instrument": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "del.episiotomy": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "del.csIndication": {
+   "raw": "Pr\u0000-\u0000clampsie s\u0000v\u0000re",
+   "status": "KNOWN",
+   "value": "Pr-clampsie svre",
+   "missingGlyph": true
+  },
+  "del.complicationsPresent": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "del.complicationTiming": {
+   "raw": "AT_DELIVERY",
+   "status": "KNOWN",
+   "value": [
+    "AT_DELIVERY"
+   ]
+  },
+  "del.complications": {
+   "raw": "PREECLAMPSIA",
+   "status": "KNOWN",
+   "value": [
+    "PREECLAMPSIA"
+   ]
+  },
+  "del.complicationOther": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "del.newbornStatus": {
+   "raw": "ALIVE",
+   "status": "KNOWN",
+   "value": "ALIVE"
+  },
+  "del.sex": {
+   "raw": "M",
+   "status": "KNOWN",
+   "value": "M"
+  },
+  "del.birthWeight": {
+   "raw": "3585 g",
+   "status": "KNOWN",
+   "value": 3585
+  },
+  "del.headCirc": {
+   "raw": "33 cm",
+   "status": "KNOWN",
+   "value": 33
+  },
+  "del.anomaly": {
+   "raw": "Aucune",
+   "status": "KNOWN",
+   "value": "Aucune"
+  },
+  "del.gaAtBirth": {
+   "raw": "41 SA",
+   "status": "KNOWN",
+   "value": {
+    "weeks": 41,
+    "days": 0
+   }
+  }
+ }
+}

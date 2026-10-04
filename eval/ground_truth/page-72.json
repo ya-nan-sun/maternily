@@ -1,0 +1,126 @@
+{
+ "pdfPage": 72,
+ "patient": 9,
+ "pageInRecord": 8,
+ "section": "PP_LATE_NEWBORN",
+ "fields": {
+  "ppn.late.consultDate": {
+   "raw": "17/03/2026",
+   "status": "KNOWN",
+   "value": "2026-03-17"
+  },
+  "ppn.late.ageDays": {
+   "raw": "46 jours",
+   "status": "KNOWN",
+   "value": 46
+  },
+  "ppn.late.temp": {
+   "raw": "36.8 \u0000C",
+   "status": "KNOWN",
+   "value": 36.8,
+   "missingGlyph": true
+  },
+  "ppn.late.weight": {
+   "raw": "5566 g",
+   "status": "KNOWN",
+   "value": 5566
+  },
+  "ppn.late.length": {
+   "raw": "54 cm",
+   "status": "KNOWN",
+   "value": 54
+  },
+  "ppn.late.headCirc": {
+   "raw": "36 cm",
+   "status": "KNOWN",
+   "value": 36
+  },
+  "ppn.late.premature": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.late.hypotrophic": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.late.feeding": {
+   "raw": "EXCLUSIVE",
+   "status": "KNOWN",
+   "value": "EXCLUSIVE"
+  },
+  "ppn.late.dangerSigns": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.late.dangerOther": {
+   "raw": "N\u0000ant",
+   "status": "KNOWN",
+   "value": "Nant",
+   "missingGlyph": true
+  },
+  "ppn.late.trauma": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.late.traumaOther": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "ppn.late.bfEval": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": "NORMAL"
+  },
+  "ppn.late.vaccines": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.late.vitaminD": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.late.complications": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.late.seenBy": {
+   "raw": "Inf. Zahra",
+   "status": "KNOWN",
+   "value": "NURSE"
+  },
+  "ppn.late.decision": {
+   "raw": "Poursuivre l'allaitement exclusif",
+   "status": "KNOWN",
+   "value": "Poursuivre l'allaitement exclusif"
+  },
+  "ppn.late.treatment": {
+   "raw": "N\u0000ant",
+   "status": "KNOWN",
+   "value": "Nant",
+   "missingGlyph": true
+  },
+  "ppn.late.transfer": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.late.referralFacility": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppn.late.nextVisit": {
+   "raw": "16/05/2026",
+   "status": "KNOWN",
+   "value": "2026-05-16"
+  }
+ }
+}

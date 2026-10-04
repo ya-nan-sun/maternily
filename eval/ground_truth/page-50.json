@@ -1,0 +1,380 @@
+{
+ "pdfPage": 50,
+ "patient": 7,
+ "pageInRecord": 2,
+ "section": "IDENTIFICATION_HISTORY",
+ "fields": {
+  "id.age": {
+   "raw": "26",
+   "status": "KNOWN",
+   "value": 26
+  },
+  "id.education": {
+   "raw": "Collège",
+   "status": "KNOWN",
+   "value": "Collège"
+  },
+  "id.occupation": {
+   "raw": "Commerçante",
+   "status": "KNOWN",
+   "value": "Commerçante"
+  },
+  "id.husbandOccupation": {
+   "raw": "Mécanicien",
+   "status": "KNOWN",
+   "value": "Mécanicien"
+  },
+  "id.consanguinity": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "id.desiredPregnancy": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "fam.hta.wife": {
+   "raw": "Mère",
+   "status": "KNOWN",
+   "value": "Mère"
+  },
+  "fam.hta.husband": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "fam.diabetes.wife": {
+   "raw": "Mère",
+   "status": "KNOWN",
+   "value": "Mère"
+  },
+  "fam.diabetes.husband": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "fam.hereditary.wife": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "fam.hereditary.husband": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "fam.malformations.wife": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "fam.malformations.husband": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "fam.allergies.wife": {
+   "raw": "Mère",
+   "status": "KNOWN",
+   "value": "Mère"
+  },
+  "fam.allergies.husband": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "hist.medical": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "hist.surgical": {
+   "raw": "Appendicectomie",
+   "status": "KNOWN",
+   "value": "Appendicectomie"
+  },
+  "hist.gyneco": {
+   "raw": "Cycles réguliers",
+   "status": "KNOWN",
+   "value": "Cycles réguliers"
+  },
+  "obs.abortion.count": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.abortion.date": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.abortion.place": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.abortion.ga": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.preterm.count": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.preterm.date": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.preterm.place": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.preterm.ga": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.fetalDeath.count": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.fetalDeath.date": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.fetalDeath.place": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.fetalDeath.ga": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.other.count": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.other.date": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.other.place": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "obs.other.ga": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.1.date": {
+   "raw": "19/10/2018",
+   "status": "KNOWN",
+   "value": "2018-10-19"
+  },
+  "prev.1.mode": {
+   "raw": "Voie basse",
+   "status": "KNOWN",
+   "value": "Voie basse"
+  },
+  "prev.1.csIndication": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.1.complication": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "prev.1.weight": {
+   "raw": "3296 g",
+   "status": "KNOWN",
+   "value": 3296
+  },
+  "prev.1.nbComplication": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "prev.2.date": {
+   "raw": "12/08/2021",
+   "status": "KNOWN",
+   "value": "2021-08-12"
+  },
+  "prev.2.mode": {
+   "raw": "Voie basse",
+   "status": "KNOWN",
+   "value": "Voie basse"
+  },
+  "prev.2.csIndication": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.2.complication": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "prev.2.weight": {
+   "raw": "3662 g",
+   "status": "KNOWN",
+   "value": 3662
+  },
+  "prev.2.nbComplication": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "prev.3.date": {
+   "raw": "25/06/2023",
+   "status": "KNOWN",
+   "value": "2023-06-25"
+  },
+  "prev.3.mode": {
+   "raw": "Voie basse",
+   "status": "KNOWN",
+   "value": "Voie basse"
+  },
+  "prev.3.csIndication": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.3.complication": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "prev.3.weight": {
+   "raw": "3651 g",
+   "status": "KNOWN",
+   "value": 3651
+  },
+  "prev.3.nbComplication": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "prev.4.date": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.4.mode": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.4.csIndication": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.4.complication": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.4.weight": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.4.nbComplication": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.5.date": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.5.mode": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.5.csIndication": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.5.complication": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.5.weight": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "prev.5.nbComplication": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "id.gravidity": {
+   "raw": "5",
+   "status": "KNOWN",
+   "value": 5
+  },
+  "id.parity": {
+   "raw": "3",
+   "status": "KNOWN",
+   "value": 3
+  },
+  "id.livingChildren": {
+   "raw": "3",
+   "status": "KNOWN",
+   "value": 3
+  },
+  "id.tetanusDoses": {
+   "raw": "2",
+   "status": "KNOWN",
+   "value": [
+    "2"
+   ]
+  },
+  "id.rubellaVaccinated": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "id.rubellaDate": {
+   "raw": "12/05/2022",
+   "status": "KNOWN",
+   "value": "2022-05-12"
+  },
+  "id.hepBVaccinated": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "id.hepBDate": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "id.papSmear": {
+   "raw": "Normal",
+   "status": "KNOWN",
+   "value": "Normal"
+  }
+ }
+}

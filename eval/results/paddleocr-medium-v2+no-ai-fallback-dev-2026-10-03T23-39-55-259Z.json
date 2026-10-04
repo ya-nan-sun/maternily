@@ -1,0 +1,149 @@
+{
+ "extractor": "template",
+ "model": "paddleocr-medium-v2+no-ai-fallback",
+ "effort": "medium",
+ "split": "dev",
+ "pages": 8,
+ "failures": [],
+ "sectionAccuracy": 1,
+ "fieldAccuracy": 0.9768339768339769,
+ "fieldsScored": 259,
+ "uncertainty": {
+  "errors": 6,
+  "errorsFlagged": 0.3333333333333333,
+  "silentErrors": 4,
+  "silentErrorRate": 0.015444015444015444,
+  "questionsAsked": 2,
+  "flaggedButCorrect": 0,
+  "acceptedAndCorrect": 253
+ },
+ "bySection": {
+  "COVER": "100.0%",
+  "IDENTIFICATION_HISTORY": "93.8%",
+  "CURRENT_PREGNANCY": "96.5%",
+  "DELIVERY": "100.0%",
+  "PP_EARLY_MOTHER": "100.0%",
+  "PP_EARLY_NEWBORN": "100.0%",
+  "PP_LATE_MOTHER": "100.0%",
+  "PP_LATE_NEWBORN": "100.0%"
+ },
+ "byType": {
+  "text": "98.2%",
+  "choice": "100.0%",
+  "bool": "100.0%",
+  "multi": "100.0%",
+  "int": "83.3%",
+  "date": "100.0%",
+  "number": "96.2%",
+  "ga": "85.7%",
+  "bp": "100.0%",
+  "lab": "100.0%",
+  "role": "100.0%"
+ },
+ "byInput": {
+  "written": "96.8%",
+  "checkbox": "100.0%"
+ },
+ "byFont": {
+  "Caveat": "97.7%"
+ },
+ "calibration": [
+  {
+   "confidence": "0-20%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "20-40%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "40-60%",
+   "n": 2,
+   "accuracy": "0.0%"
+  },
+  {
+   "confidence": "60-80%",
+   "n": 0,
+   "accuracy": "—"
+  },
+  {
+   "confidence": "80-100%",
+   "n": 257,
+   "accuracy": "98.4%"
+  }
+ ],
+ "statusConfusion": {
+  "KNOWN": {
+   "KNOWN": 257,
+   "NEEDS_REVIEW": 2
+  },
+  "NOT_PROVIDED": {
+   "NOT_PROVIDED": 197
+  },
+  "NOT_APPLICABLE": {
+   "NOT_APPLICABLE": 22,
+   "NOT_PROVIDED": 1
+  }
+ },
+ "cost": {
+  "thisRunUsd": 0,
+  "perPageUsd": 0,
+  "perRegistryUsd": 0,
+  "avgOutputTokens": 0,
+  "avgLatencyMs": 33924.25,
+  "calls": 8,
+  "cachedCalls": 0
+ },
+ "errors": [
+  {
+   "file": "dossiers_specimen_10_patientes-02.png",
+   "key": "id.livingChildren",
+   "expected": "1",
+   "got": "7",
+   "status": "KNOWN",
+   "confidence": 0.9768
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-02.png",
+   "key": "id.papSmear",
+   "expected": "Normal",
+   "got": ") : Norma/",
+   "status": "KNOWN",
+   "confidence": 0.9846
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M7.ga",
+   "expected": "31 SA",
+   "got": "37 SA",
+   "status": "KNOWN",
+   "confidence": 0.9382
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M7.fhr",
+   "expected": "149",
+   "got": "749",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M8.fundalHeight",
+   "expected": "31",
+   "got": "37",
+   "status": "KNOWN",
+   "confidence": 0.9457
+  },
+  {
+   "file": "dossiers_specimen_10_patientes-03.png",
+   "key": "anc.M9.fhr",
+   "expected": "148",
+   "got": "748",
+   "status": "NEEDS_REVIEW",
+   "confidence": 0.5
+  }
+ ]
+}

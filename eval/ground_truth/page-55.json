@@ -1,0 +1,160 @@
+{
+ "pdfPage": 55,
+ "patient": 7,
+ "pageInRecord": 7,
+ "section": "PP_LATE_MOTHER",
+ "fields": {
+  "ppm.late.consultDate": {
+   "raw": "14/10/2026",
+   "status": "KNOWN",
+   "value": "2026-10-14"
+  },
+  "ppm.late.timing": {
+   "raw": "IN_WINDOW",
+   "status": "KNOWN",
+   "value": "IN_WINDOW"
+  },
+  "ppm.late.temp": {
+   "raw": "36.8",
+   "status": "KNOWN",
+   "value": 36.8
+  },
+  "ppm.late.bp": {
+   "raw": "112/68",
+   "status": "KNOWN",
+   "value": {
+    "systolic": 112,
+    "diastolic": 68
+   }
+  },
+  "ppm.late.pulse": {
+   "raw": "71",
+   "status": "KNOWN",
+   "value": 71
+  },
+  "ppm.late.weight": {
+   "raw": "65 kg",
+   "status": "KNOWN",
+   "value": 65
+  },
+  "ppm.late.conjunctivae": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": "NORMAL"
+  },
+  "ppm.late.uterineGlobe": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppm.late.lochia": {
+   "raw": "FADE, CLEAR",
+   "status": "KNOWN",
+   "value": [
+    "FADE",
+    "CLEAR"
+   ]
+  },
+  "ppm.late.perineum": {
+   "raw": "REPAIRED",
+   "status": "KNOWN",
+   "value": [
+    "REPAIRED"
+   ]
+  },
+  "ppm.late.sphincters": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": "NORMAL"
+  },
+  "ppm.late.cesarean": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppm.late.scar": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppm.late.breasts": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": "NORMAL"
+  },
+  "ppm.late.calves": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": [
+    "NORMAL"
+   ]
+  },
+  "ppm.late.complicationsPresent": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppm.late.complications": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppm.late.medication": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppm.late.medicationDetail": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppm.late.treatment": {
+   "raw": "IRON",
+   "status": "KNOWN",
+   "value": [
+    "IRON"
+   ]
+  },
+  "ppm.late.treatmentOther": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppm.late.nextAppointment": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppm.late.fpDesired": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppm.late.fpMethod": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppm.late.fpMethodOther": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppm.late.fpPrescribed": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppm.late.fpReferred": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppm.late.fpReason": {
+   "raw": "Souhaite en discuter avec son mari",
+   "status": "KNOWN",
+   "value": "Souhaite en discuter avec son mari"
+  }
+ }
+}

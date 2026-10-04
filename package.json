@@ -1,0 +1,39 @@
+{
+  "name": "maternily",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Offline-first WhatsApp-style agent that turns photos of paper maternal registries into structured, midwife-verified records.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n server,web -c blue,green \"tsx watch server/index.ts\" \"vite\"",
+    "build": "vite build",
+    "start": "NODE_ENV=production tsx server/index.ts",
+    "gt": "python3 tools/pdf_ground_truth.py \"dayone-participants/data/Paper Registry/dossiers_specimen_10_patientes.pdf\" work/pdf_ground_truth_draft.json && tsx eval/build-ground-truth.ts",
+    "eval": "tsx eval/run.ts",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "compare": "tsx eval/compare.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
+    "express": "^5.2.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "concurrently": "^10.0.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.2",
+    "vitest": "^4.1.11"
+  }
+}

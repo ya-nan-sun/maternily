@@ -1,0 +1,126 @@
+{
+ "pdfPage": 78,
+ "patient": 10,
+ "pageInRecord": 6,
+ "section": "PP_EARLY_NEWBORN",
+ "fields": {
+  "ppn.early.consultDate": {
+   "raw": "15/07/2026",
+   "status": "KNOWN",
+   "value": "2026-07-15"
+  },
+  "ppn.early.ageDays": {
+   "raw": "8 jours",
+   "status": "KNOWN",
+   "value": 8
+  },
+  "ppn.early.temp": {
+   "raw": "36.8 °C",
+   "status": "KNOWN",
+   "value": 36.8
+  },
+  "ppn.early.weight": {
+   "raw": "3016 g",
+   "status": "KNOWN",
+   "value": 3016
+  },
+  "ppn.early.length": {
+   "raw": "49 cm",
+   "status": "KNOWN",
+   "value": 49
+  },
+  "ppn.early.headCirc": {
+   "raw": "35 cm",
+   "status": "KNOWN",
+   "value": 35
+  },
+  "ppn.early.premature": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.early.hypotrophic": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.early.feeding": {
+   "raw": "EXCLUSIVE",
+   "status": "KNOWN",
+   "value": "EXCLUSIVE"
+  },
+  "ppn.early.dangerSigns": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.early.dangerOther": {
+   "raw": "Néant",
+   "status": "KNOWN",
+   "value": "Néant"
+  },
+  "ppn.early.trauma": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.early.traumaOther": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "ppn.early.bfEval": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": "NORMAL"
+  },
+  "ppn.early.vaccines": {
+   "raw": "BCG, HB",
+   "status": "KNOWN",
+   "value": [
+    "BCG",
+    "HB"
+   ]
+  },
+  "ppn.early.vitaminD": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "ppn.early.complications": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.early.seenBy": {
+   "raw": "Dr Benjelloun",
+   "status": "KNOWN",
+   "value": "DOCTOR"
+  },
+  "ppn.early.decision": {
+   "raw": "Poursuivre l'allaitement exclusif",
+   "status": "KNOWN",
+   "value": "Poursuivre l'allaitement exclusif"
+  },
+  "ppn.early.treatment": {
+   "raw": "Néant",
+   "status": "KNOWN",
+   "value": "Néant"
+  },
+  "ppn.early.transfer": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.early.referralFacility": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppn.early.nextVisit": {
+   "raw": "14/08/2026",
+   "status": "KNOWN",
+   "value": "2026-08-14"
+  }
+ }
+}

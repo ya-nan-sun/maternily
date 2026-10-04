@@ -1,0 +1,55 @@
+{
+ "pdfPage": 33,
+ "patient": 5,
+ "pageInRecord": 1,
+ "section": "COVER",
+ "fields": {
+  "cover.ficheNumber": {
+   "raw": "2026-978-005",
+   "status": "KNOWN",
+   "value": "2026-978-005"
+  },
+  "cover.region": {
+   "raw": "Souss-Massa",
+   "status": "KNOWN",
+   "value": "Souss-Massa"
+  },
+  "cover.province": {
+   "raw": "Taroudant",
+   "status": "KNOWN",
+   "value": "Taroudant"
+  },
+  "cover.facilityName": {
+   "raw": "CSC Al Amal",
+   "status": "KNOWN",
+   "value": "CSC Al Amal"
+  },
+  "cover.facilityType": {
+   "raw": "CSC",
+   "status": "KNOWN",
+   "value": "CSC"
+  },
+  "cover.coverageMode": {
+   "raw": "FIXE",
+   "status": "KNOWN",
+   "value": "FIXE"
+  },
+  "cover.riskPregnancy": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "cover.riskTypes": {
+   "raw": "ANEMIA",
+   "status": "KNOWN",
+   "value": [
+    "ANEMIA"
+   ]
+  },
+  "cover.riskOther": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  }
+ }
+}

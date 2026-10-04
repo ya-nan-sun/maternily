@@ -1,0 +1,123 @@
+{
+ "pdfPage": 80,
+ "patient": 10,
+ "pageInRecord": 8,
+ "section": "PP_LATE_NEWBORN",
+ "fields": {
+  "ppn.late.consultDate": {
+   "raw": "20/08/2026",
+   "status": "KNOWN",
+   "value": "2026-08-20"
+  },
+  "ppn.late.ageDays": {
+   "raw": "44 jours",
+   "status": "KNOWN",
+   "value": 44
+  },
+  "ppn.late.temp": {
+   "raw": "36.9 °C",
+   "status": "KNOWN",
+   "value": 36.9
+  },
+  "ppn.late.weight": {
+   "raw": "4480 g",
+   "status": "KNOWN",
+   "value": 4480
+  },
+  "ppn.late.length": {
+   "raw": "54 cm",
+   "status": "KNOWN",
+   "value": 54
+  },
+  "ppn.late.headCirc": {
+   "raw": "39 cm",
+   "status": "KNOWN",
+   "value": 39
+  },
+  "ppn.late.premature": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.late.hypotrophic": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.late.feeding": {
+   "raw": "EXCLUSIVE",
+   "status": "KNOWN",
+   "value": "EXCLUSIVE"
+  },
+  "ppn.late.dangerSigns": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.late.dangerOther": {
+   "raw": "Néant",
+   "status": "KNOWN",
+   "value": "Néant"
+  },
+  "ppn.late.trauma": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.late.traumaOther": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "ppn.late.bfEval": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": "NORMAL"
+  },
+  "ppn.late.vaccines": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.late.vitaminD": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.late.complications": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.late.seenBy": {
+   "raw": "Dr Benjelloun",
+   "status": "KNOWN",
+   "value": "DOCTOR"
+  },
+  "ppn.late.decision": {
+   "raw": "Poursuivre l'allaitement exclusif",
+   "status": "KNOWN",
+   "value": "Poursuivre l'allaitement exclusif"
+  },
+  "ppn.late.treatment": {
+   "raw": "Néant",
+   "status": "KNOWN",
+   "value": "Néant"
+  },
+  "ppn.late.transfer": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.late.referralFacility": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppn.late.nextVisit": {
+   "raw": "19/10/2026",
+   "status": "KNOWN",
+   "value": "2026-10-19"
+  }
+ }
+}

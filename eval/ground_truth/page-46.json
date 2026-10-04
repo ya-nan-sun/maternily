@@ -1,0 +1,126 @@
+{
+ "pdfPage": 46,
+ "patient": 6,
+ "pageInRecord": 6,
+ "section": "PP_EARLY_NEWBORN",
+ "fields": {
+  "ppn.early.consultDate": {
+   "raw": "03/08/2026",
+   "status": "KNOWN",
+   "value": "2026-08-03"
+  },
+  "ppn.early.ageDays": {
+   "raw": "8 jours",
+   "status": "KNOWN",
+   "value": 8
+  },
+  "ppn.early.temp": {
+   "raw": "36.8 °C",
+   "status": "KNOWN",
+   "value": 36.8
+  },
+  "ppn.early.weight": {
+   "raw": "2233 g",
+   "status": "KNOWN",
+   "value": 2233
+  },
+  "ppn.early.length": {
+   "raw": "50 cm",
+   "status": "KNOWN",
+   "value": 50
+  },
+  "ppn.early.headCirc": {
+   "raw": "31 cm",
+   "status": "KNOWN",
+   "value": 31
+  },
+  "ppn.early.premature": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "ppn.early.hypotrophic": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.early.feeding": {
+   "raw": "EXCLUSIVE",
+   "status": "KNOWN",
+   "value": "EXCLUSIVE"
+  },
+  "ppn.early.dangerSigns": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.early.dangerOther": {
+   "raw": "Néant",
+   "status": "KNOWN",
+   "value": "Néant"
+  },
+  "ppn.early.trauma": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.early.traumaOther": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "ppn.early.bfEval": {
+   "raw": "NORMAL",
+   "status": "KNOWN",
+   "value": "NORMAL"
+  },
+  "ppn.early.vaccines": {
+   "raw": "BCG, HB",
+   "status": "KNOWN",
+   "value": [
+    "BCG",
+    "HB"
+   ]
+  },
+  "ppn.early.vitaminD": {
+   "raw": "checked",
+   "status": "KNOWN",
+   "value": true
+  },
+  "ppn.early.complications": {
+   "raw": "",
+   "status": "KNOWN",
+   "value": []
+  },
+  "ppn.early.seenBy": {
+   "raw": "Dr Benjelloun",
+   "status": "KNOWN",
+   "value": "DOCTOR"
+  },
+  "ppn.early.decision": {
+   "raw": "Poursuivre l'allaitement exclusif",
+   "status": "KNOWN",
+   "value": "Poursuivre l'allaitement exclusif"
+  },
+  "ppn.early.treatment": {
+   "raw": "Vit. D 400 UI/j",
+   "status": "KNOWN",
+   "value": "Vit. D 400 UI/j"
+  },
+  "ppn.early.transfer": {
+   "raw": "unchecked",
+   "status": "KNOWN",
+   "value": false
+  },
+  "ppn.early.referralFacility": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "ppn.early.nextVisit": {
+   "raw": "02/09/2026",
+   "status": "KNOWN",
+   "value": "2026-09-02"
+  }
+ }
+}

@@ -1,0 +1,1424 @@
+{
+ "pdfPage": 75,
+ "patient": 10,
+ "pageInRecord": 3,
+ "section": "CURRENT_PREGNANCY",
+ "fields": {
+  "preg.lmp": {
+   "raw": "03/10/2025",
+   "status": "KNOWN",
+   "value": "2025-10-03"
+  },
+  "preg.height": {
+   "raw": "160 cm",
+   "status": "KNOWN",
+   "value": 160
+  },
+  "preg.bloodGroup": {
+   "raw": "AB",
+   "status": "KNOWN",
+   "value": "AB"
+  },
+  "preg.rhesus": {
+   "raw": "POS",
+   "status": "KNOWN",
+   "value": "POS"
+  },
+  "preg.edd": {
+   "raw": "10/07/2026",
+   "status": "KNOWN",
+   "value": "2026-07-10"
+  },
+  "preg.postTerm": {
+   "raw": "17/07/2026",
+   "status": "KNOWN",
+   "value": "2026-07-17"
+  },
+  "anc.T1V1.appointment": {
+   "raw": "28/12/2025",
+   "status": "KNOWN",
+   "value": "2025-12-28"
+  },
+  "anc.T1V1.visitDate": {
+   "raw": "30/11/2025",
+   "status": "KNOWN",
+   "value": "2025-11-30"
+  },
+  "anc.T1V1.followUp": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.T1V1.ga": {
+   "raw": "8 SA",
+   "status": "KNOWN",
+   "value": {
+    "weeks": 8,
+    "days": 0
+   }
+  },
+  "anc.T1V1.weight": {
+   "raw": "72.9",
+   "status": "KNOWN",
+   "value": 72.9
+  },
+  "anc.T1V1.bp": {
+   "raw": "103/78",
+   "status": "KNOWN",
+   "value": {
+    "systolic": 103,
+    "diastolic": 78
+   }
+  },
+  "anc.T1V1.skeletal": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "anc.T1V1.conjunctivae": {
+   "raw": "Normales",
+   "status": "KNOWN",
+   "value": "Normales"
+  },
+  "anc.T1V1.breasts": {
+   "raw": "Normaux",
+   "status": "KNOWN",
+   "value": "Normaux"
+  },
+  "anc.T1V1.edema": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.T1V1.fetalMovements": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V1.fundalHeight": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V1.fhr": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V1.speculum": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "anc.T1V1.cervix": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V1.presentation": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V1.pelvis": {
+   "raw": "Normal",
+   "status": "KNOWN",
+   "value": "Normal"
+  },
+  "anc.T1V1.glycosuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T1V1.albuminuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T1V1.rubella": {
+   "raw": "Immune",
+   "status": "KNOWN",
+   "value": "IMMUNE"
+  },
+  "anc.T1V1.toxo": {
+   "raw": "Non immune",
+   "status": "KNOWN",
+   "value": "NOT_IMMUNE"
+  },
+  "anc.T1V1.syphilis": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T1V1.hbsag": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T1V1.hiv": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T1V1.hb": {
+   "raw": "11.8 g/dL",
+   "status": "KNOWN",
+   "value": 11.8
+  },
+  "anc.T1V1.platelets": {
+   "raw": "281k",
+   "status": "KNOWN",
+   "value": 281000
+  },
+  "anc.T1V1.glycemia": {
+   "raw": "0.93 g/L",
+   "status": "KNOWN",
+   "value": 0.93
+  },
+  "anc.T1V1.rai": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T1V1.iron": {
+   "raw": "Oui",
+   "status": "KNOWN",
+   "value": true
+  },
+  "anc.T1V1.examiner": {
+   "raw": "Dr Benjelloun",
+   "status": "KNOWN",
+   "value": "DOCTOR"
+  },
+  "anc.T1V2.appointment": {
+   "raw": "23/01/2026",
+   "status": "KNOWN",
+   "value": "2026-01-23"
+  },
+  "anc.T1V2.visitDate": {
+   "raw": "26/12/2025",
+   "status": "KNOWN",
+   "value": "2025-12-26"
+  },
+  "anc.T1V2.followUp": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.T1V2.ga": {
+   "raw": "12 SA",
+   "status": "KNOWN",
+   "value": {
+    "weeks": 12,
+    "days": 0
+   }
+  },
+  "anc.T1V2.weight": {
+   "raw": "74.8",
+   "status": "KNOWN",
+   "value": 74.8
+  },
+  "anc.T1V2.bp": {
+   "raw": "120/64",
+   "status": "KNOWN",
+   "value": {
+    "systolic": 120,
+    "diastolic": 64
+   }
+  },
+  "anc.T1V2.skeletal": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "anc.T1V2.conjunctivae": {
+   "raw": "Normales",
+   "status": "KNOWN",
+   "value": "Normales"
+  },
+  "anc.T1V2.breasts": {
+   "raw": "Normaux",
+   "status": "KNOWN",
+   "value": "Normaux"
+  },
+  "anc.T1V2.edema": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.T1V2.fetalMovements": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V2.fundalHeight": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V2.fhr": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V2.speculum": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V2.cervix": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V2.presentation": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V2.pelvis": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T1V2.glycosuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T1V2.albuminuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T1V2.rubella": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V2.toxo": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V2.syphilis": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V2.hbsag": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V2.hiv": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V2.hb": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V2.platelets": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V2.glycemia": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V2.rai": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V2.iron": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V2.examiner": {
+   "raw": "Dr Chakir",
+   "status": "KNOWN",
+   "value": "DOCTOR"
+  },
+  "anc.T1V3.appointment": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.visitDate": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.followUp": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.ga": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.weight": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.bp": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.skeletal": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.conjunctivae": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.breasts": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.edema": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.fetalMovements": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.fundalHeight": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.fhr": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.speculum": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.cervix": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.presentation": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.pelvis": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.glycosuria": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.albuminuria": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.rubella": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.toxo": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.syphilis": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.hbsag": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.hiv": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.hb": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.platelets": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.glycemia": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.rai": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.iron": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T1V3.examiner": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V1.appointment": {
+   "raw": "26/02/2026",
+   "status": "KNOWN",
+   "value": "2026-02-26"
+  },
+  "anc.T2V1.visitDate": {
+   "raw": "29/01/2026",
+   "status": "KNOWN",
+   "value": "2026-01-29"
+  },
+  "anc.T2V1.followUp": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.T2V1.ga": {
+   "raw": "17 SA",
+   "status": "KNOWN",
+   "value": {
+    "weeks": 17,
+    "days": 0
+   }
+  },
+  "anc.T2V1.weight": {
+   "raw": "76.1",
+   "status": "KNOWN",
+   "value": 76.1
+  },
+  "anc.T2V1.bp": {
+   "raw": "113/60",
+   "status": "KNOWN",
+   "value": {
+    "systolic": 113,
+    "diastolic": 60
+   }
+  },
+  "anc.T2V1.skeletal": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "anc.T2V1.conjunctivae": {
+   "raw": "Normales",
+   "status": "KNOWN",
+   "value": "Normales"
+  },
+  "anc.T2V1.breasts": {
+   "raw": "Normaux",
+   "status": "KNOWN",
+   "value": "Normaux"
+  },
+  "anc.T2V1.edema": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.T2V1.fetalMovements": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V1.fundalHeight": {
+   "raw": "13",
+   "status": "KNOWN",
+   "value": 13
+  },
+  "anc.T2V1.fhr": {
+   "raw": "137",
+   "status": "KNOWN",
+   "value": 137
+  },
+  "anc.T2V1.speculum": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V1.cervix": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V1.presentation": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V1.pelvis": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V1.glycosuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T2V1.albuminuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T2V1.rubella": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V1.toxo": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V1.syphilis": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V1.hbsag": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V1.hiv": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V1.hb": {
+   "raw": "11.7 g/dL",
+   "status": "KNOWN",
+   "value": 11.7
+  },
+  "anc.T2V1.platelets": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V1.glycemia": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V1.rai": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V1.iron": {
+   "raw": "Oui",
+   "status": "KNOWN",
+   "value": true
+  },
+  "anc.T2V1.examiner": {
+   "raw": "Inf. Zahra",
+   "status": "KNOWN",
+   "value": "NURSE"
+  },
+  "anc.T2V2.appointment": {
+   "raw": "18/04/2026",
+   "status": "KNOWN",
+   "value": "2026-04-18"
+  },
+  "anc.T2V2.visitDate": {
+   "raw": "21/03/2026",
+   "status": "KNOWN",
+   "value": "2026-03-21"
+  },
+  "anc.T2V2.followUp": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.T2V2.ga": {
+   "raw": "24 SA",
+   "status": "KNOWN",
+   "value": {
+    "weeks": 24,
+    "days": 0
+   }
+  },
+  "anc.T2V2.weight": {
+   "raw": "77.7",
+   "status": "KNOWN",
+   "value": 77.7
+  },
+  "anc.T2V2.bp": {
+   "raw": "111/70",
+   "status": "KNOWN",
+   "value": {
+    "systolic": 111,
+    "diastolic": 70
+   }
+  },
+  "anc.T2V2.skeletal": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "anc.T2V2.conjunctivae": {
+   "raw": "Normales",
+   "status": "KNOWN",
+   "value": "Normales"
+  },
+  "anc.T2V2.breasts": {
+   "raw": "Normaux",
+   "status": "KNOWN",
+   "value": "Normaux"
+  },
+  "anc.T2V2.edema": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.T2V2.fetalMovements": {
+   "raw": "Oui",
+   "status": "KNOWN",
+   "value": true
+  },
+  "anc.T2V2.fundalHeight": {
+   "raw": "20",
+   "status": "KNOWN",
+   "value": 20
+  },
+  "anc.T2V2.fhr": {
+   "raw": "145",
+   "status": "KNOWN",
+   "value": 145
+  },
+  "anc.T2V2.speculum": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V2.cervix": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V2.presentation": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V2.pelvis": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V2.glycosuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T2V2.albuminuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T2V2.rubella": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V2.toxo": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V2.syphilis": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V2.hbsag": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V2.hiv": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V2.hb": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V2.platelets": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V2.glycemia": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V2.rai": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V2.iron": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V2.examiner": {
+   "raw": "Inf. Zahra",
+   "status": "KNOWN",
+   "value": "NURSE"
+  },
+  "anc.T2V3.appointment": {
+   "raw": "04/05/2026",
+   "status": "KNOWN",
+   "value": "2026-05-04"
+  },
+  "anc.T2V3.visitDate": {
+   "raw": "06/04/2026",
+   "status": "KNOWN",
+   "value": "2026-04-06"
+  },
+  "anc.T2V3.followUp": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.T2V3.ga": {
+   "raw": "26 SA",
+   "status": "KNOWN",
+   "value": {
+    "weeks": 26,
+    "days": 0
+   }
+  },
+  "anc.T2V3.weight": {
+   "raw": "79.7",
+   "status": "KNOWN",
+   "value": 79.7
+  },
+  "anc.T2V3.bp": {
+   "raw": "104/64",
+   "status": "KNOWN",
+   "value": {
+    "systolic": 104,
+    "diastolic": 64
+   }
+  },
+  "anc.T2V3.skeletal": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "anc.T2V3.conjunctivae": {
+   "raw": "Normales",
+   "status": "KNOWN",
+   "value": "Normales"
+  },
+  "anc.T2V3.breasts": {
+   "raw": "Normaux",
+   "status": "KNOWN",
+   "value": "Normaux"
+  },
+  "anc.T2V3.edema": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.T2V3.fetalMovements": {
+   "raw": "Oui",
+   "status": "KNOWN",
+   "value": true
+  },
+  "anc.T2V3.fundalHeight": {
+   "raw": "22",
+   "status": "KNOWN",
+   "value": 22
+  },
+  "anc.T2V3.fhr": {
+   "raw": "138",
+   "status": "KNOWN",
+   "value": 138
+  },
+  "anc.T2V3.speculum": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V3.cervix": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V3.presentation": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V3.pelvis": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.T2V3.glycosuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T2V3.albuminuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.T2V3.rubella": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V3.toxo": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V3.syphilis": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V3.hbsag": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V3.hiv": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V3.hb": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V3.platelets": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V3.glycemia": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V3.rai": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V3.iron": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.T2V3.examiner": {
+   "raw": "Sage-femme",
+   "status": "KNOWN",
+   "value": "MIDWIFE"
+  },
+  "anc.M7.appointment": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.visitDate": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.followUp": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.ga": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.weight": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.bp": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.skeletal": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.conjunctivae": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.breasts": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.edema": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.fetalMovements": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.fundalHeight": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.fhr": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.speculum": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.cervix": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.presentation": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.pelvis": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.glycosuria": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.albuminuria": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.rubella": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.toxo": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.syphilis": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.hbsag": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.hiv": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.hb": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.platelets": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.glycemia": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.rai": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.iron": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M7.examiner": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M8.appointment": {
+   "raw": "02/07/2026",
+   "status": "KNOWN",
+   "value": "2026-07-02"
+  },
+  "anc.M8.visitDate": {
+   "raw": "04/06/2026",
+   "status": "KNOWN",
+   "value": "2026-06-04"
+  },
+  "anc.M8.followUp": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.M8.ga": {
+   "raw": "35 SA",
+   "status": "KNOWN",
+   "value": {
+    "weeks": 35,
+    "days": 0
+   }
+  },
+  "anc.M8.weight": {
+   "raw": "81.8",
+   "status": "KNOWN",
+   "value": 81.8
+  },
+  "anc.M8.bp": {
+   "raw": "114/73",
+   "status": "KNOWN",
+   "value": {
+    "systolic": 114,
+    "diastolic": 73
+   }
+  },
+  "anc.M8.skeletal": {
+   "raw": "RAS",
+   "status": "KNOWN",
+   "value": "RAS"
+  },
+  "anc.M8.conjunctivae": {
+   "raw": "Normales",
+   "status": "KNOWN",
+   "value": "Normales"
+  },
+  "anc.M8.breasts": {
+   "raw": "Normaux",
+   "status": "KNOWN",
+   "value": "Normaux"
+  },
+  "anc.M8.edema": {
+   "raw": "Non",
+   "status": "KNOWN",
+   "value": false
+  },
+  "anc.M8.fetalMovements": {
+   "raw": "Oui",
+   "status": "KNOWN",
+   "value": true
+  },
+  "anc.M8.fundalHeight": {
+   "raw": "31",
+   "status": "KNOWN",
+   "value": 31
+  },
+  "anc.M8.fhr": {
+   "raw": "145",
+   "status": "KNOWN",
+   "value": 145
+  },
+  "anc.M8.speculum": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.M8.cervix": {
+   "raw": "Fermé",
+   "status": "KNOWN",
+   "value": "Fermé"
+  },
+  "anc.M8.presentation": {
+   "raw": "Céphalique",
+   "status": "KNOWN",
+   "value": "Céphalique"
+  },
+  "anc.M8.pelvis": {
+   "raw": "—",
+   "status": "NOT_APPLICABLE",
+   "value": null
+  },
+  "anc.M8.glycosuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.M8.albuminuria": {
+   "raw": "Neg",
+   "status": "KNOWN",
+   "value": "NEGATIVE"
+  },
+  "anc.M8.rubella": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M8.toxo": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M8.syphilis": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M8.hbsag": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M8.hiv": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M8.hb": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M8.platelets": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M8.glycemia": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M8.rai": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M8.iron": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M8.examiner": {
+   "raw": "Inf. Zahra",
+   "status": "KNOWN",
+   "value": "NURSE"
+  },
+  "anc.M9.appointment": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.visitDate": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.followUp": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.ga": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.weight": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.bp": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.skeletal": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.conjunctivae": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.breasts": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.edema": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.fetalMovements": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.fundalHeight": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.fhr": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.speculum": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.cervix": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.presentation": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.pelvis": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.glycosuria": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.albuminuria": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.rubella": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.toxo": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.syphilis": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.hbsag": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.hiv": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.hb": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.platelets": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.glycemia": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.rai": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.iron": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  },
+  "anc.M9.examiner": {
+   "raw": null,
+   "status": "NOT_PROVIDED",
+   "value": null
+  }
+ }
+}
