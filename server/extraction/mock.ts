@@ -45,6 +45,7 @@ export class MockExtractor implements Extractor {
 
   async extract(_image: Buffer, _mime: string, contentHash: string): Promise<{ raw: RawExtraction }> {
     await new Promise((r) => setTimeout(r, this.latencyMs));
+    if (!this.index.size) this.index = loadIndex();
     const file = this.index.get(contentHash);
     if (!file) throw new AiUnavailableError("Mock extractor: no transcription for this image (configure Claude to read new photos).");
     const gt = JSON.parse(fs.readFileSync(file, "utf8")) as GtFile;
