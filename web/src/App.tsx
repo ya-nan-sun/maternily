@@ -12,6 +12,11 @@ export interface Health {
 export function App() {
   const [lang, setLang] = useState<UiLang>(() => (localStorageGet("ui-lang") as UiLang) || "fr");
   const [health, setHealth] = useState<Health | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">(() => (localStorageGet("ui-theme") === "dark" ? "dark" : "light"));
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    localStorageSet("ui-theme", theme);
+  }, [theme]);
 
   useEffect(() => {
     fetch("/api/health").then((r) => r.json()).then(setHealth).catch(() => setHealth(null));
@@ -25,25 +30,12 @@ export function App() {
     <>
       <header className="topbar">
         <div className="brand">
-          <div className="brand-icon">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none">
-              <circle cx="12" cy="12" r="10" fill="url(#brand-grad)" />
-              <path d="M12 7c-2.2 0-4 1.8-4 4 0 2.5 4 6 4 6s4-3.5 4-6c0-2.2-1.8-4-4-4z" fill="#ffffff" opacity="0.9" />
-              <circle cx="12" cy="10" r="1.5" fill="#f43f5e" />
-              <defs>
-                <linearGradient id="brand-grad" x1="2" y1="2" x2="22" y2="22" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#f43f5e" />
-                  <stop offset="1" stopColor="#e11d48" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
+          <img className="brand-logo" src="/logo-mark.png" alt="" />
           <div className="brand-text">
             <h1>{t(lang, "appTitle")}</h1>
-            <span className="brand-badge">DayOne 2026</span>
+            <span className="brand-tagline">{lang === "fr" ? "Du registre papier au dossier qui suit chaque maman" : "From the paper registry to a record that follows every mother"}</span>
           </div>
         </div>
-
 
         <span className="spacer" />
 
@@ -59,6 +51,15 @@ export function App() {
             </span>
           </div>
         )}
+
+        <button
+          className="theme-toggle"
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          aria-label={theme === "light" ? (lang === "fr" ? "Mode sombre" : "Dark mode") : (lang === "fr" ? "Mode clair" : "Light mode")}
+          title={theme === "light" ? (lang === "fr" ? "Mode sombre" : "Dark mode") : (lang === "fr" ? "Mode clair" : "Light mode")}
+        >
+          {theme === "light" ? "🌙" : "☀️"}
+        </button>
 
         <button className="btn lang-toggle" onClick={() => setLang(lang === "fr" ? "en" : "fr")}>
           <span className="globe-icon">🌐</span>

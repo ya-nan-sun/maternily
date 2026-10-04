@@ -39,6 +39,8 @@ interface Conv {
   lang: Lang;
   collectingDocId: string | null;
   active: Active | null;
+  /** The duplicate photo last asked about, so it isn't asked again every time a page finishes. */
+  askedDup?: string;
 }
 
 interface PageRow {
@@ -158,17 +160,17 @@ export class Agent {
       c.active = { docId, step: "waiting", captureId };
       this.save(mid, c);
       this.send(mid, L(lang, "📸 Nouvelle photo reçue. Je la lis…", "📸 New photo received. Reading it…"), undefined, { docId, captureId });
-    } else if (dup) {
+    } else if (dup && docId === c.collectingDocId) {
+      // Asked after "Terminé", one at a time: questions in the middle of a photo burst get buried.
       this.send(
         mid,
-        L(lang, `⚠️ Cette photo est identique à une photo déjà reçue (page ${this.page(dup.capture_id).page_no}). Que faire ?`,
-          `⚠️ This photo is identical to one already received (page ${this.page(dup.capture_id).page_no}). What should I do?`),
-        [
-          { id: `dup:ignore:${captureId}`, title: L(lang, "Ignorer", "Ignore it") },
-          { id: `dup:use:${captureId}`, title: L(lang, "L'utiliser", "Use it anyway") },
-        ],
+        L(lang, `📄 Page ${pageNo} reçue. Elle est identique à une photo déjà reçue : je vous demanderai quoi en faire après « Terminé ».`,
+          `📄 Page ${pageNo} received. It is identical to a photo already received: I'll ask what to do with it after "Done".`),
+        [{ id: "done", title: L(lang, "Terminé", "Done") }],
         { docId, captureId },
       );
+    } else if (dup) {
+      this.maybeStartReview(mid); // a late photo for a registry already closed
     } else {
       this.send(
         mid,
@@ -216,6 +218,31 @@ export class Agent {
     c.collectingDocId = id;
     this.save(mid, c);
     return id;
+  }
+
+  private askDuplicate(mid: string, lang: Lang, captureId: string): void {
+    const p = this.page(captureId) as PageRow & { duplicate_of: string | null };
+    const original = p.duplicate_of ? this.page(p.duplicate_of) : undefined;
+    this.send(
+      mid,
+      L(lang, `⚠️ Cette photo est identique à une photo déjà reçue (page ${original?.page_no ?? "?"}). Que faire ?`,
+        `⚠️ This photo is identical to one already received (page ${original?.page_no ?? "?"}). What should I do?`),
+      [
+        { id: `dup:ignore:${captureId}`, title: L(lang, "Ignorer", "Ignore it") },
+        { id: `dup:use:${captureId}`, title: L(lang, "L'utiliser", "Use it anyway") },
+      ],
+      { docId: p.doc_id, captureId },
+    );
+  }
+
+  /** Duplicate photos of closed registries still waiting for the midwife's answer. */
+  private pendingDuplicate(mid: string): string | null {
+    const row = this.db.prepare(
+      `SELECT p.capture_id FROM pages p JOIN documents d ON d.id = p.doc_id
+       WHERE p.midwife_id = ? AND p.state = 'DUPLICATE_SUSPECTED' AND p.replaced_by IS NULL AND d.closed_at IS NOT NULL
+       ORDER BY p.received_at LIMIT 1`,
+    ).get(mid) as { capture_id: string } | undefined;
+    return row?.capture_id ?? null;
   }
 
   /**
@@ -271,6 +298,8 @@ export class Agent {
     if (a?.step === "review_page" && /^(oui|yes|ok|okay|d ?accord|je confirme|confirme|confirmer|confirm|c ?est bon|correct)\b/.test(f.replace(/['’]/g, " "))) {
       return this.onButton(mid, "rv:confirm");
     }
+    const dupPending = a ? null : this.pendingDuplicate(mid);
+    if (dupPending) return this.askDuplicate(mid, lang, dupPending);
     if (a) {
       // Confusion is where midwives get stuck: the re-asked question also offers a way out.
       this.offerReset = true;
@@ -393,7 +422,7 @@ export class Agent {
           setState(this.db, "page", arg2, "PENDING_AI", "midwife chose to use the duplicate");
           this.send(mid, L(lang, "👍 Je la traite comme une nouvelle page (sans nouvel appel IA).", "👍 I'll treat it as a new page (no new AI call)."));
         }
-        return this.maybeStartReview(mid);
+        return this.maybeStartReview(mid); // asks the next duplicate, if any, else starts the review
       }
     }
 
@@ -506,6 +535,16 @@ export class Agent {
   private maybeStartReview(mid: string): void {
     const c = this.conv(mid);
     if (c.active) return;
+    // Duplicate photos come first, one question at a time (asked once; any message re-asks it).
+    const dup = this.pendingDuplicate(mid);
+    if (dup) {
+      if (c.askedDup !== dup) {
+        c.askedDup = dup;
+        this.save(mid, c);
+        this.askDuplicate(mid, c.lang, dup);
+      }
+      return;
+    }
     const docs = this.db
       .prepare("SELECT id, state FROM documents WHERE midwife_id = ? AND closed_at IS NOT NULL AND state IN ('PENDING_AI', 'AI_PROCESSED', 'NEEDS_REVIEW') ORDER BY opened_at")
       .all(mid) as { id: string; state: string }[];
@@ -581,11 +620,13 @@ export class Agent {
   private presentPage(mid: string, c: Conv, cid: string, ignoreQuality = false): void {
     const p = this.page(cid);
     const lang = c.lang;
-    const total = this.docPages(p.doc_id).length;
+    // Number among the pages actually kept (an ignored duplicate isn't counted).
+    const kept = this.docPages(p.doc_id);
+    const total = kept.length;
     const quality = p.quality ? (JSON.parse(p.quality) as { usable: boolean; issues: string[] }) : { usable: true, issues: [] };
     const fields = this.pageFields(p);
     const section = p.section as Section | "UNKNOWN" | null;
-    const head = `📄 Page ${p.page_no}/${total}`;
+    const head = `📄 Page ${Math.max(1, kept.findIndex((x) => x.capture_id === p.capture_id) + 1)}/${total}`;
 
     if (!section || section === "UNKNOWN") {
       c.active = { docId: p.doc_id, step: "failed_page", captureId: cid };

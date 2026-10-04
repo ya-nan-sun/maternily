@@ -286,6 +286,42 @@ describe("multi-page registry, review and registration", () => {
     expect((db.prepare("SELECT COUNT(*) AS n FROM pages WHERE doc_id != ?").get(saved) as { n: number }).n).toBe(0);
   });
 
+  it("asks a buried duplicate question again after 'terminé', then starts the review", async () => {
+    const [p1, p2] = pagesOf(2);
+    agent.handle(photo(p1.file));
+    agent.handle(photo(p1.file)); // identical bytes: duplicate question
+    agent.handle(photo(p2.file)); // later prompts replace its numbered choices
+    newMessages();
+    type("terminé");
+    await pipeline.drain();
+    const last = newMessages().at(-1)!;
+    expect(last.buttons?.map((b) => b.id.split(":").slice(0, 2).join(":"))).toEqual(["dup:ignore", "dup:use"]);
+    press(last.buttons![0].id);
+    await pipeline.drain();
+    expect(conv().active?.step).toBe("review_page");
+  });
+
+  it("never asks duplicate questions mid-burst; after 'terminé' asks them one at a time, then reviews", async () => {
+    const [p1, p2] = pagesOf(2);
+    agent.handle(photo(p1.file));
+    agent.handle(photo(p2.file));
+    agent.handle(photo(p1.file));
+    agent.handle(photo(p2.file)); // two duplicates in one burst
+    expect(newMessages().filter((m) => m.buttons?.some((b) => b.id.startsWith("dup:")))).toHaveLength(0);
+    type("terminé");
+    await pipeline.drain();
+    const asked = () => newMessages().filter((m) => m.buttons?.some((b) => b.id.startsWith("dup:")));
+    const first = asked();
+    expect(first).toHaveLength(1);
+    press(first[0].buttons![0].id);
+    const second = asked();
+    expect(second).toHaveLength(1);
+    expect(second[0].buttons![0].id).not.toBe(first[0].buttons![0].id);
+    press(second[0].buttons![0].id);
+    await pipeline.drain();
+    expect(conv().active?.step).toBe("review_page");
+  });
+
   it("is idempotent when the device retries the same message", () => {
     const msg = photo(pagesOf(2)[0].file);
     expect(agent.handle(msg)).toBe(true);

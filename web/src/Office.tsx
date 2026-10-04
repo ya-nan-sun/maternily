@@ -27,17 +27,19 @@ export function useApi(role: Role) {
 
 export function Office({ lang }: { lang: UiLang }) {
   const [role, setRole] = useState<Role>(() => (localStorageGet("office-role") as Role) || "supervisor");
-  const [tab, setTab] = useState<Tab>("overview");
+  const TABS: Tab[] = ["overview", "patients", "registries", "dashboard", "ai"];
+  const [tab, setTab] = useState<Tab>(() => (TABS as string[]).includes(location.hash.slice(1)) ? (location.hash.slice(1) as Tab) : "overview");
+  useEffect(() => history.replaceState(null, "", tab === "overview" ? location.pathname : `#${tab}`), [tab]);
   const [patientId, setPatientId] = useState<string | null>(null);
   const [docId, setDocId] = useState<string | null>(null);
   useEffect(() => localStorageSet("office-role", role), [role]);
 
   const tabIcons: Record<Tab, string> = {
-    overview: "📊",
-    patients: "👥",
-    registries: "📑",
-    dashboard: "📈",
-    ai: "⚡",
+    overview: "🏡",
+    patients: "👩‍🍼",
+    registries: "📒",
+    dashboard: "🌼",
+    ai: "🌿",
   };
   const tabs: [Tab, string][] = [
     ["overview", t(lang, "overview")],
@@ -98,13 +100,30 @@ function Forbidden({ lang }: { lang: UiLang }) {
   return <div className="locked">🔒 {t(lang, "forbidden")}</div>;
 }
 
+/** Plain words for the record states; the official state name stays in the tooltip and the transition log. */
+const FRIENDLY_STATE: Record<string, [string, string]> = {
+  CAPTURED: ["Photo reçue", "Photo received"],
+  PENDING_AI: ["En lecture", "Being read"],
+  AI_PROCESSED: ["Lu", "Read"],
+  NEEDS_REVIEW: ["À vérifier", "To check"],
+  VALIDATED: ["Vérifié", "Checked"],
+  PATIENT_MATCHED: ["Patiente reliée", "Patient linked"],
+  REGISTERED: ["Enregistré", "Saved"],
+  SYNCED: ["Confirmé à la sage-femme", "Confirmed to the midwife"],
+  PROCESSING_FAILED: ["Lecture impossible", "Could not read"],
+  SYNC_FAILED: ["Envoi à réessayer", "Send will retry"],
+  DUPLICATE_SUSPECTED: ["Doublon possible", "Possible duplicate"],
+  MANUAL_REVIEW_REQUIRED: ["Pour le bureau", "For the office"],
+};
+
 function StateBadge({ state, lang }: { state: string; lang: UiLang }) {
   const bad = ["PROCESSING_FAILED", "SYNC_FAILED"].includes(state);
   const warn = ["NEEDS_REVIEW", "DUPLICATE_SUSPECTED", "MANUAL_REVIEW_REQUIRED", "PENDING_AI"].includes(state);
+  const friendly = FRIENDLY_STATE[state]?.[lang === "fr" ? 0 : 1];
   return (
-    <span className={`chip ${bad ? "bad" : warn ? "warn" : "ok"}`}>
+    <span className={`chip ${bad ? "bad" : warn ? "warn" : "ok"}`} title={STATE_LABELS[state as keyof typeof STATE_LABELS]?.[lang] ?? state}>
       <span className="chip-dot" />
-      <span>{STATE_LABELS[state as keyof typeof STATE_LABELS]?.[lang] ?? state}</span>
+      <span>{friendly ?? state}</span>
     </span>
   );
 }
@@ -140,24 +159,44 @@ function Overview({ role, lang }: { role: Role; lang: UiLang }) {
   const done = (docs.REGISTERED ?? 0) + (docs.SYNCED ?? 0);
   const waiting = (docs.NEEDS_REVIEW ?? 0) + (docs.AI_PROCESSED ?? 0) + (docs.PENDING_AI ?? 0) + (docs.VALIDATED ?? 0);
   const L = (fr: string, en: string) => (lang === "fr" ? fr : en);
+  const hour = new Date().getHours();
+  const hello = hour < 12 ? L("Bonjour", "Good morning") : hour < 18 ? L("Bon après-midi", "Good afternoon") : L("Bonsoir", "Good evening");
   return (
     <div className="stack">
+      <section className="welcome">
+        <div>
+          <p className="welcome-hello">{hello} 🌸</p>
+          <h2>{L("Chaque page photographiée devient un dossier qui suit la maman, de visite en visite.", "Every photographed page becomes a record that follows the mother, visit after visit.")}</h2>
+          <p>{L("Les sages-femmes gardent leur registre papier et envoient les pages sur WhatsApp. Maternily les lit, demande quand il doute, et relie les visites.", "Midwives keep their paper registry and send the pages on WhatsApp. Maternily reads them, asks when it is unsure, and links the visits.")}</p>
+          <p className="welcome-today">
+            {total
+              ? L(`${total} registre(s) reçu(s) · ${done} enregistré(s) · ${waiting} en cours de vérification`, `${total} registr${total === 1 ? "y" : "ies"} received · ${done} saved · ${waiting} being checked`)
+              : L("Aucun registre pour l'instant : la première photo envoyée sur WhatsApp apparaîtra ici.", "No registry yet: the first photo sent on WhatsApp will appear here.")}
+          </p>
+          <div className="steps">
+            <span className="step"><span className="step-n">1</span>📸 {L("Photographier", "Photograph")}</span>
+            <span className="step"><span className="step-n">2</span>💬 {L("Vérifier ensemble", "Check together")}</span>
+            <span className="step"><span className="step-n">3</span>🤝 {L("Relier les visites", "Link the visits")}</span>
+          </div>
+        </div>
+        <div className="welcome-art"><img src="/logo-mark.png" alt="" /></div>
+      </section>
       <div className="tiles">
         <Tile label={L("Patientes", "Patients")} value={data.patients} icon="👥" variant="teal" />
-        <Tile label={L("Registres enregistrés", "Registries registered")} value={done} sub={`${total} ${L("reçus", "received")}`} icon="📋" variant="emerald" />
-        <Tile label={L("En cours de vérification", "Being reviewed")} value={waiting} icon="⏳" variant="amber" />
-        <Tile label={L("À rattacher par le bureau", "Waiting for office match")} value={docs.MANUAL_REVIEW_REQUIRED ?? 0} icon="🔗" variant="indigo" />
-        <Tile label={L("Exécutions d'extraction", "Extraction runs")} value={data.ai.calls ?? 0} sub={`${data.ai.cached ?? 0} ${L("depuis le cache", "from cache")} · ${data.ai.failed ?? 0} ${L("échecs", "failed")}`} icon="⚡" variant="purple" />
-        <Tile label={L("Coût Claude estimé", "Estimated Claude cost")} value={`$${(data.ai.cost ?? 0).toFixed(2)}`} sub={readerNote(data, L)} icon="💎" variant="rose" />
+        <Tile label={L("Registres enregistrés", "Registries saved")} value={done} sub={`${total} ${L("reçus", "received")}`} icon="📒" variant="emerald" />
+        <Tile label={L("En cours de vérification", "Being checked")} value={waiting} icon="💬" variant="amber" />
+        <Tile label={L("À relier par le bureau", "For the office to link")} value={docs.MANUAL_REVIEW_REQUIRED ?? 0} icon="🤝" variant="indigo" />
+        <Tile label={L("Pages lues", "Pages read")} value={data.ai.calls ?? 0} sub={`${data.ai.cached ?? 0} ${L("depuis le cache", "from cache")} · ${data.ai.failed ?? 0} ${L("échecs", "failed")}`} icon="📖" variant="purple" />
+        <Tile label={L("Coût Claude estimé", "Estimated Claude cost")} value={`$${(data.ai.cost ?? 0).toFixed(2)}`} sub={readerNote(data, L)} icon="🌿" variant="rose" />
       </div>
       <div className="panel lifecycle-panel">
         <div className="panel-header-row">
-          <h2>{L("Cycle de vie des registres", "Registry lifecycle")}</h2>
-          <span className="panel-sub-tag">{L("États temps réel", "Real-time states")}</span>
+          <h2>{L("Où en sont les registres", "Where the registries are")}</h2>
+          <span className="panel-sub-tag">{L("Mis à jour en direct", "Live")}</span>
         </div>
         <div className="row lifecycle-row">
           {data.docStates.map((d) => <span key={d.state} className="row small state-counter"><StateBadge state={d.state} lang={lang} /> <span className="counter-val">{d.n}</span></span>)}
-          {!data.docStates.length && <span className="muted small">{L("Aucun registre reçu.", "No registry received yet.")}</span>}
+          {!data.docStates.length && <span className="muted small">{L("Rien pour l'instant, tout est calme.", "Nothing yet, all is calm.")}</span>}
         </div>
         <h3 className="section-subhead">{L("Pages", "Pages")}</h3>
         <div className="row lifecycle-row">
@@ -168,7 +207,7 @@ function Overview({ role, lang }: { role: Role; lang: UiLang }) {
         <div className="row">
           <span className="spacer" />
           <button
-            className="btn"
+            className="btn quiet"
             onClick={async () => {
               if (!window.confirm(L("Effacer TOUS les registres, patientes, photos et messages de cette démo ? Action irréversible.", "Erase ALL registries, patients, photos and messages in this demo? This cannot be undone."))) return;
               await api("/api/office/reset", { method: "POST" });
@@ -179,6 +218,16 @@ function Overview({ role, lang }: { role: Role; lang: UiLang }) {
           </button>
         </div>
       )}
+    </div>
+  );
+}
+
+function Empty({ title, text }: { title: string; text: string }) {
+  return (
+    <div className="empty-state">
+      <img src="/logo-mark.png" alt="" />
+      <strong>{title}</strong>
+      <span>{text}</span>
     </div>
   );
 }
@@ -228,7 +277,7 @@ function Patients({ role, lang, open }: { role: Role; lang: UiLang; open: (id: s
               <td><strong>{p.code ?? "—"}</strong></td><td>{p.descriptor}</td><td className="num">{p.fields}</td><td className="num">{p.toReview}</td><td className="num">{p.documents}</td><td className="small muted">{p.created_at.slice(0, 16).replace("T", " ")}</td>
             </tr>
           ))}
-          {!data.length && <tr><td colSpan={6} className="muted">{L("Aucune patiente pour l'instant.", "No patients yet.")}</td></tr>}
+          {!data.length && <tr><td colSpan={6}><Empty title={L("Aucune patiente pour l'instant", "No patients yet")} text={L("Une patiente apparaît ici dès qu'une sage-femme a vérifié et enregistré son registre.", "A patient appears here once a midwife has checked and saved her registry.")} /></td></tr>}
         </tbody>
       </table>
     </div>
@@ -300,7 +349,7 @@ function Documents({ role, lang, open }: { role: Role; lang: UiLang; open: (id: 
               <td className="small">{d.opened_at.slice(0, 16).replace("T", " ")}</td><td>{d.midwife_id}</td><td className="num">{d.pages}</td><td><StateBadge state={d.state} lang={lang} /></td><td>{d.patient_code ?? d.code ?? "—"}</td>
             </tr>
           ))}
-          {!data.length && <tr><td colSpan={5} className="muted">{L("Aucun registre reçu.", "No registry received yet.")}</td></tr>}
+          {!data.length && <tr><td colSpan={5}><Empty title={L("Aucun registre reçu", "No registry received yet")} text={L("Les pages envoyées sur WhatsApp arrivent ici, même celles prises hors connexion.", "Pages sent on WhatsApp arrive here, even those taken offline.")} /></td></tr>}
         </tbody>
       </table>
     </div>
